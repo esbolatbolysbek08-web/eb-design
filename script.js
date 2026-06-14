@@ -9,15 +9,16 @@ const I18N = {
   kk: {
     "nav.services": "Қызметтер", "nav.gallery": "Жұмыстар", "nav.price": "Баға",
     "nav.faq": "FAQ", "nav.contact": "Байланыс", "nav.order": "Тапсырыс беру", "nav.start": "Бастау",
+    "nav.home": "Басты", "nav.templates": "Үлгілер", "nav.biz": "Бизнеске", "tab.tpl": "Үлгілер", "tab.make": "Шақырту",
     "apps.eyebrow": "Не қалайсыз?", "apps.title": "Бір рет басып, бастаңыз",
     "apps.toi": "Тойға шақырту жаса", "apps.toiSub": "Үлгі таңда → өңде → ал",
     "apps.tpl": "Дайын үлгілер", "apps.tplSub": "Той/туған күн үлгілерін көру",
     "apps.site": "Бизнеске сайт", "apps.siteSub": "Лендинг, дүкен, бизнес-сайт",
     "apps.bot": "Чат-бот", "apps.botSub": "WhatsApp / Telegram бот",
     "hero.badge": "● Жаңа жобаларға ашықпын",
-    "hero.title": 'Бизнесіңізге <span class="grad">клиент әкелетін</span> сайт жасаймын',
-    "hero.lead": "Заманауи, жылдам әрі сатуға бағытталған сайттар мен чат-боттар. Идеядан нәтижеге дейін — 5–7 күнде.",
-    "hero.cta1": "Тегін кеңес алу", "hero.cta2": "Жұмыстарымды көру",
+    "hero.title": 'Той шақырту жаса, <span class="grad">бизнеске сайт</span> тапсыр',
+    "hero.lead": "Шақырту үлгісін таңдап, өзің өңде немесе бизнеске заманауи сайт/бот тапсыр — бәрі бір жерде.",
+    "hero.cta1": "Шақырту жаса", "hero.cta2": "Үлгілерді көру",
     "hero.stat1": "жоба", "hero.stat2": "орташа күн", "hero.stat3": "мобильге бейім",
     "hero.float1": "💬 Жаңа клиент жазды", "hero.float2": "📈 Конверсия +48%",
     "services.eyebrow": "Қызметтер", "services.title": "Сізге не керек болса — соны жасаймын",
@@ -57,15 +58,16 @@ const I18N = {
   ru: {
     "nav.services": "Услуги", "nav.gallery": "Работы", "nav.price": "Цена",
     "nav.faq": "FAQ", "nav.contact": "Контакты", "nav.order": "Заказать", "nav.start": "Начать",
+    "nav.home": "Главная", "nav.templates": "Шаблоны", "nav.biz": "Для бизнеса", "tab.tpl": "Шаблоны", "tab.make": "Создать",
     "apps.eyebrow": "Что хотите?", "apps.title": "Нажмите — и начните",
     "apps.toi": "Создать приглашение", "apps.toiSub": "Выбери шаблон → измени → получи",
     "apps.tpl": "Готовые шаблоны", "apps.tplSub": "Свадьба / день рождения",
     "apps.site": "Сайт для бизнеса", "apps.siteSub": "Лендинг, магазин, бизнес-сайт",
     "apps.bot": "Чат-бот", "apps.botSub": "WhatsApp / Telegram бот",
     "hero.badge": "● Открыт для новых проектов",
-    "hero.title": 'Создаю сайты, которые <span class="grad">приводят клиентов</span>',
-    "hero.lead": "Современные, быстрые сайты и чат-боты, нацеленные на продажи. От идеи до результата — за 5–7 дней.",
-    "hero.cta1": "Бесплатная консультация", "hero.cta2": "Смотреть работы",
+    "hero.title": 'Создай приглашение, <span class="grad">закажи сайт</span> для бизнеса',
+    "hero.lead": "Выбери шаблон приглашения и измени сам — или закажи современный сайт/бот для бизнеса. Всё в одном месте.",
+    "hero.cta1": "Создать приглашение", "hero.cta2": "Смотреть шаблоны",
     "hero.stat1": "проектов", "hero.stat2": "дней в среднем", "hero.stat3": "адаптив",
     "hero.float1": "💬 Новый клиент написал", "hero.float2": "📈 Конверсия +48%",
     "services.eyebrow": "Услуги", "services.title": "Сделаю то, что вам нужно",
@@ -105,15 +107,16 @@ const I18N = {
   en: {
     "nav.services": "Services", "nav.gallery": "Work", "nav.price": "Pricing",
     "nav.faq": "FAQ", "nav.contact": "Contact", "nav.order": "Order now", "nav.start": "Start",
+    "nav.home": "Home", "nav.templates": "Templates", "nav.biz": "Business", "tab.tpl": "Templates", "tab.make": "Create",
     "apps.eyebrow": "What do you want?", "apps.title": "Tap once to start",
     "apps.toi": "Create an invitation", "apps.toiSub": "Pick → edit → get it",
     "apps.tpl": "Ready templates", "apps.tplSub": "Wedding / birthday designs",
     "apps.site": "Website for business", "apps.siteSub": "Landing, store, business site",
     "apps.bot": "Chatbot", "apps.botSub": "WhatsApp / Telegram bot",
     "hero.badge": "● Open for new projects",
-    "hero.title": 'I build websites that <span class="grad">bring you clients</span>',
-    "hero.lead": "Modern, fast, sales-focused websites and chatbots. From idea to result — in 5–7 days.",
-    "hero.cta1": "Free consultation", "hero.cta2": "View my work",
+    "hero.title": 'Create an invitation, <span class="grad">order a business site</span>',
+    "hero.lead": "Pick an invitation template and edit it yourself — or order a modern website/bot for your business. All in one place.",
+    "hero.cta1": "Create invitation", "hero.cta2": "View templates",
     "hero.stat1": "projects", "hero.stat2": "days avg", "hero.stat3": "responsive",
     "hero.float1": "💬 New client messaged", "hero.float2": "📈 Conversion +48%",
     "services.eyebrow": "Services", "services.title": "Whatever you need — I'll build it",
@@ -181,7 +184,8 @@ function applyLang(lang) {
   );
 }
 
-document.getElementById("lang").addEventListener("click", (e) => {
+const langEl = document.getElementById("lang");
+if (langEl) langEl.addEventListener("click", (e) => {
   const btn = e.target.closest(".lang__btn");
   if (btn) applyLang(btn.dataset.lang);
 });
@@ -191,7 +195,7 @@ applyLang(currentLang);
 //  Лид формасы → WhatsApp
 // ===================================================================
 const form = document.getElementById("leadForm");
-form.addEventListener("submit", function (e) {
+if (form) form.addEventListener("submit", function (e) {
   e.preventDefault();
   const data = new FormData(form);
   const name = (data.get("name") || "").trim();
@@ -211,30 +215,33 @@ form.addEventListener("submit", function (e) {
 
 // ===== Тема ауыстырғыш (қараңғы/жарық) =====
 const themeToggle = document.getElementById("themeToggle");
-if (localStorage.getItem("theme") === "light") {
-  document.body.classList.add("light");
-  themeToggle.textContent = "☀️";
+const savedLight = localStorage.getItem("theme") === "light";
+if (savedLight) document.body.classList.add("light");
+if (themeToggle) {
+  if (savedLight) themeToggle.textContent = "☀️";
+  themeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("light");
+    const isLight = document.body.classList.contains("light");
+    themeToggle.textContent = isLight ? "☀️" : "🌙";
+    localStorage.setItem("theme", isLight ? "light" : "dark");
+  });
 }
-themeToggle.addEventListener("click", () => {
-  document.body.classList.toggle("light");
-  const isLight = document.body.classList.contains("light");
-  themeToggle.textContent = isLight ? "☀️" : "🌙";
-  localStorage.setItem("theme", isLight ? "light" : "dark");
-});
 
 // ===== Мобильді бургер-меню =====
 const burger = document.getElementById("burger");
 const navLinks = document.getElementById("navLinks");
-burger.addEventListener("click", () => {
-  burger.classList.toggle("is-open");
-  navLinks.classList.toggle("is-open");
-});
-navLinks.querySelectorAll("a").forEach((a) =>
-  a.addEventListener("click", () => {
-    burger.classList.remove("is-open");
-    navLinks.classList.remove("is-open");
-  })
-);
+if (burger && navLinks) {
+  burger.addEventListener("click", () => {
+    burger.classList.toggle("is-open");
+    navLinks.classList.toggle("is-open");
+  });
+  navLinks.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => {
+      burger.classList.remove("is-open");
+      navLinks.classList.remove("is-open");
+    })
+  );
+}
 
 // ===== Скроллда жанданатын санауыштар =====
 function animateCount(el) {
