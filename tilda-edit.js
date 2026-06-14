@@ -1,10 +1,13 @@
 /* =====================================================================
- *  EB.design — нақты үлгіге өңдеу қабаты (text + image) + Kaspi жүктеу
- *  Бұл скрипт Tilda көшірмесінің ҮСТІНЕ қосылады. Дизайнды өзгертпейді —
- *  тек клиентке мәтін/суретті өзгертіп, өз нұсқасын жүктеуге мүмкіндік береді.
+ *  EB.design — нақты үлгіге өңдеу қабаты (мәтін + сурет + фон) + Kaspi жүктеу
+ *  Tilda көшірмесінің ҮСТІНЕ қосылады. Дизайнды өзгертпейді — клиент мәтін/суретті
+ *  өзгертіп, өз нұсқасын жүктеп ала алады.
  * ===================================================================== */
 (function () {
   "use strict";
+
+  // Қайта-қосылудан қорғаныс (қос include / Tilda кэші)
+  if (document.getElementById("ebedit-bar")) return;
 
   // ⚙️ БАПТАУ
   var CFG = {
@@ -14,8 +17,10 @@
     PRICE: 2990,
     CODE: "TOI2026", // ⚠️ құпия код — төлегеннен кейін клиентке бересіз
   };
+  var BLUE = "#2aabee"; // Telegram көк
 
   var editing = false;
+  var hint = null;
 
   // ---------- Стиль ----------
   var st = document.createElement("style");
@@ -23,14 +28,14 @@
   st.textContent =
     "#ebedit-bar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:2147483000;display:flex;gap:8px;font-family:'Inter',Arial,sans-serif}" +
     "#ebedit-bar button{border:none;border-radius:12px;padding:13px 20px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.4)}" +
-    "#ebedit-toggle{background:#7c5cff;color:#fff}" +
+    "#ebedit-toggle{background:" + BLUE + ";color:#fff}" +
     "#ebedit-toggle.on{background:#e2483b}" +
-    "#ebedit-get{background:#19c8c0;color:#fff}" +
-    ".ebedit-on [data-ebtext]{background:rgba(124,92,255,.12);box-shadow:0 0 0 1px rgba(124,92,255,.45);border-radius:5px;cursor:text}" +
-    ".ebedit-on [data-ebtext]:hover{background:rgba(124,92,255,.2)}" +
-    ".ebedit-on [data-ebtext]:focus{background:rgba(124,92,255,.06);box-shadow:0 0 0 2px #7c5cff;outline:none}" +
-    ".ebedit-on .ebedit-img{box-shadow:0 0 0 3px rgba(25,200,192,.85);cursor:pointer}" +
-    ".ebedit-on .ebedit-img:hover{box-shadow:0 0 0 4px rgba(25,200,192,1)}" +
+    "#ebedit-get{background:#229ed9;color:#fff}" +
+    ".ebedit-on [data-ebtext]{background:rgba(42,171,238,.12);box-shadow:0 0 0 1px rgba(42,171,238,.5);border-radius:5px;cursor:text}" +
+    ".ebedit-on [data-ebtext]:hover{background:rgba(42,171,238,.2)}" +
+    ".ebedit-on [data-ebtext]:focus{background:rgba(42,171,238,.06);box-shadow:0 0 0 2px " + BLUE + ";outline:none}" +
+    ".ebedit-on .ebedit-img{box-shadow:0 0 0 3px rgba(42,171,238,.85)!important;cursor:pointer!important}" +
+    ".ebedit-on .ebedit-img:hover{box-shadow:0 0 0 4px " + BLUE + "!important}" +
     "#ebedit-hint{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:2147483000;background:#111;color:#fff;font-family:'Inter',Arial,sans-serif;font-size:13px;padding:9px 16px;border-radius:99px;box-shadow:0 8px 20px rgba(0,0,0,.4)}" +
     "#ebedit-modal{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);font-family:'Inter',Arial,sans-serif;padding:18px}" +
     "#ebedit-modal.on{display:flex}" +
@@ -38,15 +43,15 @@
     "#ebedit-box .k{display:inline-block;background:#F14635;color:#fff;font-weight:800;font-size:20px;padding:7px 14px;border-radius:10px}" +
     "#ebedit-box h3{font-size:20px;margin:14px 0 6px}" +
     "#ebedit-box p{color:#5a6075;font-size:14px;margin:0 0 14px}" +
-    "#ebedit-box .price{font-size:32px;font-weight:900;color:#7c5cff;margin:6px 0 14px}" +
+    "#ebedit-box .price{font-size:32px;font-weight:900;color:" + BLUE + ";margin:6px 0 14px}" +
     "#ebedit-box .card{background:#f6f7fb;border-radius:12px;padding:12px 14px;margin-bottom:14px;font-size:14px;text-align:left}" +
     "#ebedit-box .card b{float:right}" +
     "#ebedit-box button{display:block;width:100%;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;margin-top:8px;font-family:inherit}" +
-    "#ebedit-box .b1{background:#F14635;color:#fff}#ebedit-box .b2{background:#25d366;color:#fff}#ebedit-box .b3{background:#7c5cff;color:#fff}#ebedit-box .bg{background:#eef0f7;color:#161827}" +
+    "#ebedit-box .b1{background:#F14635;color:#fff}#ebedit-box .b2{background:#25d366;color:#fff}#ebedit-box .b3{background:" + BLUE + ";color:#fff}#ebedit-box .bg{background:#eef0f7;color:#161827}" +
     "#ebedit-box input{width:100%;text-align:center;letter-spacing:4px;text-transform:uppercase;font-size:20px;font-weight:800;padding:12px;border:2px solid #e2e5ef;border-radius:11px;margin-bottom:8px;font-family:inherit}" +
     "#ebedit-box .err{color:#e2483b;font-size:13px;font-weight:600;display:none;margin:0 0 8px}" +
     "#ebedit-box .x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;width:auto;margin:0;color:#888;cursor:pointer}";
-  document.head.appendChild(st);
+  (document.head || document.documentElement).appendChild(st);
 
   // ---------- Toolbar ----------
   var bar = document.createElement("div");
@@ -56,12 +61,19 @@
     '<button id="ebedit-get" type="button" style="display:none">✅ Дайын — алу</button>';
   document.body.appendChild(bar);
 
-  var hint = null;
-
-  // ---------- Өңделетін мәтінді белгілеу ----------
+  // ---------- Көмекшілер ----------
   var SKIP = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, svg: 1, SVG: 1, IMG: 1, BUTTON: 1, INPUT: 1, TEXTAREA: 1, SELECT: 1 };
+  function inUI(el) {
+    return el && el.closest && el.closest("#ebedit-bar,#ebedit-modal,#ebedit-hint,#ebedit-style");
+  }
+  function isExcluded(el) {
+    // батырма / сілтеме / Tilda жапсырмасы — өңделмейді
+    return !!(el.closest && el.closest(
+      'a,button,.t-btn,.t-submit,.t396__submit,.t-menu__link,.tn-atom__btn-text,.t-tildalabel,.t-copyright,[data-elem-type="button"],[href]'
+    ));
+  }
   function isSkippable(el) {
-    return !el || SKIP[el.tagName] || el.closest("#ebedit-bar,#ebedit-modal,#ebedit-hint");
+    return !el || SKIP[el.tagName] || inUI(el) || isExcluded(el);
   }
   function hasText(el) {
     return el.textContent && el.textContent.replace(/\s/g, "").length > 0;
@@ -75,23 +87,21 @@
   }
 
   function enableTextEditing() {
-    // 1) Tilda мәтін блоктары (негізгі бірлік) — ішінде <span>/<br> болса да тұтас өңделеді
     var atoms = document.querySelectorAll(
       ".tn-atom, .t-text, .t-name, .t-descr, .t-title, .t-heading, .t-card__title, .t-card__descr"
     );
     for (var i = 0; i < atoms.length; i++) {
       var a = atoms[i];
       if (isSkippable(a) || !hasText(a)) continue;
-      if (a.querySelector(".tn-atom")) continue; // контейнер (ішінде басқа атом)
-      if (a.querySelector("img,svg,input,textarea,button")) continue; // сурет/форма атомы
+      if (a.querySelector(".tn-atom")) continue;
+      if (a.querySelector("img,svg,input,textarea,button")) continue;
       markText(a);
     }
-    // 2) Atom-нан тыс қалған жапырақ-мәтіндер
-    var nodes = document.querySelectorAll("h1,h2,h3,h4,h5,p,span,a,li,td,th,strong,em,b");
+    var nodes = document.querySelectorAll("h1,h2,h3,h4,h5,p,span,li,td,th,strong,em,b");
     for (var j = 0; j < nodes.length; j++) {
       var el = nodes[j];
       if (isSkippable(el) || !hasText(el)) continue;
-      if (el.closest("[data-ebtext]")) continue; // өңделмелі ата ішінде
+      if (el.closest("[data-ebtext]")) continue;
       var hasChildEl = false;
       for (var k = 0; k < el.childNodes.length; k++) {
         if (el.childNodes[k].nodeType === 1) { hasChildEl = true; break; }
@@ -100,49 +110,125 @@
     }
   }
 
-  function collectImages() {
-    var imgs = [];
+  // ---------- Суреттер (<img> + фон) ----------
+  function collectImgs() {
+    var out = [];
     var list = document.querySelectorAll("img");
     for (var i = 0; i < list.length; i++) {
       var im = list[i];
-      if (im.closest("#ebedit-bar,#ebedit-modal")) continue;
-      if (im.width < 30 && im.height < 30) continue; // ұсақ иконкалар
-      imgs.push(im);
+      if (inUI(im)) continue;
+      var r = im.getBoundingClientRect();
+      if (r.width < 32 && r.height < 32) continue;
+      out.push(im);
     }
-    return imgs;
+    return out;
+  }
+  function collectBgEls() {
+    var out = [], seen = [];
+    var list = document.querySelectorAll(
+      "[data-original]:not(img), .t-cover__carrier, .t396__carrier, .t-bgimg, [data-bgimgfield]"
+    );
+    for (var i = 0; i < list.length; i++) {
+      var el = list[i];
+      if (el.tagName === "IMG" || inUI(el)) continue;
+      var bg = "";
+      try { bg = getComputedStyle(el).backgroundImage; } catch (e) {}
+      var hasBg = el.hasAttribute("data-original") || (bg && bg.indexOf("url(") > -1);
+      if (!hasBg) continue;
+      var r = el.getBoundingClientRect();
+      if (r.width < 40 && r.height < 40) continue;
+      if (seen.indexOf(el) > -1) continue;
+      seen.push(el);
+      out.push(el);
+    }
+    return out;
   }
 
-  function swapImage(img) {
+  // Суретті сығу (телефон фотолары үлкен болмауы үшін)
+  function fileToDataURL(file, cb) {
+    var r = new FileReader();
+    r.onload = function () {
+      var raw = r.result;
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var MAX = 1600;
+          var ratio = Math.min(1, MAX / Math.max(img.naturalWidth, img.naturalHeight));
+          var w = Math.round(img.naturalWidth * ratio);
+          var h = Math.round(img.naturalHeight * ratio);
+          var c = document.createElement("canvas");
+          c.width = w; c.height = h;
+          var ctx = c.getContext("2d");
+          var isPng = /png/i.test(file.type);
+          if (!isPng) { ctx.fillStyle = "#fff"; ctx.fillRect(0, 0, w, h); }
+          ctx.drawImage(img, 0, 0, w, h);
+          var out = isPng ? c.toDataURL("image/png") : c.toDataURL("image/jpeg", 0.82);
+          cb(out.length < raw.length ? out : raw);
+        } catch (e) { cb(raw); }
+      };
+      img.onerror = function () { cb(raw); };
+      img.src = raw;
+    };
+    r.readAsDataURL(file);
+  }
+
+  function swapTarget(el) {
     var inp = document.createElement("input");
     inp.type = "file";
     inp.accept = "image/*";
     inp.onchange = function () {
       var f = inp.files[0];
       if (!f) return;
-      var r = new FileReader();
-      r.onload = function () {
-        img.removeAttribute("data-original");
-        img.removeAttribute("srcset");
-        img.src = r.result;
-      };
-      r.readAsDataURL(f);
+      fileToDataURL(f, function (data) {
+        if (el.tagName === "IMG") {
+          el.removeAttribute("data-original");
+          el.removeAttribute("srcset");
+          el.removeAttribute("data-srcset");
+          el.src = data;
+        } else {
+          el.removeAttribute("data-original");
+          el.classList.remove("lazyload", "t-bgimg");
+          el.style.backgroundImage = "url('" + data + "')";
+          el.style.backgroundSize = el.style.backgroundSize || "cover";
+          el.style.backgroundPosition = el.style.backgroundPosition || "center";
+        }
+      });
     };
     inp.click();
+  }
+
+  function bindImg(el, isBg) {
+    el.classList.add("ebedit-img");
+    el.addEventListener("click", el._ebh = function (e) {
+      if (!editing) return;
+      if (isBg && e.target !== el) return; // фон контейнерінде мәтінді бассa — өткіземіз
+      e.preventDefault();
+      e.stopPropagation();
+      swapTarget(el);
+    });
+  }
+
+  // Өңдеу кезінде сілтеме навигациясын/Tilda popup-ын бұғаттау (capture)
+  function clickGuard(e) {
+    if (!editing) return;
+    var t = e.target;
+    if (inUI(t)) return;
+    if (t.classList && t.classList.contains("ebedit-img")) return;
+    if (t.closest && t.closest(".ebedit-img")) return;
+    var a = t.closest && t.closest("a");
+    if (a) { e.preventDefault(); e.stopPropagation(); }
   }
 
   function enableEdit() {
     editing = true;
     document.body.classList.add("ebedit-on");
     enableTextEditing();
-    collectImages().forEach(function (im) {
-      im.classList.add("ebedit-img");
-      im.addEventListener("click", im._ebh = function (e) {
-        if (!editing) return;
-        e.preventDefault();
-        e.stopPropagation();
-        swapImage(im);
-      });
-    });
+    collectImgs().forEach(function (im) { bindImg(im, false); });
+    collectBgEls().forEach(function (el) { bindImg(el, true); });
+    if (!document._ebGuard) {
+      document._ebGuard = clickGuard;
+      document.addEventListener("click", document._ebGuard, true);
+    }
     var tg = document.getElementById("ebedit-toggle");
     tg.textContent = "✓ Болды";
     tg.classList.add("on");
@@ -165,14 +251,64 @@
   }
 
   document.getElementById("ebedit-toggle").addEventListener("click", function () {
-    if (editing) disableEdit();
-    else enableEdit();
+    editing ? disableEdit() : enableEdit();
   });
 
-  // ---------- Жүктеп алу (өңделген бетті) ----------
+  // ---------- Жүктеу алдында lazyload суреттерін «материалдандыру» ----------
+  function pickFromSrcset(ss) {
+    if (!ss) return "";
+    var best = "", bestW = -1;
+    ss.split(",").forEach(function (part) {
+      var seg = part.trim().split(/\s+/);
+      var url = seg[0];
+      var w = seg[1] ? parseInt(seg[1], 10) : 0;
+      if (url && w >= bestW) { bestW = w; best = url; }
+    });
+    return best;
+  }
+  function materialize() {
+    // <img>: placeholder/бос src-ті нақты URL-мен толтыру
+    var imgs = document.querySelectorAll("img");
+    for (var i = 0; i < imgs.length; i++) {
+      var im = imgs[i];
+      if (inUI(im)) continue;
+      var src = im.getAttribute("src") || "";
+      if (/^data:image\/(png|jpeg|jpg|webp)/i.test(src)) continue; // ауыстырылған — қалдырамыз
+      var orig = im.getAttribute("data-original") ||
+        pickFromSrcset(im.getAttribute("data-srcset")) ||
+        pickFromSrcset(im.getAttribute("srcset"));
+      if (orig && (!src || /^data:image\/gif/i.test(src) || /transparent|spacer|placeholder|blank/i.test(src))) {
+        im.setAttribute("src", orig);
+      }
+      im.removeAttribute("data-original");
+      im.removeAttribute("srcset");
+      im.removeAttribute("data-srcset");
+    }
+    // фон: computed немесе data-original-ды inline жазу
+    var bgs = document.querySelectorAll("[data-original], .t-cover__carrier, .t396__carrier, .t-bgimg, [data-bgimgfield]");
+    for (var j = 0; j < bgs.length; j++) {
+      var el = bgs[j];
+      if (el.tagName === "IMG" || inUI(el)) continue;
+      if (el.style && el.style.backgroundImage && el.style.backgroundImage.indexOf("data:") > -1) {
+        el.removeAttribute("data-original");
+        continue; // ауыстырылған фон
+      }
+      var bg = "";
+      try { bg = getComputedStyle(el).backgroundImage; } catch (e) {}
+      if (bg && bg !== "none" && bg.indexOf("url(") > -1) {
+        if (!el.style.backgroundImage) el.style.backgroundImage = bg;
+      } else if (el.getAttribute("data-original")) {
+        el.style.backgroundImage = "url('" + el.getAttribute("data-original") + "')";
+        el.style.backgroundSize = el.style.backgroundSize || "cover";
+        el.style.backgroundPosition = el.style.backgroundPosition || "center";
+      }
+      el.removeAttribute("data-original");
+    }
+  }
+
   function downloadEdited() {
+    materialize(); // тірі DOM-ды дайындау
     var clone = document.documentElement.cloneNode(true);
-    // өңдегіш іздерін тазалау
     ["#ebedit-bar", "#ebedit-style", "#ebedit-modal", "#ebedit-hint"].forEach(function (sel) {
       var el = clone.querySelector(sel);
       if (el) el.remove();
@@ -181,6 +317,7 @@
     for (var i = 0; i < ce.length; i++) {
       ce[i].removeAttribute("contenteditable");
       ce[i].removeAttribute("data-ebtext");
+      ce[i].removeAttribute("spellcheck");
     }
     var bodyEl = clone.querySelector("body");
     if (bodyEl) bodyEl.classList.remove("ebedit-on");
@@ -199,7 +336,7 @@
     URL.revokeObjectURL(url);
   }
 
-  // ---------- Kaspi модалы (код-жүйесі) ----------
+  // ---------- Kaspi модалы ----------
   var modal = document.createElement("div");
   modal.id = "ebedit-modal";
   modal.innerHTML =
@@ -234,6 +371,8 @@
   document.body.appendChild(modal);
 
   function show(id) {
+    var err = document.getElementById("eb-err");
+    if (err) err.style.display = "none";
     ["eb-pay", "eb-code", "eb-done"].forEach(function (s) {
       document.getElementById(s).style.display = s === id ? "block" : "none";
     });
@@ -254,7 +393,7 @@
       window.open("https://wa.me/" + CFG.WHATSAPP + "?text=" + txt, "_blank");
       return;
     }
-    if (t.hasAttribute("data-havecode")) { document.getElementById("eb-err").style.display = "none"; show("eb-code"); return; }
+    if (t.hasAttribute("data-havecode")) { show("eb-code"); return; }
     if (t.hasAttribute("data-back")) { show("eb-pay"); return; }
     if (t.hasAttribute("data-unlock")) {
       var v = (document.getElementById("eb-codein").value || "").trim().toUpperCase();
