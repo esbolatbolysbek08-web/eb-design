@@ -98,7 +98,7 @@ function inviteInner(s) {
 }
 
 function inviteRootHTML(s) {
-  return `<div class="iv-root" style="${themeInline(s)}">${inviteInner(s)}</div>`;
+  return `<div class="iv-root iv-${s.theme}" style="${themeInline(s)}">${inviteInner(s)}</div>`;
 }
 
 // =====================================================================
@@ -128,6 +128,32 @@ const INVITE_CSS = `
 @keyframes ivpop{0%{transform:scale(.7);opacity:0}100%{transform:scale(1);opacity:1}}
 @keyframes ivup{0%{transform:translateY(16px);opacity:0}100%{transform:none;opacity:1}}
 @keyframes ivspin{to{transform:rotate(360deg)}}
+
+/* ===== Әр стильдің ӨЗ дизайны ===== */
+/* Элегант қаріп (нақты үлгілердегідей) — той/ұзату/noir */
+.iv-wedding .iv-title,.iv-wedding .iv-names,
+.iv-uzatu .iv-title,.iv-uzatu .iv-names,
+.iv-noir .iv-title,.iv-noir .iv-names{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;letter-spacing:.5px}
+.iv-wedding .iv-title,.iv-uzatu .iv-title,.iv-noir .iv-title{font-size:42px;font-weight:700}
+
+/* NOIR — қара/алтын, тікбұрыш фото, ішкі алтын жиек, әшекелі бөлгіш */
+.iv-noir{border:1px solid color-mix(in srgb,var(--iv-accent) 55%,transparent)}
+.iv-noir .iv-eyebrow{letter-spacing:6px}
+.iv-noir .iv-photo{width:200px;height:240px;border-radius:8px;border-width:1px}
+.iv-noir .iv-names::before,.iv-uzatu .iv-names::before{content:"◆";display:block;color:var(--iv-accent);font-size:13px;margin-bottom:2px}
+.iv-noir .iv-rsvp,.iv-uzatu .iv-rsvp{border-radius:0;letter-spacing:2px;text-transform:uppercase;font-size:13px}
+
+/* UZATU — қос алтын сақиналы фото, әшекелі */
+.iv-uzatu .iv-photo{border-width:2px;box-shadow:0 0 0 6px color-mix(in srgb,var(--iv-accent) 25%,transparent)}
+.iv-uzatu .iv-eyebrow{letter-spacing:5px}
+
+/* BIRTHDAY — мерекелік, батыл, дөңгелек */
+.iv-birthday .iv-title{font-weight:900;text-transform:uppercase;letter-spacing:1px}
+.iv-birthday .iv-photo{border-radius:24px;width:170px;height:170px}
+.iv-birthday .iv-rsvp{border-radius:99px}
+
+/* LOVE — жұмсақ, дөңгелек */
+.iv-love .iv-title{font-weight:800}
 `;
 
 // =====================================================================
@@ -308,7 +334,7 @@ function buildExportHTML() {
     '<meta charset="UTF-8">',
     '<meta name="viewport" content="width=device-width, initial-scale=1.0">',
     "<title>" + esc(state.title) + " — " + esc(state.names) + "</title>",
-    '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">',
+    '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">',
     "<style>",
     "*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;background:#0b0d17;padding:20px;font-family:'Inter',sans-serif}",
     INVITE_CSS,
