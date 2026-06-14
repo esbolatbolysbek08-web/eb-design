@@ -102,7 +102,7 @@
     <div id="payStep1">
       <div class="kaspi-logo">kaspi<span>.kz</span></div>
       <h3 class="modal__title">Шақыртуды алу</h3>
-      <p class="modal__sub">Шақыртуыңыз дайын! Жүктеп алу үшін төлем жасаңыз:</p>
+      <p class="modal__sub">Шақыртуыңыз дайын! Алу үшін:</p>
       <div class="pay-price" id="priceTag">2 990 ₸</div>
 
       <div class="pay-card">
@@ -110,13 +110,31 @@
         <div class="pay-row"><span>Алушы</span><b id="kaspiName">—</b></div>
       </div>
 
+      <ol class="pay-steps">
+        <li>Жоғарыдағы Kaspi нөміріне төлеңіз</li>
+        <li>WhatsApp-пен бізге жазыңыз (тапсырысыңыз автоматты тіркеледі)</li>
+        <li>Біз төлемді тексеріп, <b>код</b> береміз</li>
+        <li>Кодты енгізіп, шақыртуды жүктеп аласыз</li>
+      </ol>
+
       <button class="btn btn--full btn--kaspi" id="btnKaspiPay">🔴 Kaspi-де төлеу</button>
-      <p class="modal__note">Жоғарыдағы нөмірге Kaspi арқылы аударыңыз, сосын төмендегі батырманы басыңыз.</p>
-      <button class="btn btn--full btn--ghost" id="btnPaid">✅ Төледім</button>
+      <button class="btn btn--full" id="btnGetCode">💬 Төледім — WhatsApp-пен код алу</button>
+      <button class="btn btn--full btn--ghost" id="btnHaveCode">🔑 Кодым бар</button>
     </div>
 
-    <!-- 2-қадам: жүктеп алу -->
+    <!-- 2-қадам: код енгізу -->
     <div id="payStep2" style="display:none">
+      <div class="kaspi-logo">kaspi<span>.kz</span></div>
+      <h3 class="modal__title">Кодты енгізіңіз</h3>
+      <p class="modal__sub">Дизайнер берген кодты жазыңыз — шақырту ашылады.</p>
+      <input type="text" class="code-input" id="codeInput" placeholder="КОД" autocomplete="off" />
+      <p class="code-error" id="codeError">Код қате. Қайта тексеріңіз.</p>
+      <button class="btn btn--full" id="btnUnlock">🔓 Ашу</button>
+      <button class="btn btn--full btn--ghost" id="btnBackPay">← Артқа</button>
+    </div>
+
+    <!-- 3-қадам: жүктеп алу -->
+    <div id="payStep3" style="display:none">
       <div class="pay-success">🎉</div>
       <h3 class="modal__title">Рахмет! Шақыртуыңыз дайын</h3>
       <p class="modal__sub">Файлды жүктеп алыңыз да, қонақтарға WhatsApp/Telegram арқылы жіберіңіз.</p>

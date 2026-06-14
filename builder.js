@@ -7,6 +7,8 @@ const CONFIG = {
   KASPI_NUMBER: "+7 776 557 30 09", // Kaspi нөмірі
   KASPI_NAME: "Есболат",            // Kaspi-дегі атыңыз
   PRICE: 2990,                      // шақыртудың бағасы (₸)
+  UNLOCK_CODE: "TOI2026",           // ⚠️ ҚҰПИЯ КОД — клиент төлегенде осыны бересіз.
+                                    //    Мезгіл-мезгіл өзгертіп тұрыңыз (бөлісіп жіберуді азайту үшін).
 };
 
 // =====================================================================
@@ -239,9 +241,17 @@ document.getElementById("kaspiName").textContent = CONFIG.KASPI_NAME;
 document.getElementById("priceTag").textContent = CONFIG.PRICE.toLocaleString("ru-RU") + " ₸";
 document.getElementById("priceBtn").textContent = CONFIG.PRICE.toLocaleString("ru-RU") + " ₸";
 
+const STEPS = ["payStep1", "payStep2", "payStep3"];
+function showStep(n) {
+  STEPS.forEach((id, i) => {
+    document.getElementById(id).style.display = i === n - 1 ? "block" : "none";
+  });
+}
+
 document.getElementById("btnFinish").addEventListener("click", () => {
-  document.getElementById("payStep1").style.display = "block";
-  document.getElementById("payStep2").style.display = "none";
+  showStep(1);
+  document.getElementById("codeError").style.display = "none";
+  document.getElementById("codeInput").value = "";
   modal.classList.add("is-open");
 });
 document.getElementById("payClose").addEventListener("click", () => modal.classList.remove("is-open"));
@@ -249,14 +259,40 @@ modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList
 
 // Kaspi-ге өту (қолданбаны ашуға тырысады)
 document.getElementById("btnKaspiPay").addEventListener("click", () => {
-  // Kaspi нөміріне аударымды қолмен жасайды; қолданбаны ашамыз
   window.open("https://kaspi.kz/", "_blank");
 });
 
-// "Төледім" → шақыртуды ашу
-document.getElementById("btnPaid").addEventListener("click", () => {
-  document.getElementById("payStep1").style.display = "none";
-  document.getElementById("payStep2").style.display = "block";
+// "Төледім — код алу" → тапсырысты WhatsApp-пен дизайнерге жіберу
+document.getElementById("btnGetCode").addEventListener("click", () => {
+  const text =
+    `Сәлеметсіз бе! Шақырту жасадым, төледім — код керек.%0A%0A` +
+    `🎉 ${encodeURIComponent(state.title)} — ${encodeURIComponent(state.names)}%0A` +
+    `🗓 ${encodeURIComponent(formatDate(state.date))}%0A` +
+    `📍 ${encodeURIComponent(state.place)}%0A` +
+    `💰 ${encodeURIComponent(CONFIG.PRICE.toLocaleString("ru-RU"))} ₸%0A%0A` +
+    `(Сурет/музыканы осы чатқа жіберемін)`;
+  window.open(`https://wa.me/${CONFIG.WHATSAPP}?text=${text}`, "_blank");
+});
+
+// "Кодым бар" → код енгізу қадамы
+document.getElementById("btnHaveCode").addEventListener("click", () => {
+  document.getElementById("codeError").style.display = "none";
+  showStep(2);
+  document.getElementById("codeInput").focus();
+});
+document.getElementById("btnBackPay").addEventListener("click", () => showStep(1));
+
+// Кодты тексеру → жүктеп алу қадамын ашу
+document.getElementById("btnUnlock").addEventListener("click", () => {
+  const val = (document.getElementById("codeInput").value || "").trim().toUpperCase();
+  if (val === CONFIG.UNLOCK_CODE.toUpperCase()) {
+    showStep(3);
+  } else {
+    document.getElementById("codeError").style.display = "block";
+  }
+});
+document.getElementById("codeInput").addEventListener("keydown", (e) => {
+  if (e.key === "Enter") document.getElementById("btnUnlock").click();
 });
 
 // Жүктеп алу (дайын HTML файл)
