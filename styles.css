@@ -53,6 +53,7 @@ img{max-width:100%;display:block}
 
 /* ===== Навигация ===== */
 .nav{position:sticky;top:0;z-index:50;background:rgba(11,13,23,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+body.light .nav{background:rgba(255,255,255,.85)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
 .logo span{color:var(--brand)}
@@ -184,6 +185,21 @@ img{max-width:100%;display:block}
 .gallery__item:hover::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
 .gallery__item:hover .shot{filter:brightness(.7)}
 .shot{transition:filter .25s}
+@media(hover:none){
+  .gallery__item::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
+  .gallery__item .shot{filter:brightness(.78)}
+}
+
+/* Дайын нақты үлгілер */
+.templates{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,340px));gap:18px;margin-top:32px}
+.tpl-card{position:relative;display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .3s ease,border-color .3s ease}
+.tpl-card:hover{transform:translateY(-8px);border-color:var(--brand)}
+.tpl-card__badge{position:absolute;top:14px;left:14px;z-index:2;background:var(--brand);color:#fff;font-size:12px;font-weight:800;padding:5px 12px;border-radius:99px}
+.tpl-card__img{height:230px;background-size:cover;background-position:center;background-color:#11142a}
+.tpl-card__body{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.tpl-card__body strong{font-size:18px}
+.tpl-card__body span{color:var(--muted);font-size:14px}
+.templates__or{text-align:center;color:var(--muted);font-size:15px;font-weight:600;margin:34px 0 4px}
 
 /* Галерея CTA */
 .gallery-cta{text-align:center;margin-top:40px}

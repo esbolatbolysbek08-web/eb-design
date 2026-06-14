@@ -1,5 +1,5 @@
 /* ===== Шақырту конструкторы ===== */
-.bld{background:var(--bg);color:var(--text);min-height:100vh}
+.bld{background:var(--bg);color:var(--text);min-height:100vh;display:flex;flex-direction:column}
 
 .bld-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
   padding:12px 18px;background:rgba(11,13,23,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -8,7 +8,7 @@
 .bld-logo{font-weight:800;font-size:15px}
 .bld-logo span{color:var(--brand);font-weight:400}
 
-.bld-layout{display:grid;grid-template-columns:1fr 380px;min-height:calc(100vh - 57px)}
+.bld-layout{display:grid;grid-template-columns:1fr 380px;flex:1;min-height:0}
 
 /* Превью */
 .bld-preview{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
@@ -22,6 +22,8 @@
 .editor{background:var(--surface);border-left:1px solid var(--line);padding:24px 22px 60px;overflow-y:auto;
   display:flex;flex-direction:column;gap:14px}
 .editor__title{font-size:20px;font-weight:800;margin:0 0 4px}
+.editor__close{display:none}
+.editor-backdrop{position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.45);display:none}
 .fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
 .fld input,.fld select,.fld textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;
   padding:11px 13px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
@@ -70,5 +72,7 @@
     box-shadow:-20px 0 50px -20px rgba(0,0,0,.6)
   }
   .editor.is-open{transform:none}
+  .editor-backdrop.is-open{display:block}
+  .editor__close{display:block;position:absolute;top:10px;right:12px;background:none;border:none;font-size:20px;color:var(--muted);cursor:pointer;z-index:2}
   .bld-preview{padding-top:24px}
 }

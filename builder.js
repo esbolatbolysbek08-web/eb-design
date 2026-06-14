@@ -69,6 +69,7 @@ function themeInline(s) {
 //  Шақырту ішкі HTML-і (превью де, экспорт та осыны қолданады)
 // =====================================================================
 function inviteInner(s) {
+  const hasDate = !!formatDate(s.date);
   return `
   <div class="iv-particles" data-anim="${s.anim}"></div>
   <button class="iv-music" type="button" aria-label="Музыка">♪</button>
@@ -78,14 +79,14 @@ function inviteInner(s) {
   <div class="iv-photo" style="${s.photo ? `background-image:url('${s.photo}')` : ""}">${s.photo ? "" : "📷"}</div>
   <h2 class="iv-names">${esc(s.names)}</h2>
   <p class="iv-msg">${esc(s.message)}</p>
-  <div class="iv-count" data-date="${s.date}">
+  ${hasDate ? `<div class="iv-count" data-date="${s.date}">
     <div><b>0</b><small>күн</small></div>
     <div><b>0</b><small>сағ</small></div>
     <div><b>0</b><small>мин</small></div>
     <div><b>0</b><small>сек</small></div>
-  </div>
+  </div>` : `<div class="iv-count-empty">Күн әлі белгіленбеген</div>`}
   <div class="iv-details">
-    <div>🗓 <span>${esc(formatDate(s.date))}</span></div>
+    <div>🗓 <span>${hasDate ? esc(formatDate(s.date)) : "Күн белгіленбеген"}</span></div>
     <div>📍 <span>${esc(s.place)}</span></div>
   </div>
   <a class="iv-rsvp" href="tel:${esc(s.phone.replace(/[^0-9+]/g, ""))}">Қатысатынымды растау</a>
@@ -103,7 +104,8 @@ const INVITE_CSS = `
 .iv-root{position:relative;width:100%;max-width:480px;margin:0 auto;min-height:640px;border-radius:24px;overflow:hidden;padding:48px 26px 40px;font-family:'Inter',system-ui,sans-serif;color:var(--iv-text);box-shadow:0 30px 70px -30px rgba(0,0,0,.55);text-align:center;display:flex;flex-direction:column;align-items:center;gap:15px}
 .iv-particles{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
 .iv-particles span{position:absolute;top:-30px;animation:ivfall linear infinite;will-change:transform}
-@keyframes ivfall{0%{transform:translateY(-40px) rotate(0);opacity:0}10%{opacity:.95}100%{transform:translateY(700px) rotate(360deg);opacity:0}}
+@keyframes ivfall{0%{transform:translateY(-40px) rotate(0);opacity:0}10%{opacity:.95}100%{transform:translateY(1400px) rotate(360deg);opacity:0}}
+.iv-count-empty{font-size:14px;opacity:.7;font-style:italic;margin:6px 0}
 .iv-root > *:not(.iv-particles){position:relative;z-index:1}
 .iv-eyebrow{letter-spacing:3px;text-transform:uppercase;font-size:12px;font-weight:600;opacity:.7;margin:0;animation:ivup .7s ease}
 .iv-title{font-size:34px;font-weight:800;margin:0;line-height:1.12;animation:ivup .7s ease .05s both}
@@ -140,15 +142,16 @@ const RUNTIME = `
   var c=document.querySelector('.iv-count');
   if(c){
     var target=new Date(c.getAttribute('data-date')).getTime();
-    if(window.__ivTimer)clearInterval(window.__ivTimer);
-    function upd(){
-      if(isNaN(target))return;
-      var d=target-Date.now(); if(d<0)d=0;
-      var days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
-      var b=c.querySelectorAll('b');
-      if(b.length>=4){b[0].textContent=days;b[1].textContent=('0'+h).slice(-2);b[2].textContent=('0'+m).slice(-2);b[3].textContent=('0'+s).slice(-2);}
+    if(!isNaN(target)){
+      if(window.__ivTimer)clearInterval(window.__ivTimer);
+      function upd(){
+        var d=target-Date.now(); if(d<0)d=0;
+        var days=Math.floor(d/86400000),h=Math.floor(d%86400000/3600000),m=Math.floor(d%3600000/60000),s=Math.floor(d%60000/1000);
+        var b=c.querySelectorAll('b');
+        if(b.length>=4){b[0].textContent=days;b[1].textContent=('0'+h).slice(-2);b[2].textContent=('0'+m).slice(-2);b[3].textContent=('0'+s).slice(-2);}
+      }
+      upd();window.__ivTimer=setInterval(upd,1000);
     }
-    upd();window.__ivTimer=setInterval(upd,1000);
   }
   var mb=document.querySelector('.iv-music'),au=document.querySelector('.iv-audio');
   if(mb&&au){mb.onclick=function(){ if(!au.getAttribute('src')){alert('Музыка қосылмаған');return;} if(au.paused){au.play();mb.classList.add('on');}else{au.pause();mb.classList.remove('on');} };}
@@ -217,9 +220,15 @@ document.getElementById("f-music").addEventListener("change", (e) => {
   reader.readAsDataURL(file);
 });
 
-// Панельді ашу/жабу (мобильде)
+// Панельді ашу/жабу (мобильде) — backdrop пен ✕ батырмасымен
 const editor = document.getElementById("editor");
-document.getElementById("toggleEditor").addEventListener("click", () => editor.classList.toggle("is-open"));
+const editorBackdrop = document.getElementById("editorBackdrop");
+function openEditor() { editor.classList.add("is-open"); editorBackdrop.classList.add("is-open"); }
+function closeEditor() { editor.classList.remove("is-open"); editorBackdrop.classList.remove("is-open"); }
+document.getElementById("toggleEditor").addEventListener("click", () =>
+  editor.classList.contains("is-open") ? closeEditor() : openEditor());
+editorBackdrop.addEventListener("click", closeEditor);
+document.getElementById("editorClose").addEventListener("click", closeEditor);
 
 // =====================================================================
 //  ТӨЛЕМ (Kaspi) + жүктеп алу
@@ -230,7 +239,11 @@ document.getElementById("kaspiName").textContent = CONFIG.KASPI_NAME;
 document.getElementById("priceTag").textContent = CONFIG.PRICE.toLocaleString("ru-RU") + " ₸";
 document.getElementById("priceBtn").textContent = CONFIG.PRICE.toLocaleString("ru-RU") + " ₸";
 
-document.getElementById("btnFinish").addEventListener("click", () => modal.classList.add("is-open"));
+document.getElementById("btnFinish").addEventListener("click", () => {
+  document.getElementById("payStep1").style.display = "block";
+  document.getElementById("payStep2").style.display = "none";
+  modal.classList.add("is-open");
+});
 document.getElementById("payClose").addEventListener("click", () => modal.classList.remove("is-open"));
 modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("is-open"); });
 
@@ -259,7 +272,7 @@ function buildExportHTML() {
     "<title>" + esc(state.title) + " — " + esc(state.names) + "</title>",
     '<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">',
     "<style>",
-    "*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#0b0d17;padding:20px;font-family:'Inter',sans-serif}",
+    "*{box-sizing:border-box}body{margin:0;min-height:100vh;display:flex;justify-content:center;align-items:flex-start;background:#0b0d17;padding:20px;font-family:'Inter',sans-serif}",
     INVITE_CSS,
     "</style>",
     "</head>",
