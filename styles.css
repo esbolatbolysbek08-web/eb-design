@@ -1,0 +1,322 @@
+:root{
+  --bg:#0b0d17;
+  --bg-soft:#11142250;
+  --surface:#151827;
+  --surface-2:#1c2032;
+  --text:#e7e9f3;
+  --muted:#9aa0b8;
+  --brand:#7c5cff;
+  --brand-2:#19c8c0;
+  --line:#262a3d;
+  --radius:18px;
+  --container:1120px;
+}
+/* Жарық тема */
+body.light{
+  --bg:#f6f7fb;
+  --bg-soft:#eef0f7;
+  --surface:#ffffff;
+  --surface-2:#f0f2f8;
+  --text:#161827;
+  --muted:#5a6075;
+  --line:#e2e5ef;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{max-width:var(--container);margin:0 auto;padding:0 24px}
+.container--narrow{max-width:760px}
+
+/* ===== Кнопкалар ===== */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:linear-gradient(135deg,var(--brand),#9d7bff);
+  color:#fff;font-weight:600;font-size:16px;
+  padding:14px 26px;border-radius:12px;border:none;cursor:pointer;
+  transition:transform .2s ease,box-shadow .2s ease;
+  box-shadow:0 8px 24px -8px rgba(124,92,255,.6);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 30px -8px rgba(124,92,255,.7)}
+.btn--sm{padding:10px 18px;font-size:14px}
+.btn--ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--text)}
+.btn--ghost:hover{border-color:var(--brand);background:#ffffff08}
+.btn--full{width:100%}
+
+/* ===== Навигация ===== */
+.nav{position:sticky;top:0;z-index:50;background:rgba(11,13,23,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav__inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo span{color:var(--brand)}
+.nav__links{display:flex;gap:28px}
+.nav__links a{color:var(--muted);font-weight:500;font-size:15px;transition:color .2s}
+.nav__links a:hover{color:var(--text)}
+.nav__actions{display:flex;align-items:center;gap:12px}
+.lang{display:flex;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px}
+.lang__btn{background:none;border:none;color:var(--muted);font-weight:700;font-size:13px;padding:6px 10px;border-radius:7px;cursor:pointer;transition:.2s}
+.lang__btn.is-active{background:var(--brand);color:#fff}
+.icon-btn{background:var(--surface-2);border:1px solid var(--line);width:40px;height:40px;border-radius:10px;font-size:18px;cursor:pointer;transition:transform .2s,border-color .2s}
+.icon-btn:hover{transform:translateY(-2px);border-color:var(--brand)}
+.burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:8px}
+.burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+.burger.is-open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger.is-open span:nth-child(2){opacity:0}
+.burger.is-open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+/* ===== Hero ===== */
+.hero{position:relative;overflow:hidden;padding:80px 0 90px}
+.hero::before{content:"";position:absolute;top:-200px;right:-150px;width:600px;height:600px;background:radial-gradient(circle,rgba(124,92,255,.25),transparent 70%);filter:blur(20px)}
+.hero::after{content:"";position:absolute;bottom:-150px;left:-150px;width:500px;height:500px;background:radial-gradient(circle,rgba(25,200,192,.15),transparent 70%)}
+.hero__inner{position:relative;display:grid;grid-template-columns:1.1fr .9fr;gap:50px;align-items:center}
+.badge{display:inline-block;background:#19c8c01a;color:var(--brand-2);font-size:13px;font-weight:600;padding:7px 14px;border-radius:99px;margin-bottom:22px}
+.hero h1{font-size:54px;line-height:1.08;font-weight:900;letter-spacing:-1.5px;margin-bottom:18px}
+.grad{background:linear-gradient(120deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.lead{font-size:19px;color:var(--muted);max-width:480px;margin-bottom:30px}
+.hero__cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:40px}
+.stats{display:flex;gap:36px}
+.stats div{display:flex;flex-direction:column}
+.stats strong{font-size:28px;font-weight:800}
+.stats span{font-size:14px;color:var(--muted)}
+
+/* Hero мокап */
+.hero__art{position:relative;display:flex;justify-content:center}
+.mock{width:100%;max-width:360px;background:var(--surface);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:0 30px 60px -20px rgba(0,0,0,.6)}
+.mock__bar{display:flex;gap:7px;padding:14px 16px;background:var(--surface-2);border-bottom:1px solid var(--line)}
+.mock__bar span{width:11px;height:11px;border-radius:50%;background:#3a3f57}
+.mock__bar span:nth-child(1){background:#ff5f57}
+.mock__bar span:nth-child(2){background:#febc2e}
+.mock__bar span:nth-child(3){background:#28c840}
+.mock__body{padding:22px}
+.mock__hero{height:120px;border-radius:12px;background:linear-gradient(135deg,var(--brand),var(--brand-2));margin-bottom:16px}
+.mock__row{display:flex;gap:12px;margin-bottom:16px}
+.mock__row i{flex:1;height:54px;border-radius:10px;background:var(--surface-2)}
+.mock__btn{height:42px;width:60%;border-radius:10px;background:#ffffff14}
+.card-float{position:absolute;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;box-shadow:0 14px 30px -12px rgba(0,0,0,.7);animation:float 4s ease-in-out infinite}
+.card-float--1{top:10px;left:-10px}
+.card-float--2{bottom:30px;right:-15px;animation-delay:1.5s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ===== Секциялар ===== */
+.section{padding:90px 0}
+.section--alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.eyebrow{color:var(--brand);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.eyebrow--light{color:var(--brand-2)}
+.section h2{font-size:38px;font-weight:800;letter-spacing:-1px;margin-bottom:14px;max-width:680px}
+.section__sub{color:var(--muted);font-size:18px;margin-bottom:36px;max-width:560px}
+
+/* Сетка */
+.grid{display:grid;gap:22px;margin-top:36px}
+.grid--3{grid-template-columns:repeat(3,1fr)}
+.grid--2{grid-template-columns:repeat(2,1fr)}
+
+/* Қызметтер */
+.feature{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .25s ease,border-color .25s ease}
+.feature:hover{transform:translateY(-6px);border-color:var(--brand)}
+.feature--hot{background:linear-gradient(160deg,rgba(124,92,255,.18),var(--surface));border-color:var(--brand)}
+.feature--hot::after{content:"NEW";position:absolute;top:16px;right:16px;background:var(--brand);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
+.feature{position:relative}
+.feature__icon{font-size:30px;margin-bottom:14px}
+.feature h3{font-size:20px;margin-bottom:8px}
+.feature p{color:var(--muted);font-size:15px}
+
+/* Жұмыстар */
+.work{margin-top:36px}
+.work__card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .25s ease,border-color .25s ease}
+.work__card:hover{transform:translateY(-6px);border-color:var(--brand-2)}
+.work__thumb{height:180px;background-size:cover;background-position:center}
+.work__thumb--1{background:linear-gradient(135deg,#7c5cff,#19c8c0)}
+.work__thumb--2{background:linear-gradient(135deg,#ff7e5f,#feb47b)}
+.work__thumb--3{background:linear-gradient(135deg,#43cea2,#185a9d)}
+.work__thumb--4{background:linear-gradient(135deg,#667eea,#764ba2)}
+.work__thumb--5{background:linear-gradient(135deg,#f093fb,#f5576c)}
+.work__thumb--6{background:linear-gradient(135deg,#4facfe,#00f2fe)}
+.work__meta{padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.work__meta strong{font-size:17px}
+.work__meta span{color:var(--muted);font-size:14px}
+
+/* Неге мен */
+.why__item{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:24px}
+.check{flex:none;width:30px;height:30px;border-radius:50%;background:#19c8c01a;color:var(--brand-2);display:grid;place-items:center;font-weight:800}
+.why__item strong{font-size:18px}
+.why__item p{color:var(--muted);font-size:15px;margin-top:2px}
+
+/* Байланыс */
+.section--cta{background:linear-gradient(180deg,var(--surface),var(--bg));border-top:1px solid var(--line)}
+.contact{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:start}
+.contact__text h2{font-size:38px;margin-bottom:14px}
+.contact__text p{color:var(--muted);font-size:18px;margin-bottom:28px}
+.contact__direct{display:flex;flex-direction:column;gap:14px}
+.contact__link{display:inline-flex;align-items:center;gap:10px;font-weight:600;font-size:17px;padding:12px 18px;background:var(--surface);border:1px solid var(--line);border-radius:12px;width:fit-content;transition:border-color .2s}
+.contact__link:hover{border-color:var(--brand)}
+.contact__form{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:30px;display:flex;flex-direction:column;gap:16px}
+.contact__form label{display:flex;flex-direction:column;gap:7px;font-size:14px;font-weight:600;color:var(--muted)}
+.contact__form input,.contact__form select,.contact__form textarea{
+  background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s;
+}
+.contact__form input:focus,.contact__form select:focus,.contact__form textarea:focus{border-color:var(--brand)}
+.form__note{font-size:13px;color:var(--muted);text-align:center;font-weight:400}
+
+/* Футер */
+.footer{border-top:1px solid var(--line);padding:28px 0}
+.footer__inner{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px}
+.footer__inner a:hover{color:var(--text)}
+
+/* Жылжымалы WhatsApp */
+.fab{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;font-size:26px;box-shadow:0 10px 30px -6px rgba(37,211,102,.6);z-index:60;transition:transform .2s}
+.fab:hover{transform:scale(1.08)}
+
+/* ===== Дизайн галереясы (hero-блок макеттері) ===== */
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.gallery__item{margin:0;transition:transform .35s ease}
+.gallery__item:hover{transform:translateY(-8px)}
+
+.shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0e1120;box-shadow:0 20px 40px -22px rgba(0,0,0,.7)}
+.shot__bar{display:flex;gap:6px;padding:10px 12px;background:#191d2e}
+.shot__bar i{width:9px;height:9px;border-radius:50%;background:#3a3f57}
+.shot__bar i:nth-child(1){background:#ff5f57}
+.shot__bar i:nth-child(2){background:#febc2e}
+.shot__bar i:nth-child(3){background:#28c840}
+.shot__view{aspect-ratio:4/3;padding:18px;display:flex;flex-direction:column;position:relative;overflow:hidden}
+
+/* Жалпы блоктар */
+.shot__nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:auto}
+.dot{width:16px;height:16px;border-radius:5px;background:#fff}
+.dot.dark{background:#161827}
+.nav-lines{display:flex;gap:7px}
+.nav-lines i{width:18px;height:5px;border-radius:3px;background:rgba(255,255,255,.55)}
+.nav-lines i.dark{background:rgba(0,0,0,.35)}
+.shot__center{margin:auto 0;display:flex;flex-direction:column;align-items:center;gap:9px;text-align:center}
+.shot__center--left{align-items:flex-start}
+.bar{height:11px;border-radius:6px;background:#fff}
+.bar--xl{width:88%;height:18px}
+.bar--lg{width:75%;height:14px}
+.bar--md{width:55%}
+.bar--sm{width:40%;height:8px}
+.bar.dark{background:#1b1e2e}
+.shot__btns{display:flex;gap:8px;margin-top:6px}
+.pill{width:64px;height:18px;border-radius:9px;background:#fff}
+.pill--ghost{background:rgba(255,255,255,.35)}
+.pill--accent{background:#7c5cff;width:54px}
+.pill--bright{background:#19c8c0;width:70px;height:20px}
+.pill--dark{background:#161827}
+.pill--line{background:transparent;border:2px solid #161827;width:54px}
+.shot__split{display:flex;gap:14px;align-items:center;height:100%}
+.shot__col{flex:1;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.shot__img{flex:1;align-self:stretch;border-radius:12px;background:linear-gradient(135deg,#7c5cff,#19c8c0)}
+.orb{position:absolute;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,#7c5cff,transparent 70%);top:-30px;right:-20px;filter:blur(6px)}
+.shot__cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.shot__cards span{aspect-ratio:1;border-radius:8px;background:rgba(0,0,0,.08);border:1px solid rgba(0,0,0,.06)}
+
+/* Тақырыптар (фон) */
+.shot__view--a{background:linear-gradient(150deg,#7c5cff,#9d7bff)}
+.shot__view--b{background:#f3f4fb}
+.shot__view--c{background:#ffffff}
+.shot__view--d{background:linear-gradient(160deg,#11142a,#1b1f3a)}
+.shot__view--e{background:#f6f7fb}
+.shot__view--f{background:linear-gradient(150deg,#19c8c0,#0ea89f)}
+
+/* ===== Мобиль app tab bar ===== */
+.tabbar{display:none}
+
+/* ===== Баға калькуляторы ===== */
+.calc{display:grid;grid-template-columns:1.3fr .7fr;gap:24px;margin-top:36px;align-items:start}
+.calc__options{display:flex;flex-direction:column;gap:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px}
+.calc__label{display:block;font-weight:700;margin-bottom:12px;font-size:15px}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{background:var(--bg);border:1px solid var(--line);color:var(--text);font-weight:500;font-size:14px;padding:10px 16px;border-radius:12px;cursor:pointer;transition:.2s}
+.chip:hover{border-color:var(--brand)}
+.chip.is-active{background:linear-gradient(135deg,var(--brand),#9d7bff);border-color:transparent;color:#fff}
+.calc__result{position:sticky;top:90px;background:linear-gradient(160deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:var(--radius);padding:28px;text-align:center}
+.calc__result-label{color:var(--muted);font-size:14px;font-weight:600}
+.calc__price{font-size:40px;font-weight:900;letter-spacing:-1px;margin:8px 0 4px;color:var(--brand)}
+.calc__note{font-size:13px;color:var(--muted);margin-bottom:20px}
+
+/* ===== FAQ ===== */
+.faq{margin-top:30px;display:flex;flex-direction:column;gap:12px}
+.faq__item{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.faq__q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;background:none;border:none;color:var(--text);font-family:inherit;font-size:16px;font-weight:600;text-align:left;padding:20px 22px;cursor:pointer}
+.faq__icon{flex:none;font-size:22px;font-weight:400;color:var(--brand);transition:transform .3s}
+.faq__item.is-open .faq__icon{transform:rotate(45deg)}
+.faq__a{max-height:0;overflow:hidden;transition:max-height .35s ease}
+.faq__a p{padding:0 22px 20px;color:var(--muted);font-size:15px}
+
+/* ===== Скролл-анимация ===== */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.is-in{opacity:1;transform:none}
+
+/* ===== Адаптив ===== */
+@media(max-width:900px){
+  .hero__inner,.contact,.calc{grid-template-columns:1fr}
+  .hero h1{font-size:40px}
+  .hero__art{order:-1;margin-bottom:10px}
+  .grid--3,.grid--2{grid-template-columns:1fr 1fr}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  .calc__result{position:static}
+  .burger{display:flex}
+  .nav__links{
+    position:absolute;top:68px;left:0;right:0;
+    flex-direction:column;gap:0;
+    background:var(--surface);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .3s ease;
+  }
+  .nav__links.is-open{max-height:360px}
+  .nav__links a{padding:16px 24px;border-top:1px solid var(--line);font-size:16px}
+  .section h2,.contact__text h2{font-size:30px}
+}
+
+/* ===== Мобиль = нағыз қосымша (app) сезімі ===== */
+@media(max-width:640px){
+  .grid--3,.grid--2{grid-template-columns:1fr}
+  .gallery{grid-template-columns:repeat(2,1fr);gap:12px}
+  .hero h1{font-size:32px}
+  .stats{gap:18px}
+  .stats strong{font-size:22px}
+
+  body{padding-bottom:74px}            /* tab bar орны */
+  .container{padding:0 18px}
+  .nav__order,.nav .btn--sm{display:none}  /* жоғарыдағы артық батырма */
+  .lang__btn{padding:6px 8px;font-size:12px}
+  .fab{display:none}                    /* tab bar бар, fab керек емес */
+
+  /* Секцияларды app «card» сияқты ету */
+  .section{padding:42px 0}
+  .hero{padding:30px 0 44px}
+  .feature,.why__item,.faq__item,.calc__options,.calc__result,.contact__form{border-radius:20px}
+  .feature{padding:22px}
+
+  /* Hero CTA-ны толық енді app батырмасына ұқсату */
+  .hero__cta{flex-direction:column}
+  .hero__cta .btn{width:100%;padding:16px}
+  .badge{font-size:12px}
+
+  /* Чиптерді app сегмент-контролі сияқты ету */
+  .chips{gap:8px}
+  .chip{flex:1 1 auto;text-align:center;padding:12px 12px}
+
+  /* Тіл ауыстырғышты ықшамдау */
+  .nav__inner{height:62px}
+  .nav{padding-top:env(safe-area-inset-top)}
+
+  /* Мобиль tab bar көрсету */
+  .tabbar{
+    display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
+    background:rgba(21,24,39,.92);backdrop-filter:blur(16px);
+    border-top:1px solid var(--line);
+    padding:8px 6px calc(8px + env(safe-area-inset-bottom));
+    justify-content:space-around;
+  }
+  body.light .tabbar{background:rgba(255,255,255,.92)}
+  .tabbar__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:11px;font-weight:600;padding:4px;border-radius:12px;transition:.2s}
+  .tabbar__ico{font-size:21px;line-height:1}
+  .tabbar__item.is-active{color:var(--brand)}
+  .tabbar__item--cta{color:#fff;background:linear-gradient(135deg,var(--brand),#9d7bff)}
+  .tabbar__item--cta.is-active{color:#fff}
+}

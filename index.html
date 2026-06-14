@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>EB.design · Есболат</title>
+<meta name="description" content="Бизнесіңізге клиент әкелетін заманауи сайт жасаймын." />
+<meta name="theme-color" content="#0b0d17" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ===== Навигация ===== -->
+<header class="nav" id="top">
+  <div class="container nav__inner">
+    <a href="#top" class="logo">EB<span>.design</span></a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#services" data-i18n="nav.services">Қызметтер</a>
+      <a href="#gallery" data-i18n="nav.gallery">Жұмыстар</a>
+      <a href="#calc" data-i18n="nav.price">Баға</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a href="#contact" data-i18n="nav.contact">Байланыс</a>
+    </nav>
+    <div class="nav__actions">
+      <div class="lang" id="lang">
+        <button class="lang__btn is-active" data-lang="kk">KZ</button>
+        <button class="lang__btn" data-lang="ru">RU</button>
+        <button class="lang__btn" data-lang="en">EN</button>
+      </div>
+      <button class="icon-btn" id="themeToggle" aria-label="Тема">🌙</button>
+      <a href="#contact" class="btn btn--sm" data-i18n="nav.order">Тапсырыс беру</a>
+      <button class="burger" id="burger" aria-label="Меню"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <div class="badge" data-i18n="hero.badge">● Жаңа жобаларға ашықпын</div>
+      <h1 data-i18n-html="hero.title">Бизнесіңізге <span class="grad">клиент әкелетін</span> сайт жасаймын</h1>
+      <p class="lead" data-i18n="hero.lead">Заманауи, жылдам әрі сатуға бағытталған сайттар. Идеядан жұмыс істейтін сайтқа дейін — 5–7 күнде.</p>
+      <div class="hero__cta">
+        <a href="#contact" class="btn" data-i18n="hero.cta1">Тегін кеңес алу</a>
+        <a href="#gallery" class="btn btn--ghost" data-i18n="hero.cta2">Жұмыстарымды көру</a>
+      </div>
+      <div class="stats">
+        <div><strong class="count" data-target="30" data-suffix="+">0</strong><span data-i18n="hero.stat1">жоба</span></div>
+        <div><strong class="count" data-target="7" data-suffix="">0</strong><span data-i18n="hero.stat2">орташа күн</span></div>
+        <div><strong class="count" data-target="100" data-suffix="%">0</strong><span data-i18n="hero.stat3">мобильге бейім</span></div>
+      </div>
+    </div>
+    <div class="hero__art" aria-hidden="true">
+      <div class="card-float card-float--1" data-i18n="hero.float1">💬 Жаңа клиент жазды</div>
+      <div class="card-float card-float--2" data-i18n="hero.float2">📈 Конверсия +48%</div>
+      <div class="mock">
+        <div class="mock__bar"><span></span><span></span><span></span></div>
+        <div class="mock__body">
+          <div class="mock__hero"></div>
+          <div class="mock__row"><i></i><i></i></div>
+          <div class="mock__btn"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Қызметтер ===== -->
+<section class="section" id="services">
+  <div class="container">
+    <p class="eyebrow" data-i18n="services.eyebrow">Қызметтер</p>
+    <h2 data-i18n="services.title">Сізге не керек болса — соны жасаймын</h2>
+    <div class="grid grid--3">
+      <article class="feature reveal"><div class="feature__icon">🚀</div><h3 data-i18n="s1t">Лендинг (бір беттік)</h3><p data-i18n="s1d">Бір қызметті сатуға арналған, клиент бірден байланысқа шығатын сайт.</p></article>
+      <article class="feature reveal"><div class="feature__icon">🏢</div><h3 data-i18n="s2t">Бизнес-сайт</h3><p data-i18n="s2d">Компания туралы, қызметтер, бағалар, пікірлер мен байланыс — толық презентация.</p></article>
+      <article class="feature reveal"><div class="feature__icon">🛍️</div><h3 data-i18n="s3t">Онлайн-дүкен</h3><p data-i18n="s3d">Тауар каталогы, себет және тапсырыс. Клиент сайттан тікелей сатып ала алады.</p></article>
+      <article class="feature reveal"><div class="feature__icon">🎨</div><h3 data-i18n="s4t">Дизайн жаңарту</h3><p data-i18n="s4d">Ескі сайтыңызды заманауи әрі жылдам нұсқаға айналдырамын.</p></article>
+      <article class="feature reveal"><div class="feature__icon">📱</div><h3 data-i18n="s5t">Мобильге бейімдеу</h3><p data-i18n="s5d">Телефонда да, компьютерде де мінсіз көрінеді.</p></article>
+      <article class="feature reveal"><div class="feature__icon">⚡</div><h3 data-i18n="s6t">Жылдамдық пен SEO</h3><p data-i18n="s6d">Тез ашылатын, Google-да жоғары тұратын сайт.</p></article>
+      <article class="feature feature--hot reveal"><div class="feature__icon">🤖</div><h3 data-i18n="s7t">Чат-боттар</h3><p data-i18n="s7d">WhatsApp және Telegram боттары — тапсырыс қабылдау, сұрақтарға автоматты жауап, 24/7 жұмыс.</p></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Дизайн галереясы ===== -->
+<section class="section section--alt" id="gallery">
+  <div class="container">
+    <p class="eyebrow" data-i18n="gallery.eyebrow">Жұмыстар</p>
+    <h2 data-i18n="gallery.title">Дизайн жұмыстарым</h2>
+    <p class="section__sub" data-i18n="gallery.sub">Заманауи, таза әрі әдемі дизайн.</p>
+    <div class="gallery">
+      <!-- Әрқайсысы — сайт дизайнының hero-блок макеті -->
+      <figure class="gallery__item reveal">
+        <div class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i></div>
+          <div class="shot__view shot__view--a">
+            <div class="shot__nav"><span class="dot"></span><div class="nav-lines"><i></i><i></i><i></i></div></div>
+            <div class="shot__center">
+              <div class="bar bar--lg"></div><div class="bar bar--md"></div>
+              <div class="shot__btns"><span class="pill"></span><span class="pill pill--ghost"></span></div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="gallery__item reveal">
+        <div class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i></div>
+          <div class="shot__view shot__view--b">
+            <div class="shot__split">
+              <div class="shot__col">
+                <div class="bar bar--lg dark"></div><div class="bar bar--sm dark"></div><div class="bar bar--sm dark"></div>
+                <span class="pill pill--accent"></span>
+              </div>
+              <div class="shot__img"></div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="gallery__item reveal">
+        <div class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i></div>
+          <div class="shot__view shot__view--c">
+            <div class="shot__nav"><span class="dot dark"></span><div class="nav-lines"><i class="dark"></i><i class="dark"></i><i class="dark"></i></div></div>
+            <div class="shot__center">
+              <div class="bar bar--xl dark"></div><div class="bar bar--md dark"></div>
+              <div class="shot__btns"><span class="pill pill--dark"></span><span class="pill pill--line"></span></div>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="gallery__item reveal">
+        <div class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i></div>
+          <div class="shot__view shot__view--d">
+            <div class="orb"></div>
+            <div class="shot__center">
+              <div class="bar bar--lg"></div><div class="bar bar--md"></div>
+              <span class="pill"></span>
+            </div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="gallery__item reveal">
+        <div class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i></div>
+          <div class="shot__view shot__view--e">
+            <div class="shot__nav"><span class="dot dark"></span><div class="nav-lines"><i class="dark"></i><i class="dark"></i></div></div>
+            <div class="shot__cards"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+          </div>
+        </div>
+      </figure>
+
+      <figure class="gallery__item reveal">
+        <div class="shot">
+          <div class="shot__bar"><i></i><i></i><i></i></div>
+          <div class="shot__view shot__view--f">
+            <div class="shot__center shot__center--left">
+              <div class="bar bar--xl"></div><div class="bar bar--lg"></div><div class="bar bar--sm"></div>
+              <span class="pill pill--bright"></span>
+            </div>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Неге мен ===== -->
+<section class="section" id="why">
+  <div class="container">
+    <p class="eyebrow" data-i18n="why.eyebrow">Неге мен</p>
+    <h2 data-i18n="why.title">Сайт — әдемі ғана емес, табыс әкелуі керек</h2>
+    <div class="grid grid--2">
+      <div class="why__item reveal"><span class="check">✓</span><div><strong data-i18n="w1t">Сатуға бағытталған</strong><p data-i18n="w1d">Әр блок клиентті байланысқа шығуға жетелейді.</p></div></div>
+      <div class="why__item reveal"><span class="check">✓</span><div><strong data-i18n="w2t">Жылдам жеткізу</strong><p data-i18n="w2d">Көп жобаны 5–7 күнде дайын етемін.</p></div></div>
+      <div class="why__item reveal"><span class="check">✓</span><div><strong data-i18n="w3t">3 тілде</strong><p data-i18n="w3d">Сайт мәтінін мақсатты аудиторияңызға бейімдеймін.</p></div></div>
+      <div class="why__item reveal"><span class="check">✓</span><div><strong data-i18n="w4t">Қолдау</strong><p data-i18n="w4d">Іске қосқаннан кейін де өзгерістерге көмектесемін.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Баға калькуляторы ===== -->
+<section class="section section--alt" id="calc">
+  <div class="container">
+    <p class="eyebrow" data-i18n="calc.eyebrow">Калькулятор</p>
+    <h2 data-i18n="calc.title">Сайтыңыздың бағасын бірден есептеңіз</h2>
+    <p class="section__sub" data-i18n="calc.sub">Опцияларды таңдаңыз — болжамды бағаны лезде көресіз.</p>
+    <div class="calc">
+      <div class="calc__options">
+        <div class="calc__group">
+          <span class="calc__label" data-i18n="calc.lblType">Сайт түрі</span>
+          <div class="chips" data-name="type">
+            <button class="chip is-active" data-price="40000" data-i18n="calc.type1">Лендинг</button>
+            <button class="chip" data-price="80000" data-i18n="calc.type2">Бизнес-сайт</button>
+            <button class="chip" data-price="150000" data-i18n="calc.type3">Онлайн-дүкен</button>
+          </div>
+        </div>
+        <div class="calc__group">
+          <span class="calc__label" data-i18n="calc.lblAddons">Қосымша опциялар</span>
+          <div class="chips chips--multi" data-name="addons">
+            <button class="chip" data-price="20000" data-i18n="calc.add1">Уникал дизайн</button>
+            <button class="chip" data-price="15000" data-i18n="calc.add2">Көп тіл</button>
+            <button class="chip" data-price="25000" data-i18n="calc.add3">Онлайн төлем</button>
+            <button class="chip" data-price="15000" data-i18n="calc.add4">SEO баптау</button>
+            <button class="chip" data-price="10000" data-i18n="calc.add5">Админ-панель</button>
+            <button class="chip" data-price="30000" data-i18n="calc.add6">Чат-бот (WhatsApp/TG)</button>
+          </div>
+        </div>
+        <div class="calc__group">
+          <span class="calc__label" data-i18n="calc.lblSpeed">Қаншалықты жылдам керек?</span>
+          <div class="chips" data-name="speed">
+            <button class="chip is-active" data-price="0" data-i18n="calc.speed1">Қалыпты (7 күн)</button>
+            <button class="chip" data-price="20000" data-i18n="calc.speed2">Жедел (3 күн)</button>
+          </div>
+        </div>
+      </div>
+      <div class="calc__result">
+        <span class="calc__result-label" data-i18n="calc.resultLabel">Болжамды баға</span>
+        <div class="calc__price"><span id="calcPrice">40 000</span> ₸</div>
+        <p class="calc__note" data-i18n="calc.note">Бұл — шамамен баға. Нақты бағаны талқылаудан кейін бекітеміз.</p>
+        <button class="btn btn--full" id="calcOrder" data-i18n="calc.order">Осы есеппен тапсырыс беру</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" id="faq">
+  <div class="container container--narrow">
+    <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+    <h2 data-i18n="faq.title">Жиі қойылатын сұрақтар</h2>
+    <div class="faq" id="faqList">
+      <div class="faq__item"><button class="faq__q"><span data-i18n="faq.q1">Сайт қанша уақытта дайын болады?</span><span class="faq__icon">+</span></button><div class="faq__a"><p data-i18n="faq.a1">Лендинг — 3–5 күн, бизнес-сайт — 5–7 күн. Жедел нұсқасы тезірек.</p></div></div>
+      <div class="faq__item"><button class="faq__q"><span data-i18n="faq.q2">Маған не дайындау керек?</span><span class="faq__icon">+</span></button><div class="faq__a"><p data-i18n="faq.a2">Бизнесіңіз туралы қысқаша мәлімет пен (бар болса) логотип/суреттер. Қалғанын өзім жасаймын.</p></div></div>
+      <div class="faq__item"><button class="faq__q"><span data-i18n="faq.q3">Сайтты өзім өзгерте аламын ба?</span><span class="faq__icon">+</span></button><div class="faq__a"><p data-i18n="faq.a3">Иә. Қаласаңыз админ-панель қосамын немесе кейінгі өзгерістерге көмектесемін.</p></div></div>
+      <div class="faq__item"><button class="faq__q"><span data-i18n="faq.q4">Домен мен хостинг қалай?</span><span class="faq__icon">+</span></button><div class="faq__a"><p data-i18n="faq.a4">Доменді таңдауға және хостингке орналастыруға толық көмектесемін.</p></div></div>
+      <div class="faq__item"><button class="faq__q"><span data-i18n="faq.q5">Төлем қалай жүреді?</span><span class="faq__icon">+</span></button><div class="faq__a"><p data-i18n="faq.a5">Әдетте 50% алдын ала, 50% сайт дайын болғанда.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Байланыс ===== -->
+<section class="section section--cta" id="contact">
+  <div class="container contact">
+    <div class="contact__text">
+      <p class="eyebrow eyebrow--light" data-i18n="contact.eyebrow">Байланыс</p>
+      <h2 data-i18n="contact.title">Жобаңызды талқылайық</h2>
+      <p data-i18n="contact.p">Формаға жазыңыз немесе бірден қоңырау шалыңыз. Идеяңызды тегін бағалап беремін.</p>
+      <div class="contact__direct">
+        <a href="tel:+77000000000" class="contact__link">📞 +7 700 000 00 00</a>
+        <a href="https://wa.me/77000000000" target="_blank" rel="noopener" class="contact__link" data-i18n="contact.wa">🟢 WhatsApp-қа жазу</a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" class="contact__link">📷 Instagram</a>
+      </div>
+    </div>
+    <form class="contact__form" id="leadForm">
+      <label data-i18n="form.name">Атыңыз
+        <input type="text" name="name" data-i18n-ph="form.namePh" placeholder="Мысалы: Бекзат" required />
+      </label>
+      <label data-i18n="form.phone">Телефон / WhatsApp
+        <input type="tel" name="phone" placeholder="+7 ___ ___ __ __" required />
+      </label>
+      <label data-i18n="form.type">Қандай сайт керек?
+        <select name="type">
+          <option data-i18n="form.opt1">Лендинг (бір беттік)</option>
+          <option data-i18n="form.opt2">Бизнес-сайт</option>
+          <option data-i18n="form.opt3">Онлайн-дүкен</option>
+          <option data-i18n="form.opt4">Дизайн жаңарту</option>
+          <option data-i18n="form.opt6">Чат-бот (WhatsApp/Telegram)</option>
+          <option data-i18n="form.opt5">Әлі білмеймін</option>
+        </select>
+      </label>
+      <label data-i18n="form.msg">Қысқаша сипаттама
+        <textarea name="message" rows="3" data-i18n-ph="form.msgPh" placeholder="Бизнесіңіз туралы бірер сөз..."></textarea>
+      </label>
+      <button type="submit" class="btn btn--full" data-i18n="form.submit">WhatsApp арқылы жіберу</button>
+      <p class="form__note" data-i18n="form.note">Батырманы бассаңыз, хабарлама WhatsApp-та ашылады.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ===== Футер ===== -->
+<footer class="footer">
+  <div class="container footer__inner">
+    <span data-i18n="footer.text">© 2026 EB.design · Есболат — Веб-дизайн</span>
+    <a href="#top" data-i18n="footer.up">Жоғарыға ↑</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/77000000000" class="fab" target="_blank" rel="noopener" aria-label="WhatsApp">🟢</a>
+
+<!-- Мобильді app навигациясы (тек телефонда) -->
+<nav class="tabbar" id="tabbar">
+  <a href="#top" class="tabbar__item is-active"><span class="tabbar__ico">🏠</span><span data-i18n="tab.home">Басты</span></a>
+  <a href="#gallery" class="tabbar__item"><span class="tabbar__ico">🖼️</span><span data-i18n="tab.work">Жұмыс</span></a>
+  <a href="#calc" class="tabbar__item"><span class="tabbar__ico">🧮</span><span data-i18n="tab.price">Баға</span></a>
+  <a href="#contact" class="tabbar__item tabbar__item--cta"><span class="tabbar__ico">✉️</span><span data-i18n="tab.contact">Байланыс</span></a>
+</nav>
+
+<script src="script.js"></script>
+</body>
+</html>
