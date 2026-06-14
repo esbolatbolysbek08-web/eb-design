@@ -17,6 +17,7 @@ const CONFIG = {
 const THEMES = {
   wedding: { bg: "linear-gradient(160deg,#fbf6ef,#f1e3d2)", accent: "#b88a3e", text: "#4a3b2a", anim: "flowers" },
   uzatu:   { bg: "linear-gradient(160deg,#f7eee6,#e7d8c6)", accent: "#9c6b22", text: "#3d2618", anim: "flowers" },
+  noir:    { bg: "linear-gradient(160deg,#0c0c0d,#1b1712)", accent: "#d4af37", text: "#f3ece0", anim: "flowers" },
   love:    { bg: "linear-gradient(160deg,#fff0f3,#ffdbe6)", accent: "#e25c79", text: "#6b2738", anim: "hearts" },
   birthday:{ bg: "linear-gradient(160deg,#101331,#2a1d57)", accent: "#ffd34e", text: "#ffffff", anim: "confetti" },
   night:   { bg: "linear-gradient(160deg,#0b1026,#13204a)", accent: "#7c5cff", text: "#eaeaff", anim: "stars" },
