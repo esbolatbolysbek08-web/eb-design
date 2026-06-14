@@ -17,7 +17,7 @@
     PRICE: 2990,
     CODE: "TOI2026", // ⚠️ құпия код — төлегеннен кейін клиентке бересіз
   };
-  var BLUE = "#2aabee"; // Telegram көк
+  var BLUE = "#3b82f6"; // Telegram көк
 
   var editing = false;
   var hint = null;
@@ -30,11 +30,11 @@
     "#ebedit-bar button{border:none;border-radius:12px;padding:13px 20px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 12px 30px rgba(0,0,0,.4)}" +
     "#ebedit-toggle{background:" + BLUE + ";color:#fff}" +
     "#ebedit-toggle.on{background:#e2483b}" +
-    "#ebedit-get{background:#229ed9;color:#fff}" +
-    ".ebedit-on [data-ebtext]{background:rgba(42,171,238,.12);box-shadow:0 0 0 1px rgba(42,171,238,.5);border-radius:5px;cursor:text}" +
-    ".ebedit-on [data-ebtext]:hover{background:rgba(42,171,238,.2)}" +
-    ".ebedit-on [data-ebtext]:focus{background:rgba(42,171,238,.06);box-shadow:0 0 0 2px " + BLUE + ";outline:none}" +
-    ".ebedit-on .ebedit-img{box-shadow:0 0 0 3px rgba(42,171,238,.85)!important;cursor:pointer!important}" +
+    "#ebedit-get{background:#2563eb;color:#fff}" +
+    ".ebedit-on [data-ebtext]{background:rgba(59,130,246,.12);box-shadow:0 0 0 1px rgba(59,130,246,.5);border-radius:5px;cursor:text}" +
+    ".ebedit-on [data-ebtext]:hover{background:rgba(59,130,246,.2)}" +
+    ".ebedit-on [data-ebtext]:focus{background:rgba(59,130,246,.06);box-shadow:0 0 0 2px " + BLUE + ";outline:none}" +
+    ".ebedit-on .ebedit-img{box-shadow:0 0 0 3px rgba(59,130,246,.85)!important;cursor:pointer!important}" +
     ".ebedit-on .ebedit-img:hover{box-shadow:0 0 0 4px " + BLUE + "!important}" +
     "#ebedit-hint{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:2147483000;background:#111;color:#fff;font-family:'Inter',Arial,sans-serif;font-size:13px;padding:9px 16px;border-radius:99px;box-shadow:0 8px 20px rgba(0,0,0,.4)}" +
     "#ebedit-modal{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);font-family:'Inter',Arial,sans-serif;padding:18px}" +
