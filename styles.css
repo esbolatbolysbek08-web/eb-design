@@ -105,6 +105,23 @@ body.light .nav{background:rgba(255,255,255,.85)}
 .card-float--2{bottom:30px;right:-15px;animation-delay:1.5s}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
+/* ===== App launcher (қосымша сияқты карталар) ===== */
+.applauncher{padding:46px 0 8px}
+.applist{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:28px}
+.appcard{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px;transition:transform .2s ease,border-color .2s ease}
+.appcard:hover{transform:translateY(-4px);border-color:var(--brand)}
+.appcard:active{transform:scale(.985)}
+.appcard__icon{flex:none;width:56px;height:56px;border-radius:15px;display:grid;place-items:center;font-size:28px;color:#fff}
+.appcard__txt{display:flex;flex-direction:column;gap:3px;flex:1;min-width:0}
+.appcard__txt strong{font-size:17px}
+.appcard__txt span{color:var(--muted);font-size:13px}
+.appcard__arrow{flex:none;font-size:22px;color:var(--muted);font-weight:700;transition:transform .2s,color .2s}
+.appcard:hover .appcard__arrow{color:var(--brand);transform:translateX(4px)}
+.appcard--toi .appcard__icon{background:linear-gradient(135deg,#e25c79,#ff9a8b)}
+.appcard--tpl .appcard__icon{background:linear-gradient(135deg,#7c5cff,#9d7bff)}
+.appcard--site .appcard__icon{background:linear-gradient(135deg,#19c8c0,#0ea89f)}
+.appcard--bot .appcard__icon{background:linear-gradient(135deg,#f7971e,#ffd200)}
+
 /* ===== Секциялар ===== */
 .section{padding:90px 0}
 .section--alt{background:var(--bg-soft);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
@@ -303,6 +320,10 @@ body.light .nav{background:rgba(255,255,255,.85)}
 @media(max-width:640px){
   .grid--3,.grid--2{grid-template-columns:1fr}
   .gallery{grid-template-columns:repeat(2,1fr);gap:12px}
+  .applist{grid-template-columns:1fr}        /* app сияқты асты-астына тізілген */
+  .applauncher{padding-top:30px}
+  .appcard{padding:18px 18px}
+  .appcard__icon{width:50px;height:50px;font-size:25px}
   .hero h1{font-size:32px}
   .stats{gap:18px}
   .stats strong{font-size:22px}
