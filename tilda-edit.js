@@ -26,8 +26,11 @@
     "#ebedit-toggle{background:#7c5cff;color:#fff}" +
     "#ebedit-toggle.on{background:#e2483b}" +
     "#ebedit-get{background:#19c8c0;color:#fff}" +
-    ".ebedit-on [data-ebtext]{outline:2px dashed #7c5cff;outline-offset:3px;cursor:text;min-width:8px}" +
-    ".ebedit-on .ebedit-img{outline:3px dashed #19c8c0;outline-offset:2px;cursor:pointer}" +
+    ".ebedit-on [data-ebtext]{background:rgba(124,92,255,.12);box-shadow:0 0 0 1px rgba(124,92,255,.45);border-radius:5px;cursor:text}" +
+    ".ebedit-on [data-ebtext]:hover{background:rgba(124,92,255,.2)}" +
+    ".ebedit-on [data-ebtext]:focus{background:rgba(124,92,255,.06);box-shadow:0 0 0 2px #7c5cff;outline:none}" +
+    ".ebedit-on .ebedit-img{box-shadow:0 0 0 3px rgba(25,200,192,.85);cursor:pointer}" +
+    ".ebedit-on .ebedit-img:hover{box-shadow:0 0 0 4px rgba(25,200,192,1)}" +
     "#ebedit-hint{position:fixed;left:50%;transform:translateX(-50%);top:14px;z-index:2147483000;background:#111;color:#fff;font-family:'Inter',Arial,sans-serif;font-size:13px;padding:9px 16px;border-radius:99px;box-shadow:0 8px 20px rgba(0,0,0,.4)}" +
     "#ebedit-modal{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);font-family:'Inter',Arial,sans-serif;padding:18px}" +
     "#ebedit-modal.on{display:flex}" +
@@ -55,23 +58,46 @@
 
   var hint = null;
 
-  // ---------- Өңделетін элементтерді белгілеу ----------
-  var SKIP = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, svg: 1, SVG: 1 };
-  function isLeafText(el) {
-    if (!el || SKIP[el.tagName]) return false;
-    if (el.closest("#ebedit-bar,#ebedit-modal,#ebedit-hint")) return false;
-    if (!el.childNodes.length) return false;
-    for (var i = 0; i < el.childNodes.length; i++) {
-      if (el.childNodes[i].nodeType === 1) return false; // элемент-бала бар
-    }
-    return el.textContent.replace(/\s/g, "").length > 0;
+  // ---------- Өңделетін мәтінді белгілеу ----------
+  var SKIP = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1, svg: 1, SVG: 1, IMG: 1, BUTTON: 1, INPUT: 1, TEXTAREA: 1, SELECT: 1 };
+  function isSkippable(el) {
+    return !el || SKIP[el.tagName] || el.closest("#ebedit-bar,#ebedit-modal,#ebedit-hint");
+  }
+  function hasText(el) {
+    return el.textContent && el.textContent.replace(/\s/g, "").length > 0;
+  }
+  function markText(el) {
+    el.setAttribute("data-ebtext", "1");
+    el.setAttribute("contenteditable", "true");
+    el.setAttribute("spellcheck", "false");
+    el.setAttribute("autocapitalize", "off");
+    el.setAttribute("autocorrect", "off");
   }
 
-  function eachTextEl(fn) {
-    var nodes = document.querySelectorAll(
-      "div,span,p,h1,h2,h3,h4,h5,a,li,td,th,strong,em,b"
+  function enableTextEditing() {
+    // 1) Tilda мәтін блоктары (негізгі бірлік) — ішінде <span>/<br> болса да тұтас өңделеді
+    var atoms = document.querySelectorAll(
+      ".tn-atom, .t-text, .t-name, .t-descr, .t-title, .t-heading, .t-card__title, .t-card__descr"
     );
-    for (var i = 0; i < nodes.length; i++) if (isLeafText(nodes[i])) fn(nodes[i]);
+    for (var i = 0; i < atoms.length; i++) {
+      var a = atoms[i];
+      if (isSkippable(a) || !hasText(a)) continue;
+      if (a.querySelector(".tn-atom")) continue; // контейнер (ішінде басқа атом)
+      if (a.querySelector("img,svg,input,textarea,button")) continue; // сурет/форма атомы
+      markText(a);
+    }
+    // 2) Atom-нан тыс қалған жапырақ-мәтіндер
+    var nodes = document.querySelectorAll("h1,h2,h3,h4,h5,p,span,a,li,td,th,strong,em,b");
+    for (var j = 0; j < nodes.length; j++) {
+      var el = nodes[j];
+      if (isSkippable(el) || !hasText(el)) continue;
+      if (el.closest("[data-ebtext]")) continue; // өңделмелі ата ішінде
+      var hasChildEl = false;
+      for (var k = 0; k < el.childNodes.length; k++) {
+        if (el.childNodes[k].nodeType === 1) { hasChildEl = true; break; }
+      }
+      if (!hasChildEl) markText(el);
+    }
   }
 
   function collectImages() {
@@ -107,10 +133,7 @@
   function enableEdit() {
     editing = true;
     document.body.classList.add("ebedit-on");
-    eachTextEl(function (el) {
-      el.setAttribute("data-ebtext", "1");
-      el.setAttribute("contenteditable", "true");
-    });
+    enableTextEditing();
     collectImages().forEach(function (im) {
       im.classList.add("ebedit-img");
       im.addEventListener("click", im._ebh = function (e) {
