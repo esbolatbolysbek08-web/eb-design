@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Шақырту жаса · EB.design</title>
+<meta name="theme-color" content="#0b0d17" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="builder.css" />
+</head>
+<body class="bld">
+
+<!-- Жоғарғы панель -->
+<header class="bld-top">
+  <a href="index.html" class="bld-back">← Артқа</a>
+  <span class="bld-logo">EB<span>.design</span> · Шақырту жаса</span>
+  <button class="btn btn--sm" id="toggleEditor">✏️ Өңдеу</button>
+</header>
+
+<div class="bld-layout">
+
+  <!-- Сол жақ: тірі превью -->
+  <main class="bld-preview">
+    <div class="bld-preview-inner">
+      <div id="invite"></div>
+    </div>
+    <button class="btn bld-finish" id="btnFinish">
+      ✅ Дайын — алу (<span id="priceBtn">2 990 ₸</span>)
+    </button>
+  </main>
+
+  <!-- Оң жақ: өңдеу панелі -->
+  <aside class="editor" id="editor">
+    <h2 class="editor__title">Шақыртуды баптау</h2>
+
+    <label class="fld">Үлгі / тема
+      <select id="f-theme">
+        <option value="wedding">💍 Үйлену тойы (алтын)</option>
+        <option value="love">❤️ Махаббат (қызғылт)</option>
+        <option value="birthday">🎉 Туған күн (түнгі)</option>
+        <option value="night">✨ Кешкі салтанат (күлгін)</option>
+      </select>
+    </label>
+
+    <label class="fld">Жоғарғы жазу
+      <input type="text" id="f-eyebrow" />
+    </label>
+    <label class="fld">Тақырып
+      <input type="text" id="f-title" />
+    </label>
+    <label class="fld">Есімдер
+      <input type="text" id="f-names" />
+    </label>
+    <label class="fld">Қысқаша мәтін
+      <textarea id="f-message" rows="2"></textarea>
+    </label>
+    <label class="fld">Күні мен уақыты
+      <input type="datetime-local" id="f-date" />
+    </label>
+    <label class="fld">Мекенжай
+      <input type="text" id="f-place" />
+    </label>
+    <label class="fld">Байланыс телефоны
+      <input type="tel" id="f-phone" />
+    </label>
+
+    <label class="fld">Анимация
+      <select id="f-anim">
+        <option value="flowers">🌸 Гүлдер</option>
+        <option value="hearts">❤️ Жүректер</option>
+        <option value="confetti">🎉 Конфетти</option>
+        <option value="stars">✨ Жұлдыздар</option>
+        <option value="snow">❄️ Қар</option>
+      </select>
+    </label>
+
+    <label class="fld fld--file">📷 Сурет жүктеу
+      <input type="file" id="f-photo" accept="image/*" />
+    </label>
+    <label class="fld fld--file">🎵 Музыка жүктеу
+      <input type="file" id="f-music" accept="audio/*" />
+      <span class="file-name" id="musicName"></span>
+    </label>
+
+    <p class="editor__hint">Барлық өзгеріс сол жақта бірден көрінеді 👈</p>
+  </aside>
+</div>
+
+<!-- ТӨЛЕМ модалы (Kaspi) -->
+<div class="modal" id="payModal">
+  <div class="modal__box">
+    <button class="modal__close" id="payClose">✕</button>
+
+    <!-- 1-қадам: төлем -->
+    <div id="payStep1">
+      <div class="kaspi-logo">kaspi<span>.kz</span></div>
+      <h3 class="modal__title">Шақыртуды алу</h3>
+      <p class="modal__sub">Шақыртуыңыз дайын! Жүктеп алу үшін төлем жасаңыз:</p>
+      <div class="pay-price" id="priceTag">2 990 ₸</div>
+
+      <div class="pay-card">
+        <div class="pay-row"><span>Kaspi нөмірі</span><b id="kaspiNum">—</b></div>
+        <div class="pay-row"><span>Алушы</span><b id="kaspiName">—</b></div>
+      </div>
+
+      <button class="btn btn--full btn--kaspi" id="btnKaspiPay">🔴 Kaspi-де төлеу</button>
+      <p class="modal__note">Жоғарыдағы нөмірге Kaspi арқылы аударыңыз, сосын төмендегі батырманы басыңыз.</p>
+      <button class="btn btn--full btn--ghost" id="btnPaid">✅ Төледім</button>
+    </div>
+
+    <!-- 2-қадам: жүктеп алу -->
+    <div id="payStep2" style="display:none">
+      <div class="pay-success">🎉</div>
+      <h3 class="modal__title">Рахмет! Шақыртуыңыз дайын</h3>
+      <p class="modal__sub">Файлды жүктеп алыңыз да, қонақтарға WhatsApp/Telegram арқылы жіберіңіз.</p>
+      <button class="btn btn--full" id="btnDownload">⬇️ Шақыртуды жүктеп алу</button>
+      <button class="btn btn--full btn--ghost" id="btnSend">💬 Дизайнерге жазу (қолдау)</button>
+    </div>
+  </div>
+</div>
+
+<script src="builder.js"></script>
+</body>
+</html>

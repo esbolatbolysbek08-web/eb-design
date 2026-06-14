@@ -1,0 +1,74 @@
+/* ===== Шақырту конструкторы ===== */
+.bld{background:var(--bg);color:var(--text);min-height:100vh}
+
+.bld-top{position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 18px;background:rgba(11,13,23,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bld-back{color:var(--muted);font-weight:600;font-size:14px}
+.bld-back:hover{color:var(--text)}
+.bld-logo{font-weight:800;font-size:15px}
+.bld-logo span{color:var(--brand);font-weight:400}
+
+.bld-layout{display:grid;grid-template-columns:1fr 380px;min-height:calc(100vh - 57px)}
+
+/* Превью */
+.bld-preview{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding:34px 20px 120px;background:radial-gradient(circle at 50% 0%,#161a2e,var(--bg))}
+.bld-preview-inner{width:100%;max-width:480px}
+.bld-finish{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:30;
+  font-size:16px;padding:15px 30px;box-shadow:0 14px 34px -10px rgba(124,92,255,.7)}
+@media(min-width:921px){.bld-finish{left:calc(50% - 190px)}}
+
+/* Өңдеу панелі */
+.editor{background:var(--surface);border-left:1px solid var(--line);padding:24px 22px 60px;overflow-y:auto;
+  display:flex;flex-direction:column;gap:14px}
+.editor__title{font-size:20px;font-weight:800;margin:0 0 4px}
+.fld{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.fld input,.fld select,.fld textarea{background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  padding:11px 13px;color:var(--text);font-size:15px;font-family:inherit;outline:none;transition:border-color .2s}
+.fld input:focus,.fld select:focus,.fld textarea:focus{border-color:var(--brand)}
+.fld--file{background:var(--bg);border:1px dashed var(--line);border-radius:10px;padding:12px 13px;cursor:pointer}
+.fld--file input{border:none;padding:6px 0 0;background:none}
+.file-name{font-weight:500;color:var(--brand-2);font-size:12px}
+.editor__hint{font-size:12px;color:var(--muted);text-align:center;margin-top:6px}
+
+/* ===== Төлем модалы ===== */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;
+  background:rgba(5,6,12,.7);backdrop-filter:blur(4px);padding:20px}
+.modal.is-open{display:flex}
+.modal__box{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:22px;
+  padding:32px 26px;max-width:380px;width:100%;text-align:center;animation:modalIn .3s ease}
+@keyframes modalIn{from{transform:translateY(20px);opacity:0}to{transform:none;opacity:1}}
+.modal__close{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:20px;cursor:pointer}
+.modal__title{font-size:22px;font-weight:800;margin:14px 0 6px}
+.modal__sub{color:var(--muted);font-size:14px;margin:0 0 16px}
+.modal__note{font-size:12px;color:var(--muted);margin:12px 0}
+
+/* Kaspi логотипі */
+.kaspi-logo{display:inline-block;background:#F14635;color:#fff;font-weight:800;font-size:22px;
+  padding:8px 16px;border-radius:12px;letter-spacing:-.5px}
+.kaspi-logo span{font-weight:400;opacity:.9}
+
+.pay-price{font-size:38px;font-weight:900;color:var(--brand);margin:8px 0 18px}
+.pay-card{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-bottom:18px}
+.pay-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:14px}
+.pay-row span{color:var(--muted)}
+.pay-row b{font-weight:700}
+.pay-row + .pay-row{border-top:1px solid var(--line)}
+
+.btn--kaspi{background:#F14635;box-shadow:0 10px 24px -8px rgba(241,70,53,.6);margin-bottom:4px}
+.btn--kaspi:hover{background:#d83b2b}
+.pay-success{font-size:54px;animation:ivpop .6s ease}
+
+.modal__box .btn{margin-top:8px}
+
+/* ===== Мобиль ===== */
+@media(max-width:920px){
+  .bld-layout{grid-template-columns:1fr}
+  .editor{
+    position:fixed;top:0;right:0;bottom:0;width:min(360px,88vw);z-index:60;
+    transform:translateX(100%);transition:transform .3s ease;border-left:1px solid var(--line);
+    box-shadow:-20px 0 50px -20px rgba(0,0,0,.6)
+  }
+  .editor.is-open{transform:none}
+  .bld-preview{padding-top:24px}
+}

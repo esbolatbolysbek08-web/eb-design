@@ -23,7 +23,7 @@ const I18N = {
     "s5t": "Мобильге бейімдеу", "s5d": "Телефонда да, компьютерде де мінсіз көрінеді.",
     "s6t": "Жылдамдық пен SEO", "s6d": "Тез ашылатын, Google-да жоғары тұратын сайт.",
     "s7t": "Чат-боттар", "s7d": "WhatsApp және Telegram боттары — тапсырыс қабылдау, сұрақтарға автоматты жауап, 24/7 жұмыс.",
-    "gallery.eyebrow": "Жұмыстар", "gallery.title": "Дизайн жұмыстарым", "gallery.sub": "Заманауи, таза әрі әдемі дизайн.",
+    "gallery.eyebrow": "Шақырту конструкторы", "gallery.title": "Өз шақыртуыңды өзің жаса", "gallery.sub": "Үлгіні таңда — мәтін, сурет, музыка қос. 5 минутта дайын.", "gallery.cta": "✨ Өз шақыртуыңды жаса", "gallery.ctaNote": "Үлгіні таңда → мәтін, сурет, музыка қос → дайын шақыртуыңды ал",
     "why.eyebrow": "Неге мен", "why.title": "Сайт — әдемі ғана емес, табыс әкелуі керек",
     "w1t": "Сатуға бағытталған", "w1d": "Әр блок клиентті байланысқа шығуға жетелейді.",
     "w2t": "Жылдам жеткізу", "w2d": "Көп жобаны 5–7 күнде дайын етемін.",
@@ -66,7 +66,7 @@ const I18N = {
     "s5t": "Адаптив под телефон", "s5d": "Идеально выглядит и на телефоне, и на компьютере.",
     "s6t": "Скорость и SEO", "s6d": "Быстрый сайт, высокие позиции в Google.",
     "s7t": "Чат-боты", "s7d": "Боты для WhatsApp и Telegram — приём заказов, автоответы на вопросы, работа 24/7.",
-    "gallery.eyebrow": "Работы", "gallery.title": "Мои дизайн-работы", "gallery.sub": "Современный, чистый и красивый дизайн.",
+    "gallery.eyebrow": "Конструктор приглашений", "gallery.title": "Создай своё приглашение сам", "gallery.sub": "Выбери шаблон — добавь текст, фото, музыку. Готово за 5 минут.", "gallery.cta": "✨ Создать приглашение", "gallery.ctaNote": "Выбери шаблон → добавь текст, фото, музыку → получи готовое приглашение",
     "why.eyebrow": "Почему я", "why.title": "Сайт должен не просто быть красивым, а приносить деньги",
     "w1t": "Нацелен на продажи", "w1d": "Каждый блок ведёт клиента к контакту.",
     "w2t": "Быстрая сдача", "w2d": "Большинство проектов готовы за 5–7 дней.",
@@ -109,7 +109,7 @@ const I18N = {
     "s5t": "Mobile-friendly", "s5d": "Looks perfect on both phone and desktop.",
     "s6t": "Speed & SEO", "s6d": "Fast-loading site that ranks high on Google.",
     "s7t": "Chatbots", "s7d": "WhatsApp & Telegram bots — take orders, auto-answer questions, work 24/7.",
-    "gallery.eyebrow": "Work", "gallery.title": "My design work", "gallery.sub": "Modern, clean and beautiful design.",
+    "gallery.eyebrow": "Invitation builder", "gallery.title": "Create your own invitation", "gallery.sub": "Pick a template — add text, photo, music. Ready in 5 minutes.", "gallery.cta": "✨ Create an invitation", "gallery.ctaNote": "Pick a template → add text, photo, music → get your ready invitation",
     "why.eyebrow": "Why me", "why.title": "A site shouldn't just look good — it should make money",
     "w1t": "Sales-focused", "w1d": "Every block guides the client toward contact.",
     "w2t": "Fast delivery", "w2d": "Most projects are ready in 5–7 days.",
@@ -335,3 +335,11 @@ if (tabbar) {
   );
   sections.forEach((s) => spy.observe(s));
 }
+
+// ===== Галерея үлгілері → конструкторды ашу =====
+const galleryThemes = ["wedding", "love", "birthday", "night", "wedding", "love"];
+document.querySelectorAll(".gallery .gallery__item").forEach((item, i) => {
+  item.addEventListener("click", () => {
+    location.href = "builder.html?theme=" + (galleryThemes[i] || "wedding");
+  });
+});

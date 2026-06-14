@@ -49,6 +49,7 @@ img{max-width:100%;display:block}
 .btn--ghost{background:transparent;border:1px solid var(--line);box-shadow:none;color:var(--text)}
 .btn--ghost:hover{border-color:var(--brand);background:#ffffff08}
 .btn--full{width:100%}
+.btn--lg{font-size:18px;padding:18px 38px;border-radius:14px}
 
 /* ===== Навигация ===== */
 .nav{position:sticky;top:0;z-index:50;background:rgba(11,13,23,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
@@ -175,8 +176,18 @@ img{max-width:100%;display:block}
 
 /* ===== Дизайн галереясы (hero-блок макеттері) ===== */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
-.gallery__item{margin:0;transition:transform .35s ease}
+.gallery__item{margin:0;transition:transform .35s ease;cursor:pointer;position:relative}
 .gallery__item:hover{transform:translateY(-8px)}
+.gallery__item::before{content:"Таңдау →";position:absolute;z-index:3;top:50%;left:50%;transform:translate(-50%,-50%) scale(.9);
+  background:var(--brand);color:#fff;font-weight:700;font-size:14px;padding:9px 18px;border-radius:99px;
+  opacity:0;transition:.25s;pointer-events:none}
+.gallery__item:hover::before{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.gallery__item:hover .shot{filter:brightness(.7)}
+.shot{transition:filter .25s}
+
+/* Галерея CTA */
+.gallery-cta{text-align:center;margin-top:40px}
+.gallery-cta__note{color:var(--muted);font-size:15px;margin-top:14px}
 
 .shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0e1120;box-shadow:0 20px 40px -22px rgba(0,0,0,.7)}
 .shot__bar{display:flex;gap:6px;padding:10px 12px;background:#191d2e}
