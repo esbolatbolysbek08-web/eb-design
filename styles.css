@@ -190,8 +190,10 @@ body.light .nav{background:rgba(255,255,255,.85)}
 .footer__inner a:hover{color:var(--text)}
 
 /* Жылжымалы WhatsApp */
-.fab{position:fixed;bottom:24px;right:24px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;font-size:26px;box-shadow:0 10px 30px -6px rgba(37,211,102,.6);z-index:60;transition:transform .2s}
-.fab:hover{transform:scale(1.08)}
+.fab{position:fixed;bottom:24px;right:24px;width:60px;height:60px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 10px 30px -6px rgba(37,211,102,.6);z-index:60;transition:transform .2s;animation:fabPulse 2.4s ease-in-out infinite}
+.fab svg{width:32px;height:32px;display:block}
+.fab:hover{transform:scale(1.08);animation:none}
+@keyframes fabPulse{0%{box-shadow:0 10px 30px -6px rgba(37,211,102,.6),0 0 0 0 rgba(37,211,102,.5)}70%{box-shadow:0 10px 30px -6px rgba(37,211,102,.6),0 0 0 16px rgba(37,211,102,0)}100%{box-shadow:0 10px 30px -6px rgba(37,211,102,.6),0 0 0 0 rgba(37,211,102,0)}}
 
 /* ===== Дизайн галереясы (hero-блок макеттері) ===== */
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
