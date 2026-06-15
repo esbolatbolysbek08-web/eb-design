@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EB — CapCut стиль (қара-ақ)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#0a0a0b;color:#f4f4f5;min-height:100vh;padding:46px 18px 80px}
+  .head{text-align:center;max-width:680px;margin:0 auto 44px}
+  .head h1{font-family:'Sora';font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .head p{color:#9a9aa3;margin-top:10px;font-size:15px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;max-width:1000px;margin:0 auto}
+  .card{border:1px solid #2a2a2e;border-radius:20px;overflow:hidden;background:#161618}
+  .stage{height:180px;display:flex;align-items:center;justify-content:center;gap:16px}
+  .s-dark{background:#0a0a0b}
+  .s-light{background:#f4f4f5}
+  .meta{padding:14px 18px;border-top:1px solid #2a2a2e;display:flex;justify-content:space-between;align-items:center}
+  .meta b{font-size:14px;font-weight:700}
+  .meta span{font-size:12px;color:#9a9aa3}
+  .num{font-size:11px;color:#0a0a0b;background:#f4f4f5;font-weight:800;padding:3px 9px;border-radius:99px}
+  /* squircle icon */
+  .sq{width:96px;height:96px;border-radius:26px;display:flex;align-items:center;justify-content:center;font-family:'Sora';font-weight:800;letter-spacing:-2px;font-size:40px}
+  .sq--black{background:#0e0e10;color:#fff;box-shadow:0 16px 34px -16px rgba(0,0,0,.8)}
+  .sq--white{background:#fff;color:#0a0a0b}
+  .sq--outline{background:transparent;border:2.5px solid #fff;color:#fff}
+  .sq--outlineB{background:transparent;border:2.5px solid #0a0a0b;color:#0a0a0b}
+  .word{font-family:'Sora';font-weight:800;letter-spacing:-2px;font-size:44px}
+  .word .d{font-weight:600;font-size:24px}
+  .note{text-align:center;color:#9a9aa3;font-size:13px;margin:40px auto 0;max-width:620px;line-height:1.8}
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <h1>EB — CapCut стиль (қара-ақ)</h1>
+    <p>Минимал, батыл, түссіз — CapCut логотипі сияқты. Қайсысы ұнайды — нөмірін айт, сайтқа (логотип + favicon + интро) қоямын.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. Black squircle + white EB (CapCut app icon стилі) -->
+    <div class="card">
+      <div class="stage s-dark"><div class="sq sq--black">EB</div></div>
+      <div class="meta"><div><b>1. Қара квадрат</b><br><span>CapCut app icon стилі</span></div><span class="num">1</span></div>
+    </div>
+
+    <!-- 2. White squircle + black EB -->
+    <div class="card">
+      <div class="stage s-light"><div class="sq sq--white">EB</div></div>
+      <div class="meta"><div><b>2. Ақ квадрат</b><br><span>Инверт — ашық фонға</span></div><span class="num">2</span></div>
+    </div>
+
+    <!-- 3. Outline squircle white -->
+    <div class="card">
+      <div class="stage s-dark"><div class="sq sq--outline">EB</div></div>
+      <div class="meta"><div><b>3. Контур (ақ)</b><br><span>Жеңіл, минимал</span></div><span class="num">3</span></div>
+    </div>
+
+    <!-- 4. Wordmark white -->
+    <div class="card">
+      <div class="stage s-dark"><div class="word">EB<span class="d" style="color:#9a9aa3">.design</span></div></div>
+      <div class="meta"><div><b>4. Wordmark (ақ)</b><br><span>Хедерге — таза</span></div><span class="num">4</span></div>
+    </div>
+
+    <!-- 5. EB with cut notch (CapCut "cut" нышаны) -->
+    <div class="card">
+      <div class="stage s-dark">
+        <svg width="100" height="100" viewBox="0 0 100 100">
+          <rect x="6" y="6" width="88" height="88" rx="24" fill="#0e0e10"/>
+          <rect x="6" y="6" width="88" height="88" rx="24" fill="none" stroke="#fff" stroke-opacity=".12"/>
+          <g fill="#fff">
+            <path d="M30 32 H52 V40 H38 V46.5 H50 V54.5 H38 V62 H52 V70 H30 Z"/>
+            <path fill-rule="evenodd" d="M58 32 H71 a9 9 0 0 1 2.6 17.5 a9.4 9.4 0 0 1 -2.6 17 H58 Z M66 39 V46.5 H71 a3.6 3.6 0 0 0 0 -7.5 Z M66 54 V63 H71 a3.8 3.8 0 0 0 0 -8 Z"/>
+          </g>
+          <!-- cut notch -->
+          <circle cx="50" cy="50" r="3.4" fill="#0e0e10" stroke="#fff" stroke-width="1.4"/>
+        </svg>
+      </div>
+      <div class="meta"><div><b>5. «Cut» нышан</b><br><span>CapCut-қа сілтеме</span></div><span class="num">5</span></div>
+    </div>
+
+    <!-- 6. Bold condensed wordmark on light -->
+    <div class="card">
+      <div class="stage s-light"><div class="word" style="color:#0a0a0b">EB<span class="d" style="color:#5a5a62">.design</span></div></div>
+      <div class="meta"><div><b>6. Wordmark (қара)</b><br><span>Ашық фонға</span></div><span class="num">6</span></div>
+    </div>
+
+    <!-- 7. Outline squircle black (light bg) -->
+    <div class="card">
+      <div class="stage s-light"><div class="sq sq--outlineB">EB</div></div>
+      <div class="meta"><div><b>7. Контур (қара)</b><br><span>Ашық фонға</span></div><span class="num">7</span></div>
+    </div>
+
+    <!-- 8. Black squircle + white wordmark lockup -->
+    <div class="card">
+      <div class="stage s-dark">
+        <div class="sq sq--black" style="width:64px;height:64px;font-size:26px;border-radius:18px">EB</div>
+        <div class="word" style="font-size:30px">EB<span class="d" style="color:#9a9aa3;font-size:17px">.design</span></div>
+      </div>
+      <div class="meta"><div><b>8. Белгі + жазба</b><br><span>Толық құлып (lockup)</span></div><span class="num">8</span></div>
+    </div>
+
+  </div>
+
+  <p class="note">📂 <b>logo6.html</b> · Бәрі қара-ақ (CapCut стилі), түссіз.<br>Ұнаған нөмірін айт (1–8) — оны логотип, favicon және интро ретінде сайтқа қоямын.</p>
+
+</body>
+</html>

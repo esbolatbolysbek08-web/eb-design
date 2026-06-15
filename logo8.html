@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EB — Люкс анимациялы</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@700;800&family=Cormorant+Garamond:ital@1&family=Inter:wght@400;500;700&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#08080a;color:#f4f4f5;min-height:100vh;padding:46px 18px 90px}
+  .head{text-align:center;max-width:680px;margin:0 auto 44px}
+  .head h1{font-family:'Sora';font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .head p{color:#9a9aa3;margin-top:10px;font-size:15px;line-height:1.6}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;max-width:1000px;margin:0 auto}
+  .card{position:relative;border:1px solid #222226;border-radius:24px;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,#141417,#0a0a0c);min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;padding:34px}
+  .label{position:absolute;top:15px;left:17px;font-size:11px;font-weight:700;letter-spacing:1px;color:#7a7a83;text-transform:uppercase}
+  .num{position:absolute;top:13px;right:15px;font-size:11px;color:#0a0a0b;background:#f4f4f5;font-weight:800;padding:3px 9px;border-radius:99px}
+  .cap{font-family:'Sora';font-weight:700;font-size:19px;letter-spacing:-.4px}
+  .cap small{display:block;font-family:'Inter';font-weight:400;font-size:12.5px;color:#9a9aa3;margin-top:3px;letter-spacing:0}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+  @keyframes glowP{0%,100%{filter:drop-shadow(0 6px 16px rgba(255,255,255,.12))}50%{filter:drop-shadow(0 8px 26px rgba(255,255,255,.30))}}
+  @keyframes glowG{0%,100%{filter:drop-shadow(0 6px 16px rgba(231,200,115,.18))}50%{filter:drop-shadow(0 8px 28px rgba(231,200,115,.45))}}
+  .float{animation:floaty 5s ease-in-out infinite}
+  .gp{animation:floaty 5s ease-in-out infinite,glowP 3.6s ease-in-out infinite}
+  .gg{animation:floaty 5s ease-in-out infinite,glowG 3.6s ease-in-out infinite}
+  .note{text-align:center;color:#9a9aa3;font-size:13px;margin:40px auto 0;max-width:600px;line-height:1.8}
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <h1>EB — люкс деңгей, анимациялы</h1>
+    <p>Жалғанған монограмма + қозғалыс: өзі сызылады, металл жарық жүгіреді, жұмсақ жарқырау. Қара-ақ + платина/алтын.</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- 1. SELF-DRAWING (signature) platinum -->
+    <div class="card">
+      <span class="label">01 · Self-draw</span><span class="num">1</span>
+      <svg class="float" width="120" height="120" viewBox="0 0 100 100">
+        <path fill="none" stroke="#fff" stroke-width="7.5" stroke-linejoin="round" stroke-linecap="round"
+          stroke-dasharray="560" stroke-dashoffset="560"
+          d="M50 26 H26 V74 H50 M26 50 H42 M50 26 V74 M50 26 H63 a12 12 0 0 1 0 24 H50 M50 50 H66 a12 12 0 0 1 0 24 H50">
+          <animate attributeName="stroke-dashoffset" values="560;0;0;560" keyTimes="0;0.5;0.82;1" dur="5s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <div class="cap">Өзі сызылады<small>қолтаңба эффекті · ақ</small></div>
+    </div>
+
+    <!-- 2. PLATINUM metallic sheen -->
+    <div class="card">
+      <span class="label">02 · Platinum</span><span class="num">2</span>
+      <svg class="gp" width="116" height="116" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="plat" x1="0" y1="0" x2="1" y2="0.3">
+            <stop offset="0" stop-color="#8b8f98"/><stop offset=".42" stop-color="#ffffff"/>
+            <stop offset=".58" stop-color="#ffffff"/><stop offset="1" stop-color="#8b8f98"/>
+            <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0;-1 0" dur="4s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
+        <g fill="url(#plat)">
+          <rect x="26" y="28" width="8.5" height="44"/>
+          <rect x="26" y="28" width="26" height="8.5"/>
+          <rect x="26" y="45.75" width="21" height="8.5"/>
+          <rect x="26" y="63.5" width="26" height="8.5"/>
+          <rect x="48" y="28" width="8.5" height="44"/>
+          <path d="M56.5 28 H66 a11 11 0 0 1 0 22 H56.5 Z"/>
+          <path d="M56.5 50 H68 a11 11 0 0 1 0 22 H56.5 Z"/>
+        </g>
+        <g fill="#0a0a0c">
+          <path d="M56.5 35 H64 a4 4 0 0 1 0 8 H56.5 Z"/>
+          <path d="M56.5 57 H66 a4 4 0 0 1 0 8 H56.5 Z"/>
+        </g>
+      </svg>
+      <div class="cap">Платина жылтыр<small>металл жарық жүгіреді</small></div>
+    </div>
+
+    <!-- 3. GOLD metallic sheen (luxe) -->
+    <div class="card">
+      <span class="label">03 · Gold luxe</span><span class="num">3</span>
+      <svg class="gg" width="116" height="116" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="gold" x1="0" y1="0" x2="1" y2="0.3">
+            <stop offset="0" stop-color="#9a7322"/><stop offset=".42" stop-color="#ffe9a8"/>
+            <stop offset=".55" stop-color="#fff7e0"/><stop offset="1" stop-color="#b8862f"/>
+            <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0;-1 0" dur="4.2s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
+        <g fill="url(#gold)">
+          <rect x="26" y="28" width="8.5" height="44"/>
+          <rect x="26" y="28" width="26" height="8.5"/>
+          <rect x="26" y="45.75" width="21" height="8.5"/>
+          <rect x="26" y="63.5" width="26" height="8.5"/>
+          <rect x="48" y="28" width="8.5" height="44"/>
+          <path d="M56.5 28 H66 a11 11 0 0 1 0 22 H56.5 Z"/>
+          <path d="M56.5 50 H68 a11 11 0 0 1 0 22 H56.5 Z"/>
+        </g>
+        <g fill="#0a0a0c">
+          <path d="M56.5 35 H64 a4 4 0 0 1 0 8 H56.5 Z"/>
+          <path d="M56.5 57 H66 a4 4 0 0 1 0 8 H56.5 Z"/>
+        </g>
+      </svg>
+      <div class="cap">Алтын люкс<small>жылы металл · сәнді</small></div>
+    </div>
+
+    <!-- 4. SELF-DRAW + sheen in squircle (lockup) -->
+    <div class="card">
+      <span class="label">04 · Premium icon</span><span class="num">4</span>
+      <svg class="gp" width="120" height="120" viewBox="0 0 100 100">
+        <defs>
+          <linearGradient id="plat2" x1="0" y1="0" x2="1" y2="0.4">
+            <stop offset="0" stop-color="#9aa0aa"/><stop offset=".45" stop-color="#ffffff"/>
+            <stop offset=".6" stop-color="#ffffff"/><stop offset="1" stop-color="#9aa0aa"/>
+            <animateTransform attributeName="gradientTransform" type="translate" values="-1 0;1 0;-1 0" dur="4.5s" repeatCount="indefinite"/>
+          </linearGradient>
+        </defs>
+        <rect x="6" y="6" width="88" height="88" rx="25" fill="#0e0e11" stroke="#ffffff" stroke-opacity=".12"/>
+        <g fill="none" stroke="url(#plat2)" stroke-width="7" stroke-linejoin="round" stroke-linecap="round">
+          <path d="M50 30 H30 V70 H50"/><path d="M30 50 H44"/><path d="M50 30 V70"/>
+          <path d="M50 30 H61 a10.5 10.5 0 0 1 0 20 H50"/>
+          <path d="M50 50 H63 a11 11 0 0 1 0 20 H50"/>
+        </g>
+      </svg>
+      <div class="cap">Премиум белгі<small>квадрат + платина жылтыр</small></div>
+    </div>
+
+  </div>
+
+  <p class="note">📂 <b>logo8.html</b> · Бәрі тірі (анимациялы) — браузерде сызылады/жарқырайды.<br>Ұнаған нөмірін айт (1–4) — логотип + favicon + интроға қоямын (анимациясымен).</p>
+
+</body>
+</html>
