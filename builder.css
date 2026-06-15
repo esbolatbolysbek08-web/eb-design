@@ -59,6 +59,7 @@
 
 .btn--kaspi{background:#F14635;box-shadow:0 10px 24px -8px rgba(241,70,53,.6);margin-bottom:4px}
 .btn--kaspi:hover{background:#d83b2b}
+.btn--kaspi::after{display:none}   /* aurora жарық жүгірісі Kaspi батырмасына тимесін */
 .pay-success{font-size:54px;animation:ivpop .6s ease}
 
 /* Төлем қадамдары + код енгізу */

@@ -368,19 +368,29 @@ if (tabbar) {
    ============================================================ */
 (function () {
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var targets = document.querySelectorAll(
-    ".appcard, .tpl-card, .feature, .section h2, .section__sub, .eyebrow, .stats, .contact, .calc, .templates__or"
+  if (reduce || !("IntersectionObserver" in window)) return; // reduce/ескі браузер → бәрі көрінеді (жасырылмайды)
+  var extra = document.querySelectorAll(
+    ".appcard, .tpl-card, .section h2, .section__sub, .eyebrow, .stats, .contact, .calc, .templates__or"
   );
-  if (!targets.length || reduce || !("IntersectionObserver" in window)) return; // JS жоқ/reduce → бәрі көрінеді
   document.body.classList.add("reveal-ready");
-  targets.forEach(function (el, i) {
+  extra.forEach(function (el, i) {
     el.classList.add("reveal");
-    el.style.transitionDelay = (i % 5) * 70 + "ms";
+    el.style.transitionDelay = (i % 4) * 55 + "ms";
   });
+  // барлық reveal (статикалық biznes карталарын қоса) — бір бақылаушы, 'is-in' қосады
+  var all = document.querySelectorAll(".reveal");
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) {
-      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
     });
-  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
-  targets.forEach(function (el) { io.observe(el); });
+  }, { rootMargin: "0px 0px -4% 0px", threshold: 0 });
+  all.forEach(function (el) { io.observe(el); });
+  // FAILSAFE: экранда көрініп тұрған (жоғарыдағы) reveal-дер 1.6с ішінде ашылмаса — мәжбүрлеп ашамыз
+  // (төмендегілер скроллда қалыпты анимацияланады; ешнәрсе мәңгі жасырын қалмайды)
+  setTimeout(function () {
+    var vh = window.innerHeight || 800;
+    document.querySelectorAll(".reveal:not(.is-in):not(.in)").forEach(function (el) {
+      if (el.getBoundingClientRect().top < vh * 0.95) el.classList.add("is-in");
+    });
+  }, 1600);
 })();

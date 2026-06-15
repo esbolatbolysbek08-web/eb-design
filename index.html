@@ -80,7 +80,19 @@
   @keyframes ebiD1{0%,100%{transform:translate(0,0)}50%{transform:translate(6vmin,4vmin)}}
   @keyframes ebiD2{0%,100%{transform:translate(0,0)}50%{transform:translate(-5vmin,-3vmin)}}
   @keyframes ebiD3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-3vmin,2vmin) scale(1.15)}}
-  @media (prefers-reduced-motion:reduce){.ebi-eb,.ebi-eb.bloom,.ebi-shine,.ebi-mesh span,.ebi-halo,.ebi-particles i{animation-iteration-count:1;animation-duration:.6s}}
+  @media (prefers-reduced-motion:reduce){
+    .ebi-eb,.ebi-eb.bloom,.ebi-shine,.ebi-mesh span,.ebi-halo,.ebi-particles i{animation-iteration-count:1;animation-duration:.6s}
+    #eb-intro{animation:ebiOut .4s ease .3s forwards}
+  }
+  /* Мобильге жеңілдету: ауыр блюр/halo азайтылады, бөлшектер кемиді, тезірек жабылады */
+  @media (max-width:640px){
+    #eb-intro{height:100svh;background:radial-gradient(130% 130% at 50% 30%,#0d1a36,#05080f 74%);animation:ebiOut 1s cubic-bezier(.6,0,.2,1) 2.2s forwards}
+    .ebi-mesh{filter:blur(38px);opacity:.7}
+    .ebi-halo{width:84vmin;height:84vmin;filter:blur(16px)}
+    .ebi-eb.bloom{display:none}
+    .ebi-eb,.ebi-shine{letter-spacing:-3px}
+    .ebi-particles i:nth-child(n+6){display:none}
+  }
 </style>
 </head>
 <body>
@@ -102,8 +114,16 @@
 </div>
 <script>
 (function(){var i=document.getElementById('eb-intro');if(!i)return;
-  /* әр ашқан сайын анимация ойналады */
-  setTimeout(function(){i.classList.add('ebi-hide');},4100);
+  function hide(){i.classList.add('ebi-hide');}
+  var mob=window.matchMedia&&window.matchMedia('(max-width:640px)').matches;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var delay=reduce?900:(mob?2700:4100);
+  setTimeout(hide,delay);
+  /* тигенде/басқанда өткізіп жіберу */
+  i.addEventListener('click',hide);
+  i.addEventListener('touchstart',hide,{passive:true});
+  /* failsafe: бет толық жүктелгенде де жабылсын */
+  window.addEventListener('load',function(){setTimeout(hide,delay+400);});
 })();
 </script>
 
