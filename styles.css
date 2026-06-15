@@ -1,13 +1,13 @@
 :root{
-  --bg:#070a12;          /* CapCut стилі — қою, қара-навы фон */
-  --bg-soft:#121a2b80;
-  --surface:#121a2c;     /* қою панель */
-  --surface-2:#1a2640;
-  --text:#eef3fb;
-  --muted:#8a9cb5;
-  --brand:#3b82f6;       /* корольдік көк */
-  --brand-2:#2563eb;     /* терең көк */
-  --line:#212d45;
+  --bg:#0a0a0b;          /* CapCut — таза қара (нейтрал) */
+  --bg-soft:#15151780;
+  --surface:#161618;     /* нейтрал қара-сұр панель */
+  --surface-2:#212124;
+  --text:#f4f4f5;
+  --muted:#9a9aa3;       /* нейтрал сұр */
+  --brand:#3b82f6;       /* шағын акценттер үшін ғана */
+  --brand-2:#2563eb;
+  --line:#2a2a2e;        /* нейтрал жиек */
   --radius:18px;
   --container:1120px;
 }
@@ -53,7 +53,7 @@ img{max-width:100%;display:block}
 .btn--lg{font-size:18px;padding:18px 38px;border-radius:14px}
 
 /* ===== Навигация ===== */
-.nav{position:sticky;top:0;z-index:50;background:rgba(13,23,38,.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(12,12,14,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 body.light .nav{background:rgba(255,255,255,.85)}
 .nav__inner{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{display:inline-block;font-weight:800;font-size:21px;letter-spacing:-.5px;
@@ -75,7 +75,7 @@ body.light .nav{background:rgba(255,255,255,.85)}
 .nav__actions{display:flex;align-items:center;gap:12px}
 .lang{display:flex;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:3px}
 .lang__btn{background:none;border:none;color:var(--muted);font-weight:700;font-size:13px;padding:6px 10px;border-radius:7px;cursor:pointer;transition:.2s}
-.lang__btn.is-active{background:var(--brand);color:#fff}
+.lang__btn.is-active{background:var(--text);color:var(--bg)}
 .icon-btn{background:var(--surface-2);border:1px solid var(--line);width:40px;height:40px;border-radius:10px;font-size:18px;cursor:pointer;transition:transform .2s,border-color .2s}
 .icon-btn:hover{transform:translateY(-2px);border-color:var(--brand)}
 .burger{display:none;flex-direction:column;align-items:center;justify-content:center;gap:5px;background:none;border:none;cursor:pointer;min-width:44px;min-height:44px;padding:8px;box-sizing:border-box}
@@ -151,7 +151,7 @@ body.light .nav{background:rgba(255,255,255,.85)}
 .feature{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:28px;transition:transform .25s ease,border-color .25s ease}
 .feature:hover{transform:translateY(-6px);border-color:var(--brand)}
 .feature--hot{background:linear-gradient(160deg,rgba(59,130,246,.18),var(--surface));border-color:var(--brand)}
-.feature--hot::after{content:"NEW";position:absolute;top:16px;right:16px;background:var(--brand);color:#fff;font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
+.feature--hot::after{content:"NEW";position:absolute;top:16px;right:16px;background:var(--text);color:var(--bg);font-size:11px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:.5px}
 .feature{position:relative}
 .feature__icon{font-size:30px;margin-bottom:14px}
 .feature h3{font-size:20px;margin-bottom:8px}
@@ -225,7 +225,7 @@ body.light .nav{background:rgba(255,255,255,.85)}
 .templates{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,340px));gap:18px;margin-top:32px}
 .tpl-card{position:relative;display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;transition:transform .3s ease,border-color .3s ease}
 .tpl-card:hover{transform:translateY(-8px);border-color:var(--brand)}
-.tpl-card__badge{position:absolute;top:14px;left:14px;z-index:2;background:var(--brand);color:#fff;font-size:12px;font-weight:800;padding:5px 12px;border-radius:99px}
+.tpl-card__badge{position:absolute;top:14px;left:14px;z-index:2;background:var(--text);color:var(--bg);font-size:12px;font-weight:800;padding:5px 12px;border-radius:99px}
 .tpl-card__img{display:block;height:230px;background-size:cover;background-position:center;background-color:#11142a}
 .tpl-card__body{padding:18px 20px;display:flex;flex-direction:column;gap:6px}
 .tpl-card__body strong{font-size:18px}
@@ -293,7 +293,7 @@ body.light .nav{background:rgba(255,255,255,.85)}
 .chips{display:flex;gap:10px;flex-wrap:wrap}
 .chip{background:var(--bg);border:1px solid var(--line);color:var(--text);font-weight:500;font-size:14px;padding:10px 16px;border-radius:12px;cursor:pointer;transition:.2s}
 .chip:hover{border-color:var(--brand)}
-.chip.is-active{background:linear-gradient(135deg,var(--brand),#60a5fa);border-color:transparent;color:#fff}
+.chip.is-active{background:var(--text);border-color:transparent;color:var(--bg)}
 .calc__result{position:sticky;top:90px;background:linear-gradient(160deg,var(--surface),var(--surface-2));border:1px solid var(--line);border-radius:var(--radius);padding:28px;text-align:center}
 .calc__result-label{color:var(--muted);font-size:14px;font-weight:600}
 .calc__price{font-size:40px;font-weight:900;letter-spacing:-1px;margin:8px 0 4px;color:var(--brand)}
@@ -372,7 +372,7 @@ body.reveal-ready .reveal.is-in,body.reveal-ready .reveal.in{opacity:1;transform
   /* Мобиль tab bar көрсету */
   .tabbar{
     display:flex;position:fixed;left:0;right:0;bottom:0;z-index:70;
-    background:rgba(21,24,39,.92);backdrop-filter:blur(16px);
+    background:rgba(14,14,16,.92);backdrop-filter:blur(16px);
     border-top:1px solid var(--line);
     padding:8px 6px calc(8px + env(safe-area-inset-bottom));
     justify-content:space-around;
@@ -381,8 +381,8 @@ body.reveal-ready .reveal.is-in,body.reveal-ready .reveal.in{opacity:1;transform
   .tabbar__item{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-size:11px;font-weight:600;padding:4px;border-radius:12px;transition:.2s}
   .tabbar__ico{font-size:21px;line-height:1}
   .tabbar__item.is-active{color:var(--brand)}
-  .tabbar__item--cta{color:#fff;background:linear-gradient(135deg,var(--brand),#60a5fa)}
-  .tabbar__item--cta.is-active{color:#fff}
+  .tabbar__item--cta{color:var(--bg);background:var(--text)}
+  .tabbar__item--cta.is-active{color:var(--bg)}
 }
 
 /* ============================================================
@@ -399,51 +399,51 @@ body.reveal-ready .reveal.is-in,body.reveal-ready .reveal.in{opacity:1;transform
 }
 
 /* — Hero: тірі қалқыған aurora фон + жұмсақ алтын жылу — */
-.hero{background:radial-gradient(440px 440px at 62% 14%,rgba(212,169,55,.10),transparent 70%) no-repeat}
+.hero{background:radial-gradient(440px 440px at 62% 14%,rgba(255,255,255,.045),transparent 70%) no-repeat}
 .hero::before{
   width:560px;height:560px;
-  background:radial-gradient(circle,rgba(79,147,255,.42),transparent 70%);
-  filter:blur(42px);
+  background:radial-gradient(circle,rgba(255,255,255,.08),transparent 70%);
+  filter:blur(46px);
   animation:auroraDrift1 15s ease-in-out infinite;
 }
 .hero::after{
   width:480px;height:480px;
-  background:radial-gradient(circle,rgba(25,194,255,.26),transparent 70%);
-  filter:blur(42px);
+  background:radial-gradient(circle,rgba(255,255,255,.05),transparent 70%);
+  filter:blur(46px);
   animation:auroraDrift2 18s ease-in-out infinite;
 }
 @keyframes auroraDrift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-44px,32px)}}
 @keyframes auroraDrift2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-28px)}}
 
 /* — Hero мокаптың экраны да aurora — */
-.mock__hero{background:linear-gradient(135deg,#4f93ff,#19c2ff,#2563eb);background-size:200% 200%;animation:ebAurora 6s ease infinite}
+.mock__hero{background:linear-gradient(135deg,#34343b,#1b1b1f)}
 
-/* — Премиум батырма: hover-де жарық жүгіреді — */
-.btn{position:relative;overflow:hidden;
-  background:linear-gradient(135deg,#2f6bf0,#4f93ff 58%,#19c2ff);
-  box-shadow:0 10px 26px -8px rgba(47,107,240,.6)}
-.btn::after{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
-  transform:skewX(-20deg);transition:left .6s ease;pointer-events:none}
-.btn:hover::after{left:150%}
-.btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -8px rgba(47,107,240,.72)}
-.btn--ghost{background:transparent;box-shadow:none}
-.btn--ghost::after{display:none}
+/* — CapCut батырма: таза ақ пилюля (қара темада), қара (жарық темада) — */
+.btn{position:relative;overflow:hidden;border-radius:99px;
+  background:#ffffff;color:#0a0a0b;
+  box-shadow:0 8px 24px -10px rgba(0,0,0,.7)}
+.btn::after{display:none}
+.btn:hover{transform:translateY(-2px);background:#e9e9ec;box-shadow:0 14px 34px -10px rgba(0,0,0,.85)}
+.btn--ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.26);box-shadow:none}
+.btn--ghost:hover{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.5)}
+body.light .btn{background:#0a0a0b;color:#fff}
+body.light .btn:hover{background:#26262b}
+body.light .btn--ghost{color:var(--text);border-color:var(--line)}
+body.light .btn--ghost:hover{background:#00000008}
 
-/* — Badge: aurora шекара — */
-.badge{background:linear-gradient(135deg,rgba(47,107,240,.18),rgba(25,194,255,.12));
-  border:1px solid rgba(79,147,255,.32);color:#9cc4ff}
-body.light .badge{color:#2563eb}
+/* — Badge: нейтрал шекара — */
+.badge{background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.16);color:#d4d4da}
+body.light .badge{background:rgba(0,0,0,.04);border-color:var(--line);color:#3a3a40}
 
-/* — eyebrow: aurora мәтін (жарық темада контраст үшін қою стоптар) — */
-.eyebrow{background:linear-gradient(110deg,#4f93ff,#19c2ff,#d4a937);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
-body.light .eyebrow{background:linear-gradient(110deg,#2563eb,#0ea5e9,#b45309)}
-.eyebrow--light{background:none;-webkit-text-fill-color:var(--brand-2);color:var(--brand-2)}
+/* — eyebrow: нейтрал сұр мәтін — */
+.eyebrow{background:none;-webkit-text-fill-color:currentColor;color:#c7c7cf}
+body.light .eyebrow{color:#5a5a62}
+.eyebrow--light{color:#9a9aa3}
 
-/* — Карталар: жұмсақ glow hover — */
+/* — Карталар: нейтрал glow hover — */
 .appcard,.mock,.card-float{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
-.appcard:hover{border-color:rgba(79,147,255,.6);box-shadow:0 22px 46px -22px rgba(47,107,240,.68)}
+.appcard:hover{border-color:rgba(255,255,255,.4);box-shadow:0 22px 46px -22px rgba(0,0,0,.7)}
 
 @media (prefers-reduced-motion:reduce){
   .grad,.hero::before,.hero::after,.mock__hero{animation:none}
@@ -458,12 +458,11 @@ body.light .eyebrow{background:linear-gradient(110deg,#2563eb,#0ea5e9,#b45309)}
 /* — Фон текстурасы + жұмсақ жарық/винетка (контент артында, z-index:-1 — мәтінге кедергі жоқ) — */
 body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
   background:
-    radial-gradient(120% 80% at 50% -8%,rgba(47,107,240,.18),transparent 55%),
-    radial-gradient(120% 90% at 50% 105%,rgba(25,194,255,.08),transparent 55%),
-    radial-gradient(140% 120% at 50% 50%,transparent 58%,rgba(0,0,0,.40)),
+    radial-gradient(120% 80% at 50% -8%,rgba(255,255,255,.05),transparent 55%),
+    radial-gradient(140% 120% at 50% 50%,transparent 56%,rgba(0,0,0,.45)),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-  background-size:auto,auto,auto,170px 170px;opacity:.7;mix-blend-mode:soft-light}
-body.light::after{opacity:.3}
+  background-size:auto,auto,170px 170px;opacity:.7;mix-blend-mode:soft-light}
+body.light::after{opacity:.28}
 
 /* — Батыл, аққұйма (fluid) hero тақырып + жарқыраған градиент сөз — */
 .hero h1{font-size:clamp(34px,6.6vw,60px);line-height:1.04;letter-spacing:-.025em;font-weight:900;text-wrap:balance}
@@ -471,73 +470,78 @@ body.light::after{opacity:.3}
 .lead{font-size:clamp(16px,2.3vw,19px);text-wrap:pretty}
 body.light .hero .grad{filter:drop-shadow(0 2px 14px rgba(37,99,235,.28))}
 
-/* — Bento / glass карталар: градиент жиек + шыны жылтыр + accent glow — */
-.appcard{background:linear-gradient(160deg,color-mix(in srgb,var(--surface) 88%,#070b16),var(--surface))}
+/* — Bento / glass карталар: ақ-нейтрал жиек + шыны жылтыр — */
+.appcard{background:linear-gradient(160deg,color-mix(in srgb,var(--surface) 86%,#000),var(--surface))}
 .appcard,.feature,.tpl-card{position:relative;isolation:isolate}
 .appcard::before,.feature::before,.tpl-card::before{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;
-  background:linear-gradient(140deg,rgba(90,160,255,.55),rgba(25,194,255,.22) 45%,rgba(212,169,55,.35));
+  background:linear-gradient(140deg,rgba(255,255,255,.42),rgba(255,255,255,.05) 50%,rgba(255,255,255,.20));
   -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
-  -webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;transition:opacity .25s ease;pointer-events:none;z-index:1}
+  -webkit-mask-composite:xor;mask-composite:exclude;opacity:.5;transition:opacity .25s ease;pointer-events:none;z-index:1}
 .appcard:hover::before,.feature:hover::before,.tpl-card:hover::before{opacity:1}
 .appcard::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
   background:linear-gradient(180deg,rgba(255,255,255,.06),transparent 38%)}
-.appcard__icon{box-shadow:0 8px 22px -8px rgba(47,107,240,.55)}
-.appcard--tpl:hover{box-shadow:0 24px 50px -22px rgba(59,130,246,.6)}
-.appcard--site:hover{box-shadow:0 24px 50px -22px rgba(37,99,235,.6)}
-.appcard--bot:hover{box-shadow:0 24px 50px -22px rgba(212,169,55,.5)}
-.feature:hover,.tpl-card:hover{box-shadow:0 24px 50px -24px rgba(47,107,240,.55)}
-body.light .appcard{background:linear-gradient(160deg,#fff,#f3f7fe)}
+.appcard__icon{box-shadow:0 8px 22px -10px rgba(0,0,0,.7)}
+.appcard:hover,.feature:hover,.tpl-card:hover{box-shadow:0 24px 50px -22px rgba(0,0,0,.78)}
+body.light .appcard{background:linear-gradient(160deg,#fff,#f4f5f7)}
+body.light .appcard::before{background:linear-gradient(140deg,rgba(0,0,0,.12),rgba(0,0,0,.03) 50%,rgba(0,0,0,.08))}
 body.light .appcard::after{background:linear-gradient(180deg,rgba(13,23,38,.03),transparent 40%)}
 
-/* — Студия деңгейіндегі статистика панелі — */
+/* — Статистика панелі (ақ сандар, нейтрал бөлгіш) — */
 .stats{align-items:center}
 .stats div{position:relative;padding-right:34px}
 .stats div+div{padding-left:34px}
 .stats div+div::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:1px;
   background:linear-gradient(180deg,transparent,var(--line),transparent)}
-.stats strong{background:linear-gradient(120deg,#5aa0ff,#19c2ff,#d4a937);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
-  font-feature-settings:"tnum";letter-spacing:-.02em}
+.stats strong{color:var(--text);font-feature-settings:"tnum";letter-spacing:-.02em}
 .stats span{text-transform:uppercase;letter-spacing:.08em;font-size:11px;font-weight:600;margin-top:2px}
 
-/* — Aurora секция бөлгіштер (жұқа жарық сызық) — */
+/* — Секция бөлгіштер (нейтрал ақ жұқа сызық) — */
 .applauncher,.section{position:relative}
 .applauncher::before,.section--alt::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);
   width:min(720px,82%);height:1px;pointer-events:none;
-  background:linear-gradient(90deg,transparent,rgba(90,160,255,.5),rgba(212,169,55,.4),transparent)}
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent)}
 .section--alt::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
-  background:radial-gradient(60% 120% at 50% -10%,rgba(47,107,240,.10),transparent 60%)}
+  background:radial-gradient(60% 120% at 50% -10%,rgba(255,255,255,.04),transparent 60%)}
 
-/* — Glass hero мокап + қалқыған чиптер — */
-.mock{background:linear-gradient(165deg,color-mix(in srgb,var(--surface) 92%,#070d1a),var(--surface));
-  box-shadow:0 38px 74px -26px rgba(2,8,22,.78),0 0 0 1px rgba(90,160,255,.12),0 0 60px -20px rgba(47,107,240,.35)}
-.card-float{backdrop-filter:blur(10px) saturate(1.2);
-  background:color-mix(in srgb,var(--surface) 72%,transparent);
-  border:1px solid rgba(90,160,255,.28);box-shadow:0 16px 34px -14px rgba(2,8,22,.7)}
-.card-float--1{box-shadow:0 16px 34px -14px rgba(47,107,240,.5)}
-.card-float--2{box-shadow:0 16px 34px -14px rgba(212,169,55,.4)}
-body.light .card-float{background:color-mix(in srgb,#fff 78%,transparent)}
+/* — Glass hero мокап + қалқыған чиптер (нейтрал) — */
+.mock{background:linear-gradient(165deg,color-mix(in srgb,var(--surface) 92%,#000),var(--surface));
+  box-shadow:0 38px 74px -26px rgba(0,0,0,.82),0 0 0 1px rgba(255,255,255,.08)}
+.card-float{backdrop-filter:blur(10px) saturate(1.1);
+  background:color-mix(in srgb,var(--surface) 74%,transparent);
+  border:1px solid rgba(255,255,255,.14);box-shadow:0 16px 34px -14px rgba(0,0,0,.72)}
+body.light .card-float{background:color-mix(in srgb,#fff 80%,transparent);border-color:rgba(0,0,0,.08)}
 
-/* — Навигация сілтемелерінде aurora асты сызығы (тек десктоп) — */
+/* — Навигация сілтеме асты сызығы (нейтрал, тек десктоп) — */
 @media(min-width:901px){
   .nav__links a{position:relative}
   .nav__links a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:2px;border-radius:2px;
-    background:linear-gradient(90deg,#5aa0ff,#19c2ff);transform:scaleX(0);transform-origin:left;
-    transition:transform .25s ease;pointer-events:none}
+    background:#fff;transform:scaleX(0);transform-origin:left;transition:transform .25s ease;pointer-events:none}
+  body.light .nav__links a::after{background:#0a0a0b}
   .nav__links a:hover::after,.nav__links a[aria-current="page"]::after{transform:scaleX(1)}
 }
-.nav{box-shadow:0 1px 0 rgba(90,160,255,.08),0 10px 30px -24px rgba(0,0,0,.8)}
+.nav{box-shadow:0 1px 0 rgba(255,255,255,.05),0 10px 30px -24px rgba(0,0,0,.8)}
 
-/* — Біртұтас фокус + басу (touch) микро-әрекеттер — */
+/* — Фокус + басу (touch) микро-әрекеттер (нейтрал) — */
 .btn:active,.appcard:active,.chip:active{transform:translateY(0) scale(.97)}
 .btn:focus-visible,.icon-btn:focus-visible,.lang__btn:focus-visible,.appcard:focus-visible{
-  outline:none;box-shadow:0 0 0 3px rgba(90,160,255,.45),0 0 0 6px rgba(25,194,255,.18)}
-.fab:focus-visible{outline:none;box-shadow:0 10px 30px -6px rgba(37,211,102,.6),0 0 0 4px rgba(90,160,255,.4)}
+  outline:none;box-shadow:0 0 0 3px rgba(255,255,255,.55),0 0 0 6px rgba(255,255,255,.12)}
+body.light .btn:focus-visible,body.light .icon-btn:focus-visible,body.light .appcard:focus-visible{
+  box-shadow:0 0 0 3px rgba(10,10,11,.5),0 0 0 6px rgba(10,10,11,.12)}
+.fab:focus-visible{outline:none;box-shadow:0 10px 30px -6px rgba(37,211,102,.6),0 0 0 4px rgba(255,255,255,.5)}
 
 /* — Мобиль нақтылау: статистика бөлгіштерін алып тастау, glow-ды жеңілдету — */
 @media(max-width:640px){
   .stats div{padding-right:0}
   .stats div+div{padding-left:0}
   .stats div+div::before{display:none}
-  .hero{background:radial-gradient(300px 300px at 72% 6%,rgba(212,169,55,.12),transparent 70%) no-repeat}
+  .hero{background:radial-gradient(300px 300px at 72% 6%,rgba(255,255,255,.05),transparent 70%) no-repeat}
 }
+
+/* — Қалған көк hover-акценттерді нейтралдау (толық қара-ақ) — */
+.icon-btn:hover{border-color:rgba(255,255,255,.45)}
+.appcard:hover .appcard__arrow{color:var(--text)}
+.feature:hover{border-color:rgba(255,255,255,.35)}
+.feature--hot{background:linear-gradient(160deg,rgba(255,255,255,.06),var(--surface));border-color:rgba(255,255,255,.18)}
+body.light .icon-btn:hover{border-color:rgba(0,0,0,.35)}
+body.light .feature:hover{border-color:rgba(0,0,0,.18)}
+body.light .feature--hot{background:linear-gradient(160deg,rgba(0,0,0,.05),var(--surface));border-color:rgba(0,0,0,.14)}
