@@ -56,6 +56,7 @@
       id: "dark-elegant",
       name: { kk: "Қою сәнді", ru: "Тёмный элегантный" },
       category: "wedding",
+      cats: ["wedding", "uzatu", "sundet", "besik"],
       variant: "dark-elegant",
       html: frame(
         '<div style="position:absolute;inset:0;background:' +
@@ -89,6 +90,7 @@
       id: "cream-minimal",
       name: { kk: "Кремді минимал", ru: "Кремовый минимал" },
       category: "uzatu",
+      cats: ["wedding", "uzatu", "merey", "tusaukeser"],
       variant: "cream-minimal",
       html: frame(
         '<div style="position:absolute;inset:0;background:' +
@@ -125,6 +127,7 @@
       id: "nature-garden",
       name: { kk: "Бақ / табиғат", ru: "Сад / природа" },
       category: "merey",
+      cats: ["wedding", "merey", "besik", "tusaukeser"],
       variant: "nature-garden",
       html: frame(
         '<img class="shk-img" data-shk-field="bg" alt="" ' +
@@ -159,6 +162,7 @@
       id: "black-gold",
       name: { kk: "Қара алтын", ru: "Чёрное золото" },
       category: "sundet",
+      cats: ["wedding", "sundet", "merey", "uzatu"],
       variant: "black-gold",
       html: frame(
         '<div style="position:absolute;inset:0;background:' +
