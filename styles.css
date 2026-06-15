@@ -383,3 +383,70 @@ body.light .nav{background:rgba(255,255,255,.85)}
   .tabbar__item--cta{color:#fff;background:linear-gradient(135deg,var(--brand),#60a5fa)}
   .tabbar__item--cta.is-active{color:#fff}
 }
+
+/* ============================================================
+   ✦ AURORA PREMIUM ✦ — визуалды жаңарту (бүкіл сайт)
+   ============================================================ */
+
+/* — анимациялы aurora градиент тақырып (hero h1 ішіндегі .grad) — */
+.grad{
+  background:linear-gradient(110deg,#5aa0ff,#2f6bf0,#19c2ff,#d4a937,#2f6bf0,#5aa0ff);
+  background-size:300% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:ebAurora 7s ease infinite;
+}
+
+/* — Hero: тірі қалқыған aurora фон + жұмсақ алтын жылу — */
+.hero{background:radial-gradient(440px 440px at 62% 14%,rgba(212,169,55,.10),transparent 70%) no-repeat}
+.hero::before{
+  width:560px;height:560px;
+  background:radial-gradient(circle,rgba(79,147,255,.42),transparent 70%);
+  filter:blur(42px);
+  animation:auroraDrift1 15s ease-in-out infinite;
+}
+.hero::after{
+  width:480px;height:480px;
+  background:radial-gradient(circle,rgba(25,194,255,.26),transparent 70%);
+  filter:blur(42px);
+  animation:auroraDrift2 18s ease-in-out infinite;
+}
+@keyframes auroraDrift1{0%,100%{transform:translate(0,0)}50%{transform:translate(-44px,32px)}}
+@keyframes auroraDrift2{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-28px)}}
+
+/* — Hero мокаптың экраны да aurora — */
+.mock__hero{background:linear-gradient(135deg,#4f93ff,#19c2ff,#2563eb);background-size:200% 200%;animation:ebAurora 6s ease infinite}
+
+/* — Премиум батырма: hover-де жарық жүгіреді — */
+.btn{position:relative;overflow:hidden;
+  background:linear-gradient(135deg,#2f6bf0,#4f93ff 58%,#19c2ff);
+  box-shadow:0 10px 26px -8px rgba(47,107,240,.6)}
+.btn::after{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent);
+  transform:skewX(-20deg);transition:left .6s ease;pointer-events:none}
+.btn:hover::after{left:150%}
+.btn:hover{transform:translateY(-2px);box-shadow:0 16px 34px -8px rgba(47,107,240,.72)}
+.btn--ghost{background:transparent;box-shadow:none}
+.btn--ghost::after{display:none}
+
+/* — Badge: aurora шекара — */
+.badge{background:linear-gradient(135deg,rgba(47,107,240,.18),rgba(25,194,255,.12));
+  border:1px solid rgba(79,147,255,.32);color:#9cc4ff}
+body.light .badge{color:#2563eb}
+
+/* — eyebrow: aurora мәтін — */
+.eyebrow{background:linear-gradient(110deg,#4f93ff,#19c2ff,#d4a937);
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent}
+
+/* — Карталар: жұмсақ glow hover — */
+.appcard,.mock,.card-float{transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+.appcard:hover{border-color:rgba(79,147,255,.6);box-shadow:0 22px 46px -22px rgba(47,107,240,.68)}
+
+/* — Scroll reveal (script.js қосады) — */
+body.reveal-ready .reveal{opacity:0;transform:translateY(26px)}
+body.reveal-ready .reveal.in{opacity:1;transform:none;transition:opacity .7s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+
+@media (prefers-reduced-motion:reduce){
+  .grad,.hero::before,.hero::after,.mock__hero{animation:none}
+  body.reveal-ready .reveal{opacity:1;transform:none}
+}

@@ -362,3 +362,25 @@ if (tabbar) {
   );
   sections.forEach((s) => spy.observe(s));
 }
+
+/* ============================================================
+   ✦ Aurora scroll-reveal — элементтер айналдырғанда жұмсақ шығады
+   ============================================================ */
+(function () {
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var targets = document.querySelectorAll(
+    ".appcard, .tpl-card, .feature, .section h2, .section__sub, .eyebrow, .stats, .contact, .calc, .templates__or"
+  );
+  if (!targets.length || reduce || !("IntersectionObserver" in window)) return; // JS жоқ/reduce → бәрі көрінеді
+  document.body.classList.add("reveal-ready");
+  targets.forEach(function (el, i) {
+    el.classList.add("reveal");
+    el.style.transitionDelay = (i % 5) * 70 + "ms";
+  });
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+    });
+  }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+  targets.forEach(function (el) { io.observe(el); });
+})();
