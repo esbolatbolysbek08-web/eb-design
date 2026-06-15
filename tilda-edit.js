@@ -50,7 +50,17 @@
     "#ebedit-box .b1{background:#F14635;color:#fff}#ebedit-box .b2{background:#25d366;color:#fff}#ebedit-box .b3{background:" + BLUE + ";color:#fff}#ebedit-box .bg{background:#eef0f7;color:#161827}" +
     "#ebedit-box input{width:100%;text-align:center;letter-spacing:4px;text-transform:uppercase;font-size:20px;font-weight:800;padding:12px;border:2px solid #e2e5ef;border-radius:11px;margin-bottom:8px;font-family:inherit}" +
     "#ebedit-box .err{color:#e2483b;font-size:13px;font-weight:600;display:none;margin:0 0 8px}" +
-    "#ebedit-box .x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;width:auto;margin:0;color:#888;cursor:pointer}";
+    "#ebedit-box .x{position:absolute;top:12px;right:14px;background:none;border:none;font-size:20px;width:auto;margin:0;color:#888;cursor:pointer}" +
+    "#ebedit-music,#ebedit-date{background:#1f3149;color:#fff}" +
+    "#ebedit-flash{position:fixed;left:50%;bottom:80px;transform:translateX(-50%);z-index:2147483600;background:#111;color:#fff;font-family:'Inter',Arial,sans-serif;font-size:14px;font-weight:600;padding:11px 18px;border-radius:99px;box-shadow:0 10px 24px rgba(0,0,0,.45);transition:opacity .4s}" +
+    "#ebedit-datebox{position:fixed;inset:0;z-index:2147483600;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.7);font-family:'Inter',Arial,sans-serif;padding:18px}" +
+    "#ebedit-datebox.on{display:flex}" +
+    "#ebedit-datebox .ebd-card{background:#fff;color:#161827;border-radius:20px;max-width:330px;width:100%;padding:24px;text-align:center;position:relative}" +
+    "#ebedit-datebox h3{font-size:19px;margin:0 0 6px}" +
+    "#ebedit-datebox p{font-size:13px;color:#5a6075;margin:0 0 14px}" +
+    "#ebedit-datebox input[type=date]{width:100%;font-size:17px;padding:12px;border:2px solid #e2e5ef;border-radius:11px;margin-bottom:14px;font-family:inherit;text-align:center}" +
+    "#ebedit-datebox .b3{display:block;width:100%;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;background:" + BLUE + ";color:#fff}" +
+    "#ebedit-datebox .x{position:absolute;top:10px;right:14px;background:none;border:none;font-size:20px;color:#888;cursor:pointer}";
   (document.head || document.documentElement).appendChild(st);
 
   // ---------- Toolbar ----------
@@ -58,6 +68,8 @@
   bar.id = "ebedit-bar";
   bar.innerHTML =
     '<button id="ebedit-toggle" type="button">✏️ Өңдеу</button>' +
+    '<button id="ebedit-music" type="button" style="display:none">🎵 Музыка</button>' +
+    '<button id="ebedit-date" type="button" style="display:none">📅 Күні</button>' +
     '<button id="ebedit-get" type="button" style="display:none">✅ Дайын — алу</button>';
   document.body.appendChild(bar);
 
@@ -233,10 +245,14 @@
     tg.textContent = "✓ Болды";
     tg.classList.add("on");
     document.getElementById("ebedit-get").style.display = "";
+    var mbtn = document.getElementById("ebedit-music");
+    if (mbtn) mbtn.style.display = pageHasAudio() ? "" : "none";
+    var dbtn = document.getElementById("ebedit-date");
+    if (dbtn) dbtn.style.display = pageHasCountdown() ? "" : "none";
     if (!hint) {
       hint = document.createElement("div");
       hint.id = "ebedit-hint";
-      hint.textContent = "Мәтінді басып өзгертіңіз · суретті басып ауыстырыңыз";
+      hint.textContent = "Мәтін/суретті бас та өзгерт · 🎵 музыка · 📅 күні — батырмалар";
       document.body.appendChild(hint);
     }
   }
@@ -247,8 +263,118 @@
     var tg = document.getElementById("ebedit-toggle");
     tg.textContent = "✏️ Өңдеу";
     tg.classList.remove("on");
+    var mbtn = document.getElementById("ebedit-music"); if (mbtn) mbtn.style.display = "none";
+    var dbtn = document.getElementById("ebedit-date"); if (dbtn) dbtn.style.display = "none";
     if (hint) { hint.remove(); hint = null; }
   }
+
+  // ---------- Шағын тост хабарлама ----------
+  function flash(msg) {
+    var t = document.createElement("div");
+    t.id = "ebedit-flash";
+    t.textContent = msg;
+    document.body.appendChild(t);
+    setTimeout(function () { t.style.opacity = "0"; }, 1700);
+    setTimeout(function () { if (t.parentNode) t.remove(); }, 2200);
+  }
+
+  // ---------- 🎵 Музыка ауыстыру ----------
+  function pageHasAudio() {
+    if (document.querySelector("audio")) return true;
+    var s = document.querySelectorAll("script");
+    for (var i = 0; i < s.length; i++) {
+      if (!s[i].src && /\.mp3/i.test(s[i].textContent)) return true;
+    }
+    return false;
+  }
+  function rewriteMp3InScripts(dataUri) {
+    var s = document.querySelectorAll("script");
+    for (var i = 0; i < s.length; i++) {
+      if (s[i].src) continue;
+      if (/https?:\/\/[^"'\s)]*\.mp3/i.test(s[i].textContent)) {
+        s[i].textContent = s[i].textContent.replace(/https?:\/\/[^"'\s)]*\.mp3/gi, dataUri);
+      }
+    }
+  }
+  function swapMusic() {
+    var inp = document.createElement("input");
+    inp.type = "file"; inp.accept = "audio/*,.mp3";
+    inp.onchange = function () {
+      var f = inp.files[0]; if (!f) return;
+      if (f.size > 12 * 1024 * 1024) { flash("⚠️ Файл тым үлкен (12МБ-тан кем болсын)"); return; }
+      flash("🎵 Жүктелуде...");
+      var r = new FileReader();
+      r.onload = function () {
+        var data = r.result;
+        var auds = document.querySelectorAll("audio");
+        for (var i = 0; i < auds.length; i++) {
+          var a = auds[i];
+          var srcs = a.querySelectorAll("source");
+          for (var j = 0; j < srcs.length; j++) { srcs[j].removeAttribute("srcset"); srcs[j].src = data; }
+          a.src = data;
+          try { a.load(); } catch (e) {}
+        }
+        rewriteMp3InScripts(data);
+        flash("🎵 Музыка ауыстырылды ✓");
+      };
+      r.readAsDataURL(f);
+    };
+    inp.click();
+  }
+
+  // ---------- 📅 Күні (кері санақ) ----------
+  function findCountdownScripts() {
+    var out = [], s = document.querySelectorAll("script");
+    for (var i = 0; i < s.length; i++) {
+      if (s[i].src) continue;
+      var m = s[i].textContent.match(/new Date\(\s*["'](\d{4}-\d{2}-\d{2})[^"']*["']\s*\)/);
+      if (m) out.push({ el: s[i], date: m[1] });
+    }
+    return out;
+  }
+  function pageHasCountdown() { return findCountdownScripts().length > 0; }
+  function applyDate(newDate) {
+    var cs = findCountdownScripts();
+    if (!cs.length) return;
+    // ескі санақтарды тоқтату (қайталанбау үшін)
+    var maxId = setInterval(function () {}, 100000);
+    clearInterval(maxId);
+    for (var k = 1; k <= maxId; k++) { clearInterval(k); }
+    // датаны жаңартып, скриптті қайта іске қосу
+    cs.forEach(function (c) {
+      var newText = c.el.textContent.replace(/(new Date\(\s*["'])\d{4}-\d{2}-\d{2}/, "$1" + newDate);
+      var fresh = document.createElement("script");
+      fresh.textContent = newText;
+      if (c.el.parentNode) c.el.parentNode.replaceChild(fresh, c.el);
+    });
+    flash("📅 Күні жаңартылды ✓");
+  }
+  function openDateEditor() {
+    var cs = findCountdownScripts();
+    if (!cs.length) { flash("Санақ табылмады"); return; }
+    var box = document.getElementById("ebedit-datebox");
+    if (!box) {
+      box = document.createElement("div");
+      box.id = "ebedit-datebox";
+      box.innerHTML =
+        '<div class="ebd-card"><button class="x" type="button" data-dclose>✕</button>' +
+        '<h3>📅 Мереке күні</h3><p>Кері санақ осы күнге дейін есептейді</p>' +
+        '<input type="date" id="ebd-input"><button class="b3" type="button" data-dapply>Сақтау</button></div>';
+      document.body.appendChild(box);
+      box.addEventListener("click", function (e) {
+        if (e.target.hasAttribute("data-dclose") || e.target === box) { box.classList.remove("on"); return; }
+        if (e.target.hasAttribute("data-dapply")) {
+          var v = document.getElementById("ebd-input").value;
+          if (v) { applyDate(v); box.classList.remove("on"); }
+        }
+      });
+    }
+    document.getElementById("ebd-input").value = findCountdownScripts()[0].date;
+    box.classList.add("on");
+  }
+
+  document.getElementById("ebedit-music").addEventListener("click", swapMusic);
+  document.getElementById("ebedit-date").addEventListener("click", openDateEditor);
 
   document.getElementById("ebedit-toggle").addEventListener("click", function () {
     editing ? disableEdit() : enableEdit();
@@ -309,7 +435,7 @@
   function downloadEdited() {
     materialize(); // тірі DOM-ды дайындау
     var clone = document.documentElement.cloneNode(true);
-    ["#ebedit-bar", "#ebedit-style", "#ebedit-modal", "#ebedit-hint"].forEach(function (sel) {
+    ["#ebedit-bar", "#ebedit-style", "#ebedit-modal", "#ebedit-hint", "#ebedit-datebox", "#ebedit-flash"].forEach(function (sel) {
       var el = clone.querySelector(sel);
       if (el) el.remove();
     });
