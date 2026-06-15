@@ -1,0 +1,771 @@
+/* ==========================================================================
+   Shakyrtu.kz — Shared Design System
+   Kazakh wedding-invitation platform. Plain static HTML/CSS/JS (no build step).
+   Linked by every page: index.html, login.html, templates.html, editor.html ...
+   Pair with Google Fonts <link> in <head>:
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+   ========================================================================== */
+
+/* ---------------------------------------------------------------------------
+   1. DESIGN TOKENS
+--------------------------------------------------------------------------- */
+:root{
+  /* Palette */
+  --bg:            #F5F0E8;   /* page background — cream/beige */
+  --bg-2:          #EFE8DC;   /* slightly deeper cream (sections, hovers) */
+  --surface:       #FFFFFF;   /* cards, modals, inputs */
+  --gold:          #C9A55C;   /* accent — buttons, icons, active, selected */
+  --gold-dark:     #B08E45;   /* gold hover / pressed */
+  --gold-soft:     #F3EAD6;   /* tinted gold backgrounds (chips, dots glow) */
+  --ink:           #1F1B16;   /* darkest text / dark button */
+  --ink-2:         #2B2B2B;   /* dark button alt / strong text */
+  --muted:         #9B9285;   /* muted gray-beige secondary text */
+  --line:          #E4DCCD;   /* hairline borders on cream */
+  --line-2:        #EAE3D6;   /* faint dividers */
+  --telegram:      #2AABEE;   /* Telegram blue */
+  --telegram-dark: #1E95D4;   /* Telegram blue hover */
+  --white:         #FFFFFF;
+
+  /* State / feedback */
+  --danger:        #C0563E;
+  --success:       #4F8A5B;
+
+  /* Radii */
+  --r-card:   20px;   /* cards / modals (range 16–24) */
+  --r-card-lg:24px;
+  --r-card-sm:16px;
+  --r-btn:    12px;   /* buttons */
+  --r-input:  12px;
+  --r-pill:   999px;  /* chips, social buttons, fully rounded */
+
+  /* Shadows */
+  --shadow-soft:  0 20px 60px rgba(0,0,0,.06);   /* signature diffuse downward */
+  --shadow-sm:    0 8px 24px rgba(0,0,0,.05);
+  --shadow-lift:  0 28px 70px rgba(0,0,0,.10);   /* hover-lift target */
+  --shadow-ring:  0 0 0 3px rgba(201,165,92,.30);/* focus ring (gold) */
+
+  /* Motion */
+  --ease:       cubic-bezier(.22,.61,.36,1);
+  --t-fast:     .18s;
+  --t:          .28s;
+  --t-slow:     .5s;
+
+  /* Layout */
+  --container: 1160px;
+  --gutter:    20px;
+
+  /* Fonts */
+  --font-serif:  "Cormorant Garamond","Playfair Display",Georgia,"Times New Roman",serif;
+  --font-sans:   "Inter","Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --font-script: "Great Vibes","Pinyon Script",cursive;
+}
+
+/* ---------------------------------------------------------------------------
+   2. RESET & BASE
+--------------------------------------------------------------------------- */
+*,*::before,*::after{box-sizing:border-box}
+*{margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html,body{overflow-x:hidden}
+
+body{
+  font-family:var(--font-sans);
+  background:var(--bg);
+  color:var(--ink);
+  line-height:1.6;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  min-height:100vh;
+}
+
+img,svg,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:none}
+ul{list-style:none}
+strong,b{font-weight:700}
+
+/* Visible focus for keyboard users (accessibility) */
+:focus-visible{outline:none;box-shadow:var(--shadow-ring);border-radius:8px}
+a:focus-visible,button:focus-visible{border-radius:var(--r-btn)}
+
+/* Hide content visually but keep it for screen readers */
+.sr-only{
+  position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+  overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
+}
+
+::selection{background:var(--gold-soft);color:var(--ink)}
+
+/* ---------------------------------------------------------------------------
+   3. TYPOGRAPHY
+--------------------------------------------------------------------------- */
+.serif,h1,h2,h3{
+  font-family:var(--font-serif);
+  font-weight:600;
+  line-height:1.15;
+  letter-spacing:-.01em;
+  color:var(--ink);
+}
+h1{font-size:clamp(2.2rem,6vw,3.6rem)}
+h2{font-size:clamp(1.8rem,4.5vw,2.6rem)}
+h3{font-size:clamp(1.4rem,3vw,1.9rem)}
+
+.script{
+  font-family:var(--font-script);
+  font-weight:400;
+  line-height:1.1;
+  color:var(--gold);
+  font-size:clamp(2.4rem,8vw,4.2rem);
+}
+
+.lead{font-size:clamp(1.05rem,2vw,1.25rem);color:var(--muted);line-height:1.65}
+.muted{color:var(--muted)}
+.gold-text{color:var(--gold)}
+.eyebrow{                       /* small uppercase gold label above headings */
+  text-transform:uppercase;
+  letter-spacing:.18em;
+  font-size:.78rem;
+  font-weight:600;
+  color:var(--gold);
+}
+.text-center{text-align:center}
+
+/* ---------------------------------------------------------------------------
+   4. LAYOUT — CONTAINER
+--------------------------------------------------------------------------- */
+.container{
+  width:100%;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding-inline:var(--gutter);
+}
+.container--narrow{max-width:720px}
+.container--wide{max-width:1320px}
+.section{padding-block:clamp(48px,8vw,96px)}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+/* ---------------------------------------------------------------------------
+   5. BUTTONS
+   Base: .btn  |  Variants: --dark --gold --telegram --google --outline
+   Modifiers: --pill --lg --full
+--------------------------------------------------------------------------- */
+.btn{
+  --btn-bg:var(--ink);
+  --btn-fg:#fff;
+  --btn-bd:transparent;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-family:var(--font-sans);
+  font-weight:600;
+  font-size:1rem;
+  line-height:1;
+  padding:14px 24px;
+  min-height:48px;                 /* comfortable tap target */
+  border-radius:var(--r-btn);
+  border:1.5px solid var(--btn-bd);
+  background:var(--btn-bg);
+  color:var(--btn-fg);
+  cursor:pointer;
+  white-space:nowrap;
+  transition:transform var(--t) var(--ease),
+             box-shadow var(--t) var(--ease),
+             background var(--t-fast),border-color var(--t-fast),color var(--t-fast);
+}
+.btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.btn:active{transform:translateY(0)}
+.btn:disabled,.btn.is-disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
+.btn svg,.btn img{width:1.25em;height:1.25em;display:block}
+
+/* Dark (primary) */
+.btn--dark{--btn-bg:var(--ink-2);--btn-fg:#fff}
+.btn--dark:hover{--btn-bg:var(--ink)}
+
+/* Gold (accent) */
+.btn--gold{--btn-bg:var(--gold);--btn-fg:var(--ink)}
+.btn--gold:hover{--btn-bg:var(--gold-dark);box-shadow:0 14px 34px rgba(201,165,92,.40)}
+
+/* Telegram (blue) */
+.btn--telegram{--btn-bg:var(--telegram);--btn-fg:#fff}
+.btn--telegram:hover{--btn-bg:var(--telegram-dark);box-shadow:0 14px 34px rgba(42,171,238,.35)}
+
+/* Google (white + border) */
+.btn--google{--btn-bg:#fff;--btn-fg:var(--ink);--btn-bd:var(--line)}
+.btn--google:hover{--btn-bg:#fff;--btn-bd:var(--muted);box-shadow:var(--shadow-sm)}
+
+/* Outline (transparent, gold-ish border) */
+.btn--outline{--btn-bg:transparent;--btn-fg:var(--ink);--btn-bd:var(--gold)}
+.btn--outline:hover{--btn-bg:var(--gold-soft)}
+
+/* Modifiers */
+.btn--pill{border-radius:var(--r-pill)}
+.btn--lg{font-size:1.1rem;padding:18px 34px;min-height:58px;border-radius:14px}
+.btn--full{width:100%}
+.btn--sm{font-size:.9rem;padding:9px 16px;min-height:38px}
+
+/* ---------------------------------------------------------------------------
+   6. LANGUAGE TOGGLE — segmented [ Қазақша | Русский ]
+--------------------------------------------------------------------------- */
+.lang-toggle{
+  display:inline-flex;
+  padding:4px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:var(--r-pill);
+  gap:2px;
+}
+.lang-toggle__btn{
+  border:none;background:transparent;
+  font-weight:600;font-size:.85rem;
+  color:var(--muted);
+  padding:8px 16px;
+  border-radius:var(--r-pill);
+  transition:background var(--t-fast),color var(--t-fast);
+}
+.lang-toggle__btn:hover{color:var(--ink)}
+.lang-toggle__btn.is-active{
+  background:var(--ink);
+  color:#fff;
+  box-shadow:0 2px 8px rgba(0,0,0,.12);
+}
+
+/* ---------------------------------------------------------------------------
+   7. CARD
+--------------------------------------------------------------------------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-card);
+  box-shadow:var(--shadow-soft);
+  padding:clamp(20px,3vw,32px);
+}
+.card--flat{box-shadow:none}
+.card--pad-sm{padding:18px}
+.card--center{text-align:center}
+.card__title{font-family:var(--font-serif);font-size:1.5rem;font-weight:600;margin-bottom:8px}
+
+/* ---------------------------------------------------------------------------
+   8. FORM — .field-label / .input / .field-hint
+--------------------------------------------------------------------------- */
+.field{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+
+.field-label{                    /* small-caps muted label */
+  font-size:.72rem;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.input,
+input.input,
+textarea.input,
+select.input{
+  width:100%;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  border-radius:var(--r-input);
+  padding:13px 16px;
+  font-size:1rem;
+  color:var(--ink);
+  transition:border-color var(--t-fast),box-shadow var(--t-fast);
+}
+.input::placeholder{color:var(--muted);opacity:.8}
+.input:hover{border-color:var(--muted)}
+.input:focus{outline:none;border-color:var(--gold);box-shadow:var(--shadow-ring)}
+textarea.input{min-height:120px;resize:vertical;line-height:1.5}
+.input.is-error{border-color:var(--danger)}
+
+.field-hint{font-size:.8rem;color:var(--muted)}
+.field-hint--error{color:var(--danger)}
+
+/* ---------------------------------------------------------------------------
+   9. CHIP — category pills  (.chip / .chip.is-active)
+--------------------------------------------------------------------------- */
+.chip{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-weight:500;font-size:.9rem;
+  padding:9px 18px;
+  border-radius:var(--r-pill);
+  cursor:pointer;
+  transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.chip:hover{border-color:var(--gold);transform:translateY(-1px)}
+.chip.is-active{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:var(--ink);
+  font-weight:600;
+}
+/* Horizontally scrollable strip of chips */
+.chip-row{
+  display:flex;gap:10px;flex-wrap:wrap;
+}
+
+/* ---------------------------------------------------------------------------
+   10. SOCIAL PILL — icon + text, white, fully rounded
+--------------------------------------------------------------------------- */
+.social-pill{
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  color:var(--ink);
+  font-weight:600;font-size:.95rem;
+  padding:12px 22px;
+  border-radius:var(--r-pill);
+  box-shadow:var(--shadow-sm);
+  transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),border-color var(--t-fast);
+}
+.social-pill:hover{transform:translateY(-2px);box-shadow:var(--shadow-soft);border-color:var(--muted)}
+.social-pill svg,.social-pill img{width:20px;height:20px}
+.social-pill--telegram{color:var(--telegram)}
+.social-pill--full{width:100%}
+
+/* ---------------------------------------------------------------------------
+   11. HEADER  (.header / .header__bar / .iconbtn hamburger)
+--------------------------------------------------------------------------- */
+.header{
+  position:sticky;top:0;z-index:50;
+  background:rgba(245,240,232,.82);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.header__bar{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  max-width:var(--container);
+  margin-inline:auto;
+  padding:14px var(--gutter);
+  min-height:66px;
+}
+.header__brand{
+  display:inline-flex;align-items:center;gap:10px;
+  font-family:var(--font-serif);font-weight:700;font-size:1.4rem;letter-spacing:-.01em;
+  color:var(--ink);
+}
+.header__brand .gold-text{color:var(--gold)}
+.header__nav{display:flex;align-items:center;gap:28px}
+.header__nav a{color:var(--ink);font-weight:500;font-size:.95rem;transition:color var(--t-fast)}
+.header__nav a:hover{color:var(--gold)}
+.header__nav a.is-active,
+.header__nav a[aria-current="page"]{color:var(--gold);font-weight:600}
+.header__actions{display:flex;align-items:center;gap:12px}
+
+/* Square icon button — hamburger, etc. */
+.iconbtn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;flex:none;
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-btn);
+  color:var(--ink);font-size:1.25rem;
+  transition:transform var(--t-fast),border-color var(--t-fast),background var(--t-fast);
+}
+.iconbtn:hover{transform:translateY(-1px);border-color:var(--gold);background:var(--gold-soft)}
+.iconbtn--ghost{background:transparent;border-color:transparent}
+.iconbtn--hamburger{display:none}        /* shown on mobile via media query */
+
+/* Slide-down mobile nav (toggle .is-open with JS) */
+.mobile-nav{
+  display:none;flex-direction:column;gap:4px;
+  background:var(--surface);
+  border-bottom:1px solid var(--line);
+  padding:12px var(--gutter) 18px;
+  box-shadow:var(--shadow-soft);
+}
+.mobile-nav.is-open{display:flex;animation:fadeInDown var(--t) var(--ease)}
+.mobile-nav a{padding:12px 6px;font-weight:500;color:var(--ink);border-radius:10px}
+.mobile-nav a:hover{background:var(--bg-2)}
+
+/* ---------------------------------------------------------------------------
+   12. STEP INDICATOR  (.step-indicator / .step / .step.is-active)
+--------------------------------------------------------------------------- */
+.step-indicator{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  flex-wrap:wrap;
+}
+.step{
+  display:inline-flex;align-items:center;gap:10px;
+  color:var(--muted);font-weight:600;font-size:.9rem;
+}
+.step__dot{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:32px;height:32px;flex:none;
+  border-radius:var(--r-pill);
+  background:var(--surface);
+  border:1.5px solid var(--line);
+  color:var(--muted);font-size:.9rem;font-weight:700;
+  transition:background var(--t),border-color var(--t),color var(--t);
+}
+.step.is-active{color:var(--ink)}
+.step.is-active .step__dot{background:var(--gold);border-color:var(--gold);color:var(--ink)}
+.step.is-done .step__dot{background:var(--gold-soft);border-color:var(--gold);color:var(--gold-dark)}
+.step__line{width:34px;height:2px;background:var(--line);flex:none}
+.step.is-done + .step__line,.step__line.is-done{background:var(--gold)}
+
+/* ---------------------------------------------------------------------------
+   13. MODE TABS  (.mode-tabs / .mode-tab / .is-active / .is-disabled "ЖУЫРДА")
+--------------------------------------------------------------------------- */
+.mode-tabs{
+  display:inline-flex;gap:8px;flex-wrap:wrap;
+  padding:6px;background:var(--bg-2);border:1px solid var(--line);border-radius:16px;
+}
+.mode-tab{
+  position:relative;
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;
+  border:1.5px solid transparent;
+  color:var(--muted);
+  font-weight:600;font-size:.95rem;
+  padding:11px 20px;
+  border-radius:12px;
+  transition:background var(--t-fast),border-color var(--t-fast),color var(--t-fast);
+}
+.mode-tab:hover{color:var(--ink)}
+.mode-tab.is-active{
+  background:var(--surface);
+  border-color:var(--gold);
+  color:var(--ink);
+  box-shadow:var(--shadow-sm);
+}
+.mode-tab.is-disabled{opacity:.55;cursor:not-allowed;pointer-events:none}
+/* "ЖУЫРДА" (soon) badge — add class .mode-tab.is-disabled */
+.mode-tab.is-disabled::after{
+  content:"ЖУЫРДА";
+  font-size:.6rem;font-weight:700;letter-spacing:.08em;
+  background:var(--gold-soft);color:var(--gold-dark);
+  padding:3px 7px;border-radius:var(--r-pill);
+}
+
+/* ---------------------------------------------------------------------------
+   14. PHONE MOCK — realistic 9:16 device frame for previews
+--------------------------------------------------------------------------- */
+.phone-mock{
+  position:relative;
+  width:100%;
+  max-width:300px;
+  margin-inline:auto;
+  aspect-ratio:9/19;                /* device incl. bezel */
+  background:#1c1a17;
+  border-radius:42px;
+  padding:12px;
+  box-shadow:var(--shadow-lift),inset 0 0 0 2px rgba(255,255,255,.06);
+}
+.phone-mock::before{                 /* notch / pill */
+  content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);
+  width:42%;height:7px;background:#000;border-radius:var(--r-pill);z-index:3;
+}
+.phone-mock__screen{
+  position:relative;
+  width:100%;height:100%;
+  background:var(--surface);
+  border-radius:30px;
+  overflow:hidden;
+}
+.phone-mock__screen img,
+.phone-mock__screen iframe,
+.phone-mock__screen video{
+  width:100%;height:100%;object-fit:cover;border:0;display:block;
+}
+
+/* ---------------------------------------------------------------------------
+   15. TEMPLATE CARD  (.tpl-card 9:16, .is-selected, hover lift, ✓ badge)
+--------------------------------------------------------------------------- */
+.tpl-card{
+  position:relative;
+  display:block;
+  background:var(--surface);
+  border:2px solid var(--line);
+  border-radius:var(--r-card);
+  overflow:hidden;
+  cursor:pointer;
+  box-shadow:var(--shadow-soft);
+  transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),border-color var(--t-fast);
+}
+.tpl-card:hover,
+.tpl-card:focus-visible{transform:translateY(-6px);box-shadow:var(--shadow-lift)}
+.tpl-card__media{
+  position:relative;
+  width:100%;
+  aspect-ratio:9/16;                 /* portrait invitation preview */
+  background:var(--bg-2);
+  overflow:hidden;
+}
+.tpl-card__media img,
+.tpl-card__media video{width:100%;height:100%;object-fit:cover}
+.tpl-card__body{padding:12px 14px}
+.tpl-card__title{font-family:var(--font-serif);font-size:1.1rem;font-weight:600;color:var(--ink)}
+.tpl-card__meta{font-size:.82rem;color:var(--muted);margin-top:2px}
+
+/* Selected state: gold border + ✓ badge */
+.tpl-card.is-selected{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),var(--shadow-soft)}
+.tpl-card__badge{
+  position:absolute;top:10px;right:10px;z-index:2;
+  width:30px;height:30px;
+  display:none;align-items:center;justify-content:center;
+  background:var(--gold);color:var(--ink);
+  border-radius:var(--r-pill);
+  font-size:.95rem;font-weight:700;
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+.tpl-card.is-selected .tpl-card__badge{display:inline-flex}
+.tpl-card__badge::after{content:"✓"}
+
+/* ---------------------------------------------------------------------------
+   16. PREVIEW PANEL  (sticky live-preview column in editor)
+--------------------------------------------------------------------------- */
+.preview-panel{
+  position:sticky;top:90px;
+  display:flex;flex-direction:column;align-items:center;gap:18px;
+  background:var(--bg-2);
+  border:1px solid var(--line);
+  border-radius:var(--r-card-lg);
+  padding:clamp(20px,3vw,36px);
+}
+.preview-panel__label{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------------------------------------------------------------------------
+   17. BOTTOM TOOLBAR — floating capsule + .tool (.has-dot)
+--------------------------------------------------------------------------- */
+.bottom-toolbar{
+  position:fixed;left:50%;bottom:18px;transform:translateX(-50%);
+  z-index:60;
+  display:flex;align-items:center;gap:6px;
+  max-width:calc(100% - 24px);
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--r-pill);
+  box-shadow:var(--shadow-soft);
+  padding:8px;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+.bottom-toolbar::-webkit-scrollbar{display:none}
+
+.tool{
+  position:relative;
+  display:inline-flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;
+  flex:none;
+  min-width:64px;
+  padding:8px 12px;
+  border-radius:14px;
+  color:var(--ink);
+  font-size:.72rem;font-weight:600;
+  transition:background var(--t-fast),color var(--t-fast),transform var(--t-fast);
+}
+.tool__icon{font-size:1.3rem;line-height:1;color:var(--ink-2)}
+.tool:hover{background:var(--gold-soft)}
+.tool:hover .tool__icon{color:var(--gold-dark)}
+.tool.is-active{background:var(--gold);color:var(--ink)}
+.tool.is-active .tool__icon{color:var(--ink)}
+/* Gold notice dot */
+.tool.has-dot::after{
+  content:"";position:absolute;top:6px;right:12px;
+  width:8px;height:8px;border-radius:var(--r-pill);
+  background:var(--gold);
+  box-shadow:0 0 0 2px var(--surface);
+}
+
+/* ---------------------------------------------------------------------------
+   18. MODAL  (.modal / .modal__box) — blur backdrop, fade in
+--------------------------------------------------------------------------- */
+.modal{
+  position:fixed;inset:0;z-index:100;
+  display:none;align-items:center;justify-content:center;
+  padding:20px;
+  background:rgba(31,27,22,.45);
+  backdrop-filter:blur(6px);
+  -webkit-backdrop-filter:blur(6px);
+}
+.modal.is-open{display:flex;animation:modalFade var(--t) var(--ease)}
+.modal__box{
+  position:relative;
+  width:100%;max-width:460px;
+  max-height:90vh;overflow-y:auto;
+  background:var(--surface);
+  border-radius:var(--r-card-lg);
+  box-shadow:var(--shadow-lift);
+  padding:clamp(24px,4vw,36px);
+  animation:modalPop var(--t) var(--ease);
+}
+.modal__box--wide{max-width:720px}
+.modal__close{
+  position:absolute;top:14px;right:14px;
+  width:38px;height:38px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:var(--r-pill);
+  background:var(--bg-2);color:var(--ink);font-size:1.1rem;
+  transition:background var(--t-fast)}
+.modal__close:hover{background:var(--line)}
+.modal__close::after{content:"\00d7"}
+.modal__title{font-family:var(--font-serif);font-size:1.7rem;font-weight:600;margin-bottom:6px}
+.modal__sub{color:var(--muted);margin-bottom:22px}
+
+/* ---------------------------------------------------------------------------
+   19. DIVIDER  — centered label "НЕМЕСЕ" / "НЕ ІСТЕЙ АЛАСЫЗ"
+   Put label text inside <span>. e.g. <div class="divider"><span>НЕМЕСЕ</span></div>
+--------------------------------------------------------------------------- */
+.divider{
+  display:flex;align-items:center;gap:14px;
+  margin-block:22px;
+  color:var(--muted);
+  font-size:.74rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider span{flex:none}
+
+/* ---------------------------------------------------------------------------
+   20. BULLET LIST — gold bullets
+--------------------------------------------------------------------------- */
+.bullet-list{display:flex;flex-direction:column;gap:12px}
+.bullet-list li{
+  position:relative;
+  padding-left:30px;
+  color:var(--ink);line-height:1.5;
+}
+.bullet-list li::before{
+  content:"";position:absolute;left:6px;top:.55em;
+  width:8px;height:8px;border-radius:var(--r-pill);
+  background:var(--gold);
+}
+/* Checkmark variant — use .bullet-list.bullet-list--check */
+.bullet-list--check li::before{
+  content:"✓";
+  left:0;top:0;
+  width:20px;height:20px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--gold-soft);color:var(--gold-dark);
+  font-size:.72rem;font-weight:700;
+  border-radius:var(--r-pill);
+}
+.bullet-list--check li{padding-left:32px}
+
+/* ---------------------------------------------------------------------------
+   21. FAB — floating + button, bottom-right
+--------------------------------------------------------------------------- */
+.fab{
+  position:fixed;right:20px;bottom:20px;z-index:70;
+  width:58px;height:58px;
+  display:inline-flex;align-items:center;justify-content:center;
+  background:var(--gold);color:var(--ink);
+  border-radius:var(--r-pill);
+  font-size:1.8rem;line-height:1;
+  box-shadow:0 16px 38px rgba(201,165,92,.45);
+  transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),background var(--t-fast);
+}
+.fab:hover{transform:translateY(-3px) scale(1.04);background:var(--gold-dark)}
+.fab:active{transform:translateY(0)}
+
+/* ---------------------------------------------------------------------------
+   22. SMALL UTILITIES
+--------------------------------------------------------------------------- */
+.hover-lift{transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease)}
+.hover-lift:hover{transform:translateY(-6px);box-shadow:var(--shadow-lift)}
+.badge-soft{                         /* small inline tag */
+  display:inline-flex;align-items:center;gap:5px;
+  background:var(--gold-soft);color:var(--gold-dark);
+  font-size:.72rem;font-weight:700;letter-spacing:.04em;
+  padding:5px 11px;border-radius:var(--r-pill);
+}
+.divider-line{height:1px;background:var(--line);border:0;margin-block:20px}
+.gap-sm{gap:8px}.gap-lg{gap:24px}
+.mt-1{margin-top:8px}.mt-2{margin-top:16px}.mt-3{margin-top:24px}.mt-4{margin-top:32px}
+.center{display:flex;align-items:center;justify-content:center}
+.spread{display:flex;align-items:center;justify-content:space-between}
+
+/* ---------------------------------------------------------------------------
+   23. GALLERY & EDITOR GRIDS (desktop defaults; collapse below)
+--------------------------------------------------------------------------- */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);   /* desktop: 4 cols */
+  gap:clamp(14px,2vw,24px);
+}
+/* Editor / gallery split layout: controls + preview */
+.editor-layout{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;     /* desktop: 2 cols */
+  gap:clamp(20px,3vw,40px);
+  align-items:start;
+}
+.editor-layout--preview-first{grid-template-columns:.85fr 1.15fr}
+
+/* ---------------------------------------------------------------------------
+   24. KEYFRAMES — fade / modal / envelope-open
+--------------------------------------------------------------------------- */
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes fadeInDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:none}}
+@keyframes modalFade{from{opacity:0}to{opacity:1}}
+@keyframes modalPop{from{opacity:0;transform:translateY(14px) scale(.98)}to{opacity:1;transform:none}}
+
+/* Envelope open — flap rotates back to reveal invitation.
+   Apply .envelope-open to the flap element (with transform-origin:top). */
+@keyframes envelopeOpen{
+  0%  {transform:rotateX(0deg)}
+  100%{transform:rotateX(-180deg)}
+}
+.envelope-open{
+  transform-origin:top center;
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  animation:envelopeOpen 1s var(--ease) forwards;
+}
+
+/* Scroll/entry helpers (toggle .is-visible with IntersectionObserver) */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* ---------------------------------------------------------------------------
+   25. RESPONSIVE  (mobile-first overrides)
+--------------------------------------------------------------------------- */
+/* Tablet and below — gallery 2 cols, header nav hidden, layouts stack */
+@media (max-width:900px){
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}   /* phone/tablet: 2 cols */
+  .editor-layout,
+  .editor-layout--preview-first{grid-template-columns:1fr}
+  .preview-panel{position:static;order:-1}             /* preview on top when stacked */
+  .header__nav{display:none}
+  .iconbtn--hamburger{display:inline-flex}
+}
+
+/* Phone */
+@media (max-width:560px){
+  :root{--gutter:16px}
+  .btn--lg{font-size:1rem;padding:15px 24px;min-height:52px}
+  .section{padding-block:40px}
+  .modal{padding:12px;align-items:flex-end}            /* sheet-style on phone */
+  .modal__box{max-width:none;border-radius:var(--r-card-lg) var(--r-card-lg) 0 0}
+  .step-indicator{gap:6px}
+  .step__line{width:18px}
+  .step span:not(.step__dot){display:none}             /* labels collapse, keep dots */
+  .fab{right:16px;bottom:16px}
+  .bottom-toolbar{left:12px;right:12px;transform:none;max-width:none;justify-content:flex-start}
+}
+
+/* Very small */
+@media (max-width:380px){
+  .gallery-grid{grid-template-columns:1fr}
+}
+
+/* Reduced motion — respect OS preference */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}
+
+/* High-contrast / dark scrollbar polish on cream */
+@supports (scrollbar-color:auto){
+  body{scrollbar-color:var(--line) transparent}
+}

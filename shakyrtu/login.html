@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shakyrtu.kz — Кіру</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><text y='26' font-size='26'>✦</text></svg>">
+
+  <!-- Google Fonts: Cormorant Garamond (serif), Inter (sans), Great Vibes (script) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ---- Page-local layout for the centered auth card ---- */
+    .auth-page{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:clamp(20px,5vw,48px) var(--gutter);
+      gap:22px;
+    }
+    .auth-card{
+      width:100%;
+      max-width:440px;
+      margin-inline:auto;
+    }
+    /* serif title centered */
+    .auth-card .card__title{
+      text-align:center;
+      font-size:clamp(1.9rem,5vw,2.4rem);
+      margin-bottom:26px;
+    }
+    /* tighten button stack spacing */
+    .auth-card .btn--full{margin:0}
+    /* Referral input: monospace + spaced caps (spec) */
+    .input--code{
+      font-family:"SFMono-Regular",ui-monospace,"Roboto Mono",Menlo,Consolas,monospace;
+      letter-spacing:.28em;
+      text-transform:uppercase;
+    }
+    .input--code::placeholder{letter-spacing:.28em;text-transform:uppercase}
+    /* bottom muted "back home" link */
+    .back-home{
+      display:inline-block;
+      color:var(--muted);
+      font-weight:500;
+      font-size:.95rem;
+      transition:color var(--t-fast),transform var(--t-fast);
+    }
+    .back-home:hover{color:var(--ink);transform:translateX(-2px)}
+    .back-home:focus-visible{box-shadow:var(--shadow-ring)}
+    /* small soft entrance for the card */
+    @keyframes shk-fade-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+    @media (prefers-reduced-motion:no-preference){
+      .auth-card{animation:shk-fade-up var(--t-slow) var(--ease) both}
+    }
+    /* spacing for the referral field after the button group */
+    .auth-card .field{margin-top:4px;margin-bottom:6px}
+  </style>
+</head>
+<body>
+  <main class="auth-page">
+
+    <!-- Language toggle (Қазақша active | Русский) -->
+    <div class="lang-toggle" role="group" aria-label="Тіл / Язык">
+      <button class="lang-toggle__btn" data-lang="kk">Қазақша</button>
+      <button class="lang-toggle__btn" data-lang="ru">Русский</button>
+    </div>
+
+    <!-- Centered white auth card on cream background -->
+    <section class="card auth-card" aria-labelledby="auth-title">
+      <h1 class="card__title" id="auth-title" data-i18n="login.title">Кіру</h1>
+
+      <form id="auth-form" novalidate>
+        <div class="stack" style="gap:14px">
+
+          <!-- (1) Telegram (demo: navigates to templates.html) -->
+          <button type="button" class="btn btn--telegram btn--full" data-go="templates.html" aria-label="Telegram-мен кіру">
+            <!-- Telegram paper-plane icon -->
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M21.94 4.5 18.9 19.2c-.23 1.02-.83 1.27-1.68.79l-4.65-3.43-2.24 2.16c-.25.25-.46.46-.94.46l.33-4.73L18.4 6.3c.37-.33-.08-.52-.58-.19L7.16 13.1l-4.65-1.46c-1.01-.32-1.03-1.01.21-1.5L20.63 3.2c.84-.31 1.58.2 1.31 1.3Z"/>
+            </svg>
+            <span data-i18n="login.telegram">Telegram-мен кіру</span>
+          </button>
+
+          <!-- (2) Divider -->
+          <div class="divider"><span data-i18n="login.or">НЕМЕСЕ</span></div>
+
+          <!-- (3) Google (demo: navigates to templates.html) -->
+          <button type="button" class="btn btn--google btn--full" data-go="templates.html" aria-label="Google арқылы кіру">
+            <!-- Google colored "G" logo -->
+            <svg viewBox="0 0 48 48" aria-hidden="true">
+              <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.9 29.3 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.3-.4-3.5Z"/>
+              <path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34.6 6.1 29.6 4 24 4 16.3 4 9.7 8.3 6.3 14.7Z"/>
+              <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35 26.7 36 24 36c-5.3 0-9.7-3.1-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44Z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.1-4.1 5.6l6.2 5.2C40.9 35.7 44 30.3 44 24c0-1.3-.1-2.3-.4-3.5Z"/>
+            </svg>
+            <span data-i18n="login.google">Google арқылы кіру</span>
+          </button>
+
+          <!-- (4) Divider -->
+          <div class="divider"><span data-i18n="login.or">НЕМЕСЕ</span></div>
+
+          <!-- (5) Phone + password (outline). Demo: navigates to templates.html -->
+          <button type="button" class="btn btn--outline btn--full" data-go="templates.html">
+            <span data-i18n="login.phone">Нөмір + құпиясөзбен кіру</span>
+          </button>
+
+        </div>
+
+        <!-- Referral field -->
+        <div class="field" style="margin-top:22px">
+          <label class="field-label" for="ref-code" data-i18n="login.referral">РЕФЕРАЛДЫҚ КОД (ҚОСЫМША)</label>
+          <input class="input input--code" id="ref-code" name="ref" type="text"
+                 placeholder="ABXY42" maxlength="12"
+                 autocomplete="off" autocapitalize="characters" spellcheck="false"
+                 inputmode="text">
+          <p class="field-hint" id="ref-hint"
+             data-i18n-kk="Реферал кодыңыз болса енгізіңіз — алғашқы сайтыңызға 10% жеңілдік аласыз."
+             data-i18n-ru="Если у вас есть реферальный код — введите его и получите скидку 10% на первый сайт.">
+            Реферал кодыңыз болса енгізіңіз — алғашқы сайтыңызға 10% жеңілдік аласыз.
+          </p>
+        </div>
+      </form>
+    </section>
+
+    <!-- Bottom centered muted link back to home -->
+    <a class="back-home" href="index.html" data-i18n="login.backHome">← Басты бетке</a>
+
+  </main>
+
+  <!-- Shared i18n (must come before page script that listens for langchange) -->
+  <script src="i18n.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      /* --- Demo auth: Telegram / Google / Phone buttons just navigate to the
+         gallery. No real authentication is wired up here. If a referral code
+         was typed, carry it along in the URL (?ref=...) for the demo flow. --- */
+      document.querySelectorAll("[data-go]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var dest = btn.getAttribute("data-go") || "templates.html";
+          var ref = (document.getElementById("ref-code").value || "").trim();
+          if (ref) dest += "?ref=" + encodeURIComponent(ref);
+          window.location.href = dest;
+        });
+      });
+
+      /* --- Referral hint is not part of the shared i18n dictionary, so it is
+         translated locally via data-i18n-kk / data-i18n-ru on the element. --- */
+      function applyLocal(lang) {
+        var hint = document.getElementById("ref-hint");
+        if (!hint) return;
+        var txt = hint.getAttribute("data-i18n-" + lang);
+        if (txt) hint.textContent = txt;
+      }
+      applyLocal(window.getLang ? window.getLang() : "kk");
+      window.addEventListener("shk:langchange", function (e) {
+        applyLocal(e.detail && e.detail.lang ? e.detail.lang : "kk");
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Үлгілер — Shakyrtu.kz</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F1B16'/%3E%3Ctext x='16' y='22' font-size='18' font-family='Georgia,serif' fill='%23C9A55C' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Cormorant Garamond + Inter + Great Vibes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ----- Page-specific layout for the Template Gallery ----- */
+
+    /* Mode tabs row spacing */
+    .tpl-modes{margin-block:clamp(18px,3vw,28px)}
+
+    /* Category section */
+    .tpl-cats{margin-bottom:clamp(20px,3vw,30px)}
+    .tpl-cats__label{
+      display:block;
+      font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--muted);
+      margin-bottom:12px;
+    }
+
+    /* Two-column split: gallery (wide) + preview (narrow) */
+    .tpl-split{
+      display:grid;
+      grid-template-columns:1.35fr .65fr;
+      gap:clamp(20px,3vw,40px);
+      align-items:start;
+    }
+
+    /* Mini-preview inside each card: scale the standalone 9:16 template
+       so it fits the card media box. We force the embedded .shk-invite to
+       fill its container (overriding its inline max-width/aspect/shadow). */
+    .tpl-card__media .shk-invite{
+      max-width:none !important;
+      width:100% !important;
+      height:100% !important;
+      aspect-ratio:auto !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+    }
+    /* Mini previews are non-interactive (the whole card is the control). */
+    .tpl-card__media{pointer-events:none}
+
+    /* Preview panel sizing (right column) */
+    .tpl-preview .phone-mock{max-width:260px}
+    .tpl-preview__title{
+      font-family:var(--font-serif);
+      font-size:1.5rem;font-weight:600;color:var(--ink);
+      text-align:center;
+    }
+    .tpl-preview .btn--full{margin-top:4px}
+
+    /* The template inside the phone screen fills the screen edge-to-edge. */
+    .phone-mock__screen .shk-invite{
+      max-width:none !important;
+      width:100% !important;
+      height:auto !important;
+      border-radius:0 !important;
+      box-shadow:none !important;
+    }
+
+    /* Fullscreen overlay for "Толық ашу" — reuses .modal mechanics. */
+    .tpl-overlay__box{
+      background:transparent;
+      box-shadow:none;
+      padding:0;
+      max-width:420px;
+      width:100%;
+      overflow:visible;
+    }
+    .tpl-overlay__box .shk-invite{
+      max-width:100% !important;
+      width:100% !important;
+    }
+    .tpl-overlay__close{
+      position:absolute;top:-14px;right:-14px;z-index:5;
+    }
+
+    /* Mobile: collapse to single column, preview below the gallery. */
+    @media (max-width:900px){
+      .tpl-split{grid-template-columns:1fr}
+      .tpl-preview{order:2;position:static}
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="header">
+    <div class="header__bar">
+      <!-- Left: hamburger -->
+      <button class="iconbtn" id="hamburger" aria-label="Мәзір" aria-expanded="false" aria-controls="mobileNav">☰</button>
+
+      <!-- Center: step indicator -->
+      <nav class="step-indicator" aria-label="Қадамдар">
+        <span class="step is-active">
+          <span class="step__dot">1</span>
+          <span data-i18n="gallery.title">Үлгілер</span>
+        </span>
+        <span class="step__line"></span>
+        <span class="step">
+          <span class="step__dot">2</span>
+          <span data-i18n="gallery.customize">Реттеу</span>
+        </span>
+      </nav>
+
+      <!-- Right: select -> editor (+ language toggle) -->
+      <div class="header__actions">
+        <div class="lang-toggle" role="group" aria-label="Тіл / Язык">
+          <button class="lang-toggle__btn" data-lang="kk">Қазақша</button>
+          <button class="lang-toggle__btn" data-lang="ru">Русский</button>
+        </div>
+        <a class="btn btn--dark" id="selectBtn" href="editor.html?tpl=dark-elegant" data-i18n="gallery.select">Таңдау →</a>
+      </div>
+    </div>
+
+    <!-- Mobile slide-down nav -->
+    <nav class="mobile-nav" id="mobileNav" aria-label="Мобильді мәзір">
+      <a href="index.html" data-i18n="gallery.backHome">← Басты бетке</a>
+      <a href="templates.html" aria-current="page" data-i18n="gallery.title">Үлгілер</a>
+      <a href="login.html" data-i18n="landing.login">Кіру</a>
+    </nav>
+  </header>
+
+  <!-- ============================ MAIN ============================ -->
+  <main class="container section" style="padding-top:clamp(24px,4vw,40px)">
+
+    <!-- Back link + page title -->
+    <div class="spread" style="margin-bottom:clamp(16px,3vw,24px);gap:16px;flex-wrap:wrap">
+      <a href="index.html" class="muted" style="font-weight:600" data-i18n="gallery.backHome">← Басты бетке</a>
+      <h1 class="serif" style="font-size:clamp(1.8rem,4vw,2.6rem)" data-i18n="gallery.title">Үлгілер</h1>
+    </div>
+
+    <!-- Mode tabs: site (active) / video (soon) -->
+    <div class="tpl-modes">
+      <div class="mode-tabs" role="tablist" aria-label="Шақырту түрі">
+        <button class="mode-tab is-active" role="tab" aria-selected="true">
+          🌐 <span data-i18n="gallery.siteInvite">Сайт шақырту</span>
+        </button>
+        <button class="mode-tab is-disabled" role="tab" aria-selected="false" aria-disabled="true" tabindex="-1">
+          🎥 <span data-i18n="gallery.videoInvite">Видео шақырту</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Category chips -->
+    <section class="tpl-cats" aria-label="Категориялар">
+      <span class="tpl-cats__label" data-i18n="cat.choose">Категорияны таңдаңыз</span>
+      <div class="chip-row" id="catRow" role="group">
+        <button class="chip is-active" data-cat="wedding"    data-i18n="cat.wedding">Үйлену тойы</button>
+        <button class="chip"            data-cat="uzatu"      data-i18n="cat.uzatu">Қыз ұзату</button>
+        <button class="chip"            data-cat="merey"      data-i18n="cat.merey">Мерей той</button>
+        <button class="chip"            data-cat="tusaukeser" data-i18n="cat.tusaukeser">Тұсаукесер</button>
+        <button class="chip"            data-cat="besik"      data-i18n="cat.besik">Бесік той</button>
+        <button class="chip"            data-cat="sundet"     data-i18n="cat.sundet">Сүндет той</button>
+      </div>
+    </section>
+
+    <!-- Split: gallery (wide) + live preview (narrow) -->
+    <div class="tpl-split">
+
+      <!-- LEFT: templates grid -->
+      <section aria-label="Үлгілер галереясы">
+        <div class="gallery-grid" id="tplGrid"><!-- cards injected by JS --></div>
+        <p id="tplEmpty" class="muted text-center" style="display:none;padding:48px 0">—</p>
+      </section>
+
+      <!-- RIGHT: live preview panel -->
+      <aside class="preview-panel tpl-preview" aria-label="Алдын ала қарау">
+        <span class="preview-panel__label" data-i18n="gallery.preview">АЛДЫН АЛА ҚАРАУ</span>
+        <h2 class="tpl-preview__title" id="previewTitle">ВАРИАНТ 1</h2>
+        <div class="phone-mock">
+          <div class="phone-mock__screen" id="previewMount"><!-- renderTemplate target --></div>
+        </div>
+        <button class="btn btn--gold btn--full" id="openFullBtn" data-i18n="gallery.openFull">Толық ашу</button>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ===================== FULLSCREEN OVERLAY ===================== -->
+  <div class="modal" id="fullOverlay" role="dialog" aria-modal="true" aria-label="Толық қарау">
+    <div class="modal__box tpl-overlay__box">
+      <button class="modal__close tpl-overlay__close" id="fullClose" aria-label="Жабу"></button>
+      <div id="fullMount"><!-- renderTemplate target --></div>
+    </div>
+  </div>
+
+  <!-- ============================ SCRIPTS ============================ -->
+  <script src="i18n.js"></script>
+  <script src="templates.js"></script>
+  <script>
+  (function () {
+    "use strict";
+
+    var STORE_TPL = "shk_tpl";
+
+    var grid        = document.getElementById("tplGrid");
+    var emptyEl     = document.getElementById("tplEmpty");
+    var catRow      = document.getElementById("catRow");
+    var selectBtn   = document.getElementById("selectBtn");
+    var previewMount= document.getElementById("previewMount");
+    var previewTitle= document.getElementById("previewTitle");
+    var openFullBtn = document.getElementById("openFullBtn");
+    var overlay     = document.getElementById("fullOverlay");
+    var fullMount   = document.getElementById("fullMount");
+    var fullClose   = document.getElementById("fullClose");
+
+    var templates = window.SHK_TEMPLATES || [];
+
+    var activeCat  = "wedding";
+    var selectedId = null;
+
+    /* "ВАРИАНТ N" caption — N is the global index in SHK_TEMPLATES + 1. */
+    function variantLabel(id) {
+      var n = 1;
+      for (var i = 0; i < templates.length; i++) {
+        if (templates[i].id === id) { n = i + 1; break; }
+      }
+      return "ВАРИАНТ " + n;
+    }
+
+    /* Read a saved/default selection. */
+    function readSavedId() {
+      var saved = null;
+      try { saved = localStorage.getItem(STORE_TPL); } catch (e) { saved = null; }
+      if (saved && window.getTemplate && window.getTemplate(saved)) return saved;
+      return templates.length ? templates[0].id : null;
+    }
+
+    function persistId(id) {
+      try { localStorage.setItem(STORE_TPL, id); } catch (e) { /* ignore */ }
+    }
+
+    /* Build one template card. */
+    function buildCard(tpl, index) {
+      var card = document.createElement("button");
+      card.type = "button";
+      card.className = "tpl-card";
+      card.setAttribute("data-id", tpl.id);
+      card.setAttribute("aria-pressed", "false");
+      card.setAttribute("aria-label", variantLabel(tpl.id));
+
+      var media = document.createElement("div");
+      media.className = "tpl-card__media";
+
+      var badge = document.createElement("span");
+      badge.className = "tpl-card__badge";
+      badge.setAttribute("aria-hidden", "true");
+
+      var body = document.createElement("div");
+      body.className = "tpl-card__body";
+      var meta = document.createElement("div");
+      meta.className = "tpl-card__meta";
+      meta.textContent = variantLabel(tpl.id);
+      body.appendChild(meta);
+
+      card.appendChild(badge);
+      card.appendChild(media);
+      card.appendChild(body);
+
+      /* Mini live preview rendered straight from templates.js. */
+      window.renderTemplate(tpl.id, media);
+
+      card.addEventListener("click", function () { selectTemplate(tpl.id); });
+
+      return card;
+    }
+
+    /* Render the grid filtered by the active category. */
+    function renderGrid() {
+      grid.innerHTML = "";
+      var list = templates.filter(function (tpl) { return tpl.category === activeCat; });
+
+      if (!list.length) {
+        emptyEl.style.display = "block";
+      } else {
+        emptyEl.style.display = "none";
+      }
+
+      list.forEach(function (tpl, i) { grid.appendChild(buildCard(tpl, i)); });
+
+      /* If current selection is outside this category, fall back to first. */
+      var inList = list.some(function (tpl) { return tpl.id === selectedId; });
+      if (!inList && list.length) {
+        selectTemplate(list[0].id, /*skipScroll*/ true);
+      } else {
+        markSelected();
+      }
+    }
+
+    /* Highlight the selected card. */
+    function markSelected() {
+      grid.querySelectorAll(".tpl-card").forEach(function (card) {
+        var on = card.getAttribute("data-id") === selectedId;
+        card.classList.toggle("is-selected", on);
+        card.setAttribute("aria-pressed", on ? "true" : "false");
+      });
+    }
+
+    /* Update the right preview + select link + caption. */
+    function updatePreview() {
+      if (!selectedId) return;
+      window.renderTemplate(selectedId, previewMount);
+      previewTitle.textContent = variantLabel(selectedId);
+      selectBtn.setAttribute("href", "editor.html?tpl=" + encodeURIComponent(selectedId));
+    }
+
+    /* Select a template by id. */
+    function selectTemplate(id, skipScroll) {
+      if (!id) return;
+      selectedId = id;
+      persistId(id);
+      markSelected();
+      updatePreview();
+    }
+
+    /* Category chip clicks. */
+    catRow.addEventListener("click", function (e) {
+      var chip = e.target.closest(".chip[data-cat]");
+      if (!chip) return;
+      catRow.querySelectorAll(".chip").forEach(function (c) { c.classList.remove("is-active"); });
+      chip.classList.add("is-active");
+      activeCat = chip.getAttribute("data-cat");
+      renderGrid();
+    });
+
+    /* ---- Fullscreen overlay ---- */
+    function openFull() {
+      if (!selectedId) return;
+      window.renderTemplate(selectedId, fullMount);
+      overlay.classList.add("is-open");
+      document.body.style.overflow = "hidden";
+      fullClose.focus();
+    }
+    function closeFull() {
+      overlay.classList.remove("is-open");
+      document.body.style.overflow = "";
+      openFullBtn.focus();
+    }
+    openFullBtn.addEventListener("click", openFull);
+    fullClose.addEventListener("click", closeFull);
+    overlay.addEventListener("click", function (e) {
+      if (e.target === overlay) closeFull();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && overlay.classList.contains("is-open")) closeFull();
+    });
+
+    /* ---- Hamburger mobile nav ---- */
+    var hamburger = document.getElementById("hamburger");
+    var mobileNav = document.getElementById("mobileNav");
+    if (hamburger && mobileNav) {
+      hamburger.addEventListener("click", function () {
+        var open = mobileNav.classList.toggle("is-open");
+        hamburger.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+    }
+
+    /* ---- Boot ---- */
+    selectedId = readSavedId();
+    /* Make sure the active category contains the saved selection. */
+    if (selectedId && window.getTemplate) {
+      var tpl0 = window.getTemplate(selectedId);
+      if (tpl0) activeCat = tpl0.category;
+    }
+    /* Sync chip active state to the resolved category. */
+    catRow.querySelectorAll(".chip").forEach(function (c) {
+      c.classList.toggle("is-active", c.getAttribute("data-cat") === activeCat);
+    });
+
+    renderGrid();
+    updatePreview();
+
+    /* Re-render templates on language change so any localized chrome stays fresh.
+       (Template html itself is language-neutral, but this keeps previews consistent.) */
+    window.addEventListener("shk:langchange", function () {
+      updatePreview();
+    });
+  })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shakyrtu.kz — Қазақша электронды той шақырту</title>
+  <meta name="description" content="Қазақша электронды той шақырту жасайтын онлайн платформа. Бірнеше минутта өзіңіздің жеке шақырту сайтыңызды дайындаңыз.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F1B16'/%3E%3Ctext x='16' y='22' font-size='18' font-family='Georgia,serif' fill='%23C9A55C' text-anchor='middle'%3ES%3C/text%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Cormorant Garamond + Inter + Great Vibes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Shared design system -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- Page-specific landing tweaks (layout only; tokens come from styles.css) -->
+  <style>
+    /* Centered single-column landing on cream */
+    .landing{padding-block:clamp(40px,7vw,80px)}
+    .landing__inner{
+      max-width:720px;margin-inline:auto;
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+      gap:clamp(28px,5vw,44px);
+    }
+
+    /* Gold monogram emblem */
+    .monogram{
+      width:84px;height:84px;flex:none;
+      display:inline-flex;align-items:center;justify-content:center;
+      animation:fadeInUp var(--t-slow) var(--ease) both;
+    }
+    @media (max-width:560px){ .monogram{width:72px;height:72px} }
+
+    /* Hero block */
+    .landing__hero{display:flex;flex-direction:column;align-items:center;gap:14px}
+    .landing__title{font-size:clamp(2.6rem,8vw,4rem);margin:0}
+    .landing__title .dot{color:var(--gold)}
+    .landing__desc{max-width:560px}
+
+    /* Generic landing section block (features / contact) */
+    .landing__block{
+      width:100%;
+      display:flex;flex-direction:column;align-items:center;gap:20px;
+    }
+    .landing__heading{display:flex;flex-direction:column;align-items:center;gap:8px}
+
+    /* Feature bullet card */
+    .feature-card{
+      width:100%;max-width:600px;text-align:left;
+    }
+    .feature-card .bullet-list li{font-size:1.02rem}
+
+    /* Contact pills cluster */
+    .social-cluster{
+      display:flex;flex-wrap:wrap;justify-content:center;gap:12px;
+      max-width:620px;
+    }
+
+    /* Primary CTA wrapper */
+    .landing__cta{display:flex;flex-direction:column;align-items:center;gap:14px;width:100%}
+
+    /* Footer */
+    .landing-footer{
+      border-top:1px solid var(--line);
+      padding-block:28px;margin-top:clamp(32px,6vw,64px);
+      text-align:center;color:var(--muted);font-size:.88rem;
+      display:flex;flex-direction:column;align-items:center;gap:6px;
+    }
+    .landing-footer__brand{font-family:var(--font-serif);font-weight:600;color:var(--ink);font-size:1.05rem}
+  </style>
+</head>
+<body>
+
+  <!-- ====================== HEADER ====================== -->
+  <header class="header">
+    <div class="header__bar">
+      <a class="header__brand" href="index.html" aria-label="Shakyrtu.kz">
+        <!-- Small gold monogram in the bar -->
+        <svg width="30" height="30" viewBox="0 0 64 64" fill="none" aria-hidden="true" focusable="false">
+          <rect x="3" y="3" width="58" height="58" rx="16" fill="#F3EAD6" stroke="#C9A55C" stroke-width="2"/>
+          <text x="32" y="43" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="36" font-weight="700" fill="#C9A55C">S</text>
+        </svg>
+        <span>Shakyrtu<span class="gold-text">.kz</span></span>
+      </a>
+
+      <div class="header__actions">
+        <!-- Language toggle (wired by i18n.js) -->
+        <div class="lang-toggle" role="group" aria-label="Тіл / Язык">
+          <button class="lang-toggle__btn is-active" data-lang="kk" aria-pressed="true">Қазақша</button>
+          <button class="lang-toggle__btn" data-lang="ru" aria-pressed="false">Русский</button>
+        </div>
+        <a class="btn btn--dark btn--sm btn--pill" href="login.html" data-i18n="landing.login">Кіру</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====================== LANDING ====================== -->
+  <main class="container landing">
+    <div class="landing__inner">
+
+      <!-- Monogram emblem: "S" + envelope/leaf -->
+      <div class="monogram" aria-hidden="true">
+        <svg width="84" height="84" viewBox="0 0 96 96" fill="none" role="img" aria-label="Shakyrtu.kz">
+          <!-- soft gold halo -->
+          <circle cx="48" cy="48" r="46" fill="#F3EAD6"/>
+          <circle cx="48" cy="48" r="46" fill="none" stroke="#C9A55C" stroke-width="1.5" opacity=".5"/>
+          <!-- envelope body -->
+          <rect x="24" y="34" width="48" height="34" rx="6" fill="#FFFFFF" stroke="#C9A55C" stroke-width="2"/>
+          <!-- envelope flap -->
+          <path d="M24 40 L48 56 L72 40" fill="none" stroke="#C9A55C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <!-- decorative leaf sprig rising from the envelope -->
+          <path d="M48 34 C48 24 44 18 38 14" fill="none" stroke="#C9A55C" stroke-width="2" stroke-linecap="round"/>
+          <path d="M44 24 C40 22 37 23 35 26 C39 28 43 27 44 24Z" fill="#C9A55C"/>
+          <path d="M47 18 C43 17 40 18 39 21 C43 23 46 21 47 18Z" fill="#C9A55C"/>
+          <!-- monogram "S" centered on the envelope -->
+          <text x="48" y="62" text-anchor="middle" font-family="'Cormorant Garamond',serif" font-size="28" font-weight="700" fill="#1F1B16">S</text>
+        </svg>
+      </div>
+
+      <!-- Hero -->
+      <section class="landing__hero">
+        <h1 class="landing__title serif">Shakyrtu<span class="dot">.kz</span></h1>
+        <p class="lead landing__desc">
+          <span data-i18n="landing.desc1">Қазақша электронды той шақырту жасайтын онлайн платформа.</span>
+          <span data-i18n="landing.desc2">Бірнеше минутта өзіңіздің жеке шақырту сайтыңызды дайындап, қонақтарыңызға бір сілтемемен жібересіз.</span>
+        </p>
+      </section>
+
+      <!-- Features: "Не істей аласыз" -->
+      <section class="landing__block">
+        <div class="landing__heading">
+          <h2 class="serif" data-i18n="landing.features">Не істей аласыз</h2>
+        </div>
+        <div class="card feature-card">
+          <ul class="bullet-list">
+            <li data-i18n="landing.bullet1">20-дан астам шақырту үлгісінен таңдау</li>
+            <li data-i18n="landing.bullet2">Аты-жөні, күн-уақыт, мекен-жай — барлығын редакциялау</li>
+            <li data-i18n="landing.bullet3">Қонақтардың жауаптарын автоматты жинау</li>
+            <li data-i18n="landing.bullet4">Тілектерді қалдыру + Excel-ге жүктеу</li>
+            <li data-i18n="landing.bullet5">Telegram + WhatsApp арқылы оңай бөлісу</li>
+            <li data-i18n="landing.bullet6">Қыз ұзату және үйлену тойы үлгілері бөлек категорияда</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Primary CTA -->
+      <section class="landing__cta">
+        <a class="btn btn--dark btn--pill btn--lg" href="templates.html" data-i18n="landing.viewTemplates">Үлгілерді көру →</a>
+      </section>
+
+      <!-- Contact: "Бізбен байланыс" -->
+      <section class="landing__block">
+        <div class="landing__heading">
+          <h2 class="serif" data-i18n="landing.contact">Бізбен байланыс</h2>
+          <p class="muted" data-i18n="landing.contactDesc">Сұрақтар мен ұсыныстарыңызды әлеуметтік желілер арқылы жібере аласыз.</p>
+        </div>
+
+        <div class="social-cluster">
+          <!-- Instagram -->
+          <a class="social-pill" href="#" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" stroke="#1F1B16" stroke-width="1.8"/>
+              <circle cx="12" cy="12" r="4" stroke="#1F1B16" stroke-width="1.8"/>
+              <circle cx="17.3" cy="6.7" r="1.2" fill="#C9A55C"/>
+            </svg>
+            <span data-i18n="social.instagram">Instagram</span>
+          </a>
+
+          <!-- Telegram -->
+          <a class="social-pill social-pill--telegram" href="#" target="_blank" rel="noopener" aria-label="Telegram">
+            <svg viewBox="0 0 24 24" fill="#2AABEE" aria-hidden="true">
+              <path d="M21.9 4.3 18.6 20c-.25 1.1-.9 1.37-1.83.85l-5.05-3.72-2.44 2.35c-.27.27-.5.5-1.02.5l.36-5.16L17.9 5.6c.4-.36-.09-.56-.63-.2L5.7 12.66.83 11.13c-1.06-.33-1.08-1.06.22-1.57L20.53 2.4c.88-.33 1.65.2 1.37 1.9Z"/>
+            </svg>
+            <span data-i18n="social.telegram">Telegram</span>
+          </a>
+
+          <!-- Telegram bot -->
+          <a class="social-pill social-pill--telegram" href="#" target="_blank" rel="noopener" aria-label="Telegram бот">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="4" y="7" width="16" height="12" rx="4" stroke="#2AABEE" stroke-width="1.8"/>
+              <line x1="12" y1="3.5" x2="12" y2="7" stroke="#2AABEE" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="12" cy="3.2" r="1.3" fill="#2AABEE"/>
+              <circle cx="9" cy="13" r="1.4" fill="#2AABEE"/>
+              <circle cx="15" cy="13" r="1.4" fill="#2AABEE"/>
+            </svg>
+            <span data-i18n="social.telegramBot">Telegram бот</span>
+          </a>
+
+          <!-- WhatsApp -->
+          <a class="social-pill" href="#" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <svg viewBox="0 0 24 24" fill="#25D366" aria-hidden="true">
+              <path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.7 4.8-1.26A10 10 0 1 0 12 2Zm5.4 14.2c-.23.65-1.34 1.24-1.85 1.28-.5.05-1.01.27-3.4-.71-2.86-1.18-4.65-4.13-4.79-4.32-.14-.19-1.14-1.52-1.14-2.9 0-1.38.72-2.06.98-2.34a1 1 0 0 1 .74-.35c.18 0 .37 0 .53.01.18.01.4-.06.62.48.23.55.78 1.9.85 2.04.07.14.12.3.02.49-.09.18-.14.3-.28.46-.14.16-.3.36-.42.48-.14.14-.29.29-.12.57.16.28.73 1.21 1.57 1.96 1.08.96 1.99 1.26 2.27 1.4.28.14.45.12.62-.07.18-.19.71-.83.9-1.11.18-.28.37-.23.62-.14.25.09 1.6.76 1.87.9.28.13.46.2.53.31.07.11.07.65-.16 1.3Z"/>
+            </svg>
+            <span data-i18n="social.whatsapp">WhatsApp</span>
+          </a>
+
+          <!-- TikTok -->
+          <a class="social-pill" href="#" target="_blank" rel="noopener" aria-label="TikTok">
+            <svg viewBox="0 0 24 24" fill="#1F1B16" aria-hidden="true">
+              <path d="M16.5 3c.3 2.1 1.5 3.6 3.5 3.9v2.6c-1.3.05-2.5-.3-3.6-1v5.9c0 3.2-2.5 5.6-5.6 5.6S5.2 17.6 5.2 14.5c0-3 2.3-5.4 5.3-5.5v2.7c-1.5.1-2.6 1.3-2.6 2.8 0 1.6 1.2 2.8 2.8 2.8s2.8-1.2 2.8-2.9V3h3Z"/>
+            </svg>
+            <span data-i18n="social.tiktok">TikTok</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ====================== FOOTER ====================== -->
+  <footer class="landing-footer">
+    <span class="landing-footer__brand">Shakyrtu<span class="gold-text">.kz</span></span>
+    <span>© 2026 Shakyrtu.kz — <span data-i18n="footer.rights">Барлық құқықтар қорғалған.</span></span>
+  </footer>
+
+  <!-- Shared i18n (defines window.setLang, wires .lang-toggle, applies translations) -->
+  <script src="i18n.js" defer></script>
+</body>
+</html>
