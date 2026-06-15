@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>EB — Aurora (про)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#04060d;color:#eef3fb;min-height:100vh;padding:44px 18px 90px;overflow-x:hidden}
+  .head{text-align:center;max-width:680px;margin:0 auto 40px;position:relative;z-index:2}
+  .head h1{font-family:'Sora';font-size:30px;font-weight:800;letter-spacing:-.5px}
+  .head .sub{color:#8a9cb5;margin-top:10px;font-size:15px;line-height:1.6}
+
+  /* ===================== HERO: AURORA BLOOM ===================== */
+  .hero{position:relative;max-width:860px;margin:0 auto 30px;height:360px;border-radius:30px;overflow:hidden;
+    border:1px solid #16243c;background:radial-gradient(120% 120% at 50% 0%,#0c1730,#05070f 70%);
+    display:flex;flex-direction:column;align-items:center;justify-content:center}
+  /* drifting aurora blobs */
+  .hero .mesh{position:absolute;inset:-20%;filter:blur(60px);opacity:.7;z-index:0}
+  .hero .b1{position:absolute;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,#2f6bf0,transparent 65%);top:-10%;left:5%;animation:drift1 12s ease-in-out infinite}
+  .hero .b2{position:absolute;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,#19c2ff,transparent 65%);bottom:-15%;right:8%;animation:drift2 14s ease-in-out infinite}
+  .hero .b3{position:absolute;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,#e7c873,transparent 65%);top:30%;left:42%;opacity:.5;animation:drift3 16s ease-in-out infinite}
+  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(60px,40px)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-50px,-30px)}}
+  @keyframes drift3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,20px) scale(1.15)}}
+
+  .stack{position:relative;z-index:2;text-align:center}
+  .aurora{font-family:'Sora';font-weight:800;letter-spacing:-4px;line-height:1;
+    background:linear-gradient(110deg,#bcd6ff,#4f93ff,#19c2ff,#e7c873,#4f93ff,#bcd6ff);
+    background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+    animation:flow 7s ease infinite}
+  @keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .big{font-size:120px}
+  /* bloom: blurred clone behind */
+  .glowclone{position:absolute;inset:0;filter:blur(22px);opacity:.65;z-index:-1}
+  .tagline{font-family:'Cormorant Garamond';font-style:italic;font-weight:500;font-size:26px;color:#cfe0ff;letter-spacing:2px;margin-top:8px;opacity:.92}
+
+  /* shimmer line under */
+  .uline{width:0;height:2px;margin:14px auto 0;border-radius:2px;
+    background:linear-gradient(90deg,transparent,#7cb0ff,#e7c873,#7cb0ff,transparent);
+    animation:grow 3.5s ease forwards}
+  @keyframes grow{to{width:240px}}
+
+  /* ===================== VARIANTS ===================== */
+  .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;max-width:860px;margin:0 auto}
+  .card{position:relative;height:230px;border-radius:24px;border:1px solid #16243c;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0%,#0b1428,#05070f);display:flex;align-items:center;justify-content:center}
+  .label{position:absolute;top:14px;left:16px;font-size:11px;font-weight:700;letter-spacing:1px;color:#8a9cb5;text-transform:uppercase;z-index:5}
+
+  /* V1: aurora + sharp shimmer pass */
+  .shimWrap{position:relative}
+  .shimWrap .aurora{font-size:62px}
+  .shimWrap::after{content:"";position:absolute;top:0;left:-60%;width:45%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.85),transparent);
+    mix-blend-mode:overlay;transform:skewX(-18deg);animation:pass 3.8s ease-in-out infinite}
+  @keyframes pass{0%{left:-60%}55%{left:130%}100%{left:130%}}
+
+  /* V2: outline aurora (stroke) */
+  .outline{font-family:'Sora';font-weight:800;font-size:64px;letter-spacing:-3px;color:transparent;
+    -webkit-text-stroke:2px #4f93ff;
+    filter:drop-shadow(0 0 10px rgba(79,147,255,.6));animation:hue 6s linear infinite}
+  @keyframes hue{0%{filter:drop-shadow(0 0 8px rgba(79,147,255,.5))}50%{filter:drop-shadow(0 0 16px rgba(231,200,115,.6))}100%{filter:drop-shadow(0 0 8px rgba(79,147,255,.5))}}
+
+  /* V3: aurora inside soft squircle */
+  .sq{width:138px;height:138px;border-radius:40px;display:flex;align-items:center;justify-content:center;
+    background:linear-gradient(160deg,rgba(79,147,255,.12),rgba(25,194,255,.05));border:1px solid rgba(124,176,255,.3);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 20px 50px -20px rgba(31,90,200,.5)}
+  .sq .aurora{font-size:56px;letter-spacing:-3px}
+
+  .note{text-align:center;color:#8a9cb5;font-size:13px;margin:38px auto 0;max-width:600px;line-height:1.8}
+  .gd{color:#e7c873}
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <h1>EB — Aurora про</h1>
+    <p class="sub">Сүйікті Aurora — барынша күшейтілген. Кинематографиялық жарқырау + қозғалатын фон.</p>
+  </div>
+
+  <!-- HERO: AURORA BLOOM -->
+  <div class="hero">
+    <div class="mesh"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+    <div class="stack">
+      <div class="aurora big glowclone" aria-hidden="true">EB</div>
+      <div class="aurora big">EB</div>
+      <div class="tagline">design studio</div>
+      <div class="uline"></div>
+    </div>
+  </div>
+
+  <!-- VARIANTS -->
+  <div class="row">
+    <div class="card">
+      <span class="label">A · Shimmer</span>
+      <div class="shimWrap"><div class="aurora">EB.design</div></div>
+    </div>
+    <div class="card">
+      <span class="label">B · Neon outline</span>
+      <div class="outline">EB</div>
+    </div>
+    <div class="card">
+      <span class="label">C · Aurora icon</span>
+      <div class="sq"><div class="aurora">EB</div></div>
+    </div>
+  </div>
+
+  <p class="note">Жоғарыдағы үлкені — <span class="gd">Aurora Bloom</span> (басты нұсқа): әріптер жарқырап, артында түрлі-түсті жарық қалқып жүреді.<br>📂 <b>logo5.html</b> · Қалауыңды айт: басты Bloom-ды аламыз ба, әлде A / B / C біреуін? Сосын сайтқа орнатамын.</p>
+
+</body>
+</html>
